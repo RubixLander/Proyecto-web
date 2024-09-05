@@ -5,8 +5,8 @@ El principal objetivo de la aplicación es ofrecer al usuario una pagina web ded
 ## Tabla de Contenidos
 
 1. [Funcionalidades](#funcionalidades)
-2. [Prototipado Figma](#prototipadofigma)
-3. [Maquetación Responsiva](#maquetaciónresponsiva)
+2. [Prototipado Figma](#prototipadoenfigma)
+
 4. [Formularios y Validación](#formulariosyvalidación)
 5. [Tecnologías](#tecnologías)
 
