@@ -1,15 +1,6 @@
 ## SkellyTunes
-## Una pagina web para compartir musica
-
+## Descripción
 El principal objetivo de la aplicación es ofrecer al usuario una pagina web dedicada a compartir musica, donde tanto artistas como usuarios puedan participar de la comunidad. 
-## Tabla de Contenidos
-
-1. [Funcionalidades](#funcionalidades)
-2. [Prototipado Figma](#prototipadoenfigma)
-
-4. [Formularios y Validación](#formulariosyvalidación)
-5. [Tecnologías](#tecnologías)
-
 
 ## Funcionalidades
 
@@ -26,8 +17,6 @@ El principal objetivo de la aplicación es ofrecer al usuario una pagina web ded
 - Reproductor de musica: La aplicación contará con un apartado para reproducir la musica que el usuario quiera, con ajuste de volumen y el listado de canciones que contiene un album.
 
 - Comentarios: Cada album tendrá su propia caja de comentarios, donde los usuarios pueden dejar sus opiniones.
-  
- 
 
 ## Prototipado en Figma
 
