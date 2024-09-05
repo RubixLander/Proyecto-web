@@ -38,7 +38,7 @@ La aplicación será desarrollada con HTML5, CSS3 y JavaScript, utilizando frame
 maquetación responsiva.
 
 ## Tecnologías
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-![Bootstrap](https://getbootstrap.com/)
+-JavaScript
+-HTML
+-CSS
+-Bootstrap
