@@ -38,7 +38,11 @@ La aplicación será desarrollada con HTML5, CSS3 y JavaScript, utilizando frame
 maquetación responsiva.
 
 ## Tecnologías
--JavaScript
--HTML
--CSS
--Bootstrap
+- HTML
+  
+- JavaScript
+  
+- CSS
+  
+- Bootstrap
+
