@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="styles/fotoPerfil.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-edit">
+            <h2>Editar Perfil</h2>
+
+            <!-- Imagen de perfil en círculo centrado -->
+            <div class="profile-image-circle">
+                <img id="profilePic" src="default-profile.png" alt="Foto de perfil">
+                <input type="file" id="profileImageInput" accept="image/*" style="display:none">
+                <button id="changeProfilePic">Cambiar Foto</button>
+            </div>
+
+            <!-- Formulario de edición de perfil -->
+            <div class="form-section">
+                <form id="editProfileForm" action="#" method="POST">
+                    <div class="input-group">
+                        <label for="username">Nombre de Usuario</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Nueva Contraseña</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="confirmPassword">Confirmar Contraseña</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+
+                    <button type="submit">Guardar Cambios</button>
+                </form>
+
+                <p id="error-message" style="color:red; display:none;">Las contraseñas no coinciden</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/editar_perfil.js"></script>
+</body>
+</html>
