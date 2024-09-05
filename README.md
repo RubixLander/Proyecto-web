@@ -13,15 +13,20 @@ El principal objetivo de la aplicación es ofrecer al usuario una pagina web ded
 
 ## Funcionalidades
 
-- - Creación de perfil: El usuario podrá registrarse y asi obtener un perfil, en donde se guardara su registro.
+- Creación de perfil: El usuario podrá registrarse y asi obtener un perfil, en donde se guardara su registro.
+  
+- Editar perfil: El usuario que posea un perfil , podra editar su perfil, pudiendo agregar un avatar como modificando sus datos.
+  
+- Comunidades: En las comunidades, el usuario podrá ser participe de multiples comunidades a eleccion, donde podrá crear temas de discusion y compartir listas de reproducción con otros usuarios.
+  
+- Biblioteca: El usuario contará con una biblioteca de musica personal, donde podra crear y almacenar listas de reproduccion y ver que musica ha escuchado recientemente.
+  
+- Reproductor de musica: La aplicación contará con un apartado para reproducir la musica que el usuario quiera, con ajuste de volumen y el listado de canciones que contiene un album.
 
-- - Editar perfil: El usuario que posea un perfil , podra editar su perfil, pudiendo agregar un avatar como modificando sus datos.
-
-- - Comunidades: En las comunidades, el usuario podrá ser participe de multiples comunidades a eleccion, donde podrá crear temas de discusion y compartir listas de reproducción con otros usuarios.
-
-- - Biblioteca: El usuario contará con una biblioteca de musica personal, donde podra crear y almacenar listas de reproduccion y ver que musica ha escuchado recientemente.
-
-- - Comentarios: .
+- Comentarios: Cada album tendrá su propia caja de comentarios, donde los usuarios pueden dejar sus opiniones.
+  
+- Barra de busqueda: La aplicación tendra una barra de busqueda y navegación para facil acceso a todas las funcionalidades de la plataforma
+ 
 
 ## Prototipado en Figma
 
