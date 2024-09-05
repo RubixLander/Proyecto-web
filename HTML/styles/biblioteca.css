@@ -1,0 +1,16 @@
+.icon {
+    width: 1em; /* Tamaño del icono igual al tamaño del texto */
+    height: 1em;
+    vertical-align: middle; /* Alineación vertical del icono */
+    margin-right: 0.5em; /* Espacio entre el icono y el texto */
+  }
+  .header {
+    background-color: #f8f9fa; /* Color de fondo para la cabecera */
+    padding: 1rem; /* Espaciado dentro de la cabecera */
+    border-bottom: 1px solid #dee2e6; /* Borde inferior */
+    margin-bottom: 2rem; /* Espaciado debajo de la cabecera */
+  }
+  .list-group-item:hover {
+    background-color: #e9ecef; /* Color de fondo al pasar el mouse */
+    cursor: pointer; /* Cambia el cursor para indicar que es interactivo */
+  }
