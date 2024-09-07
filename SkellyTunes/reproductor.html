@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titulo del album</title>
+    <!--GOOGLE FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Griffy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+
+    <!--BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!--ANEXOS-->
+    <link rel="stylesheet" href="styles/navbar_UI.css">
+    <link rel="stylesheet" href="styles/custom-cards.css">
+
+    <link rel="stylesheet" href="styles/reproductor.css">
+
+
+</head>
+
+<body>
+<!--------------------------COMIENZO NABVAR--------------------------------------->
+       <!-- Barra de navegación -->
+            <!-- SIDEBAR -->
+            <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+                <!--CABECERA SIDEBAR-->
+                <div class="offcanvas-header">
+                    <!-- LOGO -->
+                    <img src="images/logo.gif" alt=" Logo" class="sidebar-logo">
+                    <h3>SkellyTunes</h3>
+
+                    <!--BOTON SALIR-->
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <!--CUERPO SIDEBAR-->
+                <div class="offcanvas-body">
+                    
+                    <ul class="list-unstyled">
+                        <!--BOTON 1-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill me-2" viewBox="0 0 16 16">
+                                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+                                </svg>
+                                Inicio
+                            </button>
+                        </li>
+
+                        <!--BOTON 2-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">
+                                    <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2"/>
+                                    <path fill-rule="evenodd" d="M12 3v10h-1V3z"/>
+                                    <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1z"/>
+                                    <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5"/>
+                                </svg>
+                                Biblioteca
+                            </button>
+                        </li>
+
+                        <!--BOTON 3-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                </svg>
+                                Perfil
+                            </button>
+                        </li>
+
+                        <!--BOTON 4-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                                </svg>
+                                Comunidades
+                            </button>
+                        </li>
+
+                        <!--BOTON 5-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                    <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                                </svg>
+                                Configuracion
+                            </button>
+                        </li>
+
+                        <!--BOTON 6-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                                </svg>
+                                Cerrar Sesión
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <footer class="sidebar-footer">@ 2024 SkellyTunes - Todos los derechos reservados</footer>
+            </div>
+
+            
+            <!--BARRA DE NAVEGACION-->
+            <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+                <div class="container-fluid d-flex justify-content-between align-items-center">
+
+                    <!--BOTON SIDEBAR -->
+                    <button type="button" class="btn btn-custom" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list icon-custom" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                        </svg>
+                    </button>
+
+                    <!--LOGO-->
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <a class="navbar-brand d-flex align-items-center" href="#">
+                            <img src="images/logo.gif" alt="MelodyStream Logo" class="me-2"> SkellyTunes
+                        </a>
+
+                        <!--BARRA DE BUSQUEDA-->
+                        <form class="d-flex ms-3 flex-grow-1" role="search">
+                            <input class="form-control me-2" type="search" placeholder="¿Que deseas buscar?" aria-label="Buscar">
+                            <button class="btn btn-outline-light" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!--BOTONES-->
+                    <div class="d-flex">
+                        <button class="btn btn-primary me-2" type="button">Iniciar Sesión</button>
+                        <button class="btn btn-secondary" type="button">Registrarse</button>
+                    </div>
+                </div>
+            </nav>
+<!-------------------CONTENIDO----------------------------------->
+    <div class="container mt-5">
+
+        <!--ALBUM -->
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6">
+                <!--PORTADA-->
+                <img src="https://f4.bcbits.com/img/a0972302045_16.jpg" alt="Portada del Álbum" class="album-image">
+            </div>
+
+            <div class="col-lg-8 col-md-6">
+
+                <!--Boton-->
+                <div class="album-header">
+                    <div class="dropdown">
+                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                              </svg>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Añadir a Lista de Reproducción</a></li>
+
+                        </ul>
+                      </div>
+                </div>
+
+                <!--DETALLES-->
+                <div class="album-body">
+                    <!--NOMBRE ALBUM-->
+                    <div class="album-header-info">
+                        <h1>Fenix</h1>
+                        <h3>Cul de Sac</h3>
+                    </div>
+
+                </div>
+
+                <div class="album-footer">
+
+
+
+                    
+
+                </div>
+
+            </div>
+            <div class="progress-bar bg-secondary" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <div class = "repr">
+             <!--REPRODUCCION-->
+             <div class="repr-count">
+                <p>01:15 / 02:37</p>
+            </div>
+                    
+            <!-- Botones del reproductor -->
+            <div class="repr-buttons mb-3">
+                <button type="button" class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                    <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                  </svg></button>
+
+
+                <div class="btn-group" role="group" aria-label="Basic example">
+
+                    <button type="button" class="btn btn-dark">
+                        <!-- SVG de canción anterior -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-start-fill" viewBox="0 0 16 16">
+                            <path d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.54-.313 1.232.066 1.232.696v7.384c0 .63-.692 1.01-1.232.697L5 8.753V12a.5.5 0 0 1-1 0z"/>
+                          </svg>
+
+                    </button>
+
+                    <button type="button" class="btn btn-dark">
+                        <!-- SVG de pausa -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 16 16">
+                            <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/>
+                          </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-dark">
+                        <!-- SVG de canción siguiente -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-fill" viewBox="0 0 16 16">
+                            <path d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.693 3.3 4 3.678 4 4.308v7.384c0 .63.692 1.01 1.233.697L11.5 8.753V12a.5.5 0 0 0 1 0z"/>
+                          </svg>
+                    </button>
+                </div>
+
+                <button type="button" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down-fill" viewBox="0 0 16 16">
+                    <path d="M6.956 14.534c.065.936.952 1.659 1.908 1.42l.261-.065a1.38 1.38 0 0 0 1.012-.965c.22-.816.533-2.512.062-4.51q.205.03.443.051c.713.065 1.669.071 2.516-.211.518-.173.994-.68 1.2-1.272a1.9 1.9 0 0 0-.234-1.734c.058-.118.103-.242.138-.362.077-.27.113-.568.113-.856 0-.29-.036-.586-.113-.857a2 2 0 0 0-.16-.403c.169-.387.107-.82-.003-1.149a3.2 3.2 0 0 0-.488-.9c.054-.153.076-.313.076-.465a1.86 1.86 0 0 0-.253-.912C13.1.757 12.437.28 11.5.28H8c-.605 0-1.07.08-1.466.217a4.8 4.8 0 0 0-.97.485l-.048.029c-.504.308-.999.61-2.068.723C2.682 1.815 2 2.434 2 3.279v4c0 .851.685 1.433 1.357 1.616.849.232 1.574.787 2.132 1.41.56.626.914 1.28 1.039 1.638.199.575.356 1.54.428 2.591"/>
+                  </svg></button>
+            </div>
+        
+
+        </div>
+
+
+        <!--Cuerpo-->
+        <div class="body-section">
+                       <!--LISTADO CANCIONES -->
+                       <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-music" viewBox="0 0 16 16">
+                                    <path d="M11 6.64a1 1 0 0 0-1.243-.97l-1 .25A1 1 0 0 0 8 6.89v4.306A2.6 2.6 0 0 0 7 11c-.5 0-.974.134-1.338.377-.36.24-.662.628-.662 1.123s.301.883.662 1.123c.364.243.839.377 1.338.377s.974-.134 1.338-.377c.36-.24.662-.628.662-1.123V8.89l2-.5z"/>
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                  </svg>
+                            Lista de Canciones
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="song-list">
+                                    <div class="song-item">
+                                        <span>1. Cul de Sac</span> 
+                                        <span>02:34</span>
+                                    </div>
+
+                                    <div class="song-item">
+                                        <span>2. Fenix</span>
+                                        <span>02:37</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                    <!--ARTISTA-->
+                    <div class="artist-info">
+                        <!--IMAGEN -->
+                        <img src="https://f4.bcbits.com/img/0033779152_21.jpg" alt="Foto del artista" class="artist-image">
+
+                        <!--DETALLES-->
+                        <div class="artist-details">
+                            <div class="artist-name fw-bold">[minimo]</div>
+                            <div class="artist-tag text-muted">@minimo</div>
+                        </div>
+
+                        <!--SEGUIR -->
+                        <button class="btn btn-outline-primary follow-btn">Seguir</button>
+                    </div>
+            
+            <div class="comment-section">
+                <h5>Comentarios</h5>
+
+                <!--Comentario 1-->
+                <div class="comment">
+                    <img src="https://static.wikia.nocookie.net/punpun/images/1/15/Punpun_c1p2.PNG/revision/latest?cb=20150406130815" alt="Foto de usuario">
+                    <div class="comment-content">
+                        <strong>@tele.path0s:</strong> ¡Gran álbum!
+                    </div>
+                </div>
+
+                <!--Comentario 2-->
+                <div class="comment">
+                    <img src="https://i.pinimg.com/736x/14/6f/4b/146f4b5a1bbf6dcb5f7a90a0d34658d3.jpg" alt="Foto de usuario">
+                    <div class="comment-content">
+                        <strong>@rubixlander:</strong> Me encantó la música.
+                    </div>
+                </div>
+
+
+
+                <!--COMENTARIO NUEVO-->
+                <div class="add-comment">
+                    <!--IMAGEN-->
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwEAmF8HZle9Lst9fguK1vC-1GoF9fIWXu7Q&s" alt="Foto de usuario">
+
+                    <!--TEXTO-->
+                    <textarea class="form-control" rows="2" placeholder="Escribe tu comentario..."></textarea>
+
+                    <!--BOTON PUBLICAR-->
+                    <button class="btn btn-primary">Publicar</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</body>
+
+</html>
