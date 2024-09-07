@@ -8,6 +8,8 @@
 /* Estilo para el logo */
 .navbar-brand {
     margin-left: 0; /* Asegúrate de que el logo esté pegado a la izquierda */
+    font-family: "Griffy";
+    font-size:x-large;
 }
 
 /* Estilo para la imagen del logo */
@@ -101,6 +103,7 @@
 
 /* Estilo para el contenedor de la cabecera del sidebar */
 .offcanvas-header {
+    font-family: "Griffy";
     display: flex;
     align-items: center; /* Alinea verticalmente el contenido */
     padding: 1rem; /* Espaciado dentro de la cabecera */
