@@ -28,7 +28,7 @@ body.inicio {
     height: 100%;
     top: 0;
     left: 0;
-    background: url(../imagenes/skelly.png) no-repeat center center;
+    background: url(../images/skelly.png) no-repeat center center;
     background-size: cover;
     z-index: -1; /* Keeps the image behind the content */
 }
