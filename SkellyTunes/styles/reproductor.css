@@ -1,0 +1,220 @@
+.body{
+    font-family: 'Inter', sans-serif;
+}
+
+.row{
+    background-color: rgb(154, 207, 207);
+}
+
+.album-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.song-list {
+    margin-top: 15px;
+}
+
+.song-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.song-item:hover {
+    background-color: #e9ecef; /* Color de fondo en hover */
+    transform: scale(1.02); /* Ligero aumento de tamaño */
+}
+
+.song-item span {
+    display: block;
+}
+
+.song-item span:first-child {
+    font-weight: 500;
+}
+
+.song-item span:last-child {
+    color: #6c757d; /* Color de tiempo de canción */
+}
+
+/* Controles de reproducción */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.progress-bar-container {
+    flex-grow: 1;
+    margin: 0 15px;
+}
+
+.progress-bar {
+    height: 5px;
+    background-color: #007bff;
+}
+
+/* Artista */
+.artist-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;;
+}
+
+.artist-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.artist-details {
+    margin-left: 10px;
+    flex-grow: 1;
+}
+
+.follow-btn {
+    margin-left: auto;
+}
+
+/* Sección de comentarios */
+.body-section {
+    margin-top: 20px;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.comment img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.comment-content {
+    flex-grow: 1;
+}
+
+/* Contenedor para escribir un nuevo comentario */
+.add-comment {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.add-comment img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.add-comment textarea {
+    flex-grow: 1;
+    resize: none;
+}
+
+.add-comment button {
+    margin-left: 10px;
+}
+
+.album-header {
+    display: flex;
+    justify-content: flex-end; /* Alinea todos los elementos al borde derecho del contenedor */
+    padding: 10px; /* Espacio interno opcional */
+}
+
+.comment-section{
+    margin-top: 30px;
+}
+
+.music-player {
+
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.player-controls button {
+    margin: 0 5px;
+}
+
+.player-container {
+    background-color: #4A2C2C;
+    max-width: 375px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .control-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .control-buttons button {
+    background-color: black;
+    color: white;
+    border: none;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 50%;
+  }
+
+.album-footer {
+
+    justify-content: flex-end;
+    height: 100%; /* Se asegura de que ocupe todo el espacio disponible */
+
+}
+
+.repr-buttons {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    /* Añade espacio inferior para separarlos del progreso */
+}
+
+.repr-count{
+    justify-content: flex-start;
+    margin-left: auto;
+}
+  
+.btn-group .btn {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #000;
+}
+.btn-group .btn:hover {
+    background-color: #333;
+}
+.btn-group .btn svg {
+    width: 16px;
+    height: 16px;
+}
