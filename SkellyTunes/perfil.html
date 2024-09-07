@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+
+    <!--GOOGLE FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Griffy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+
+    <!--BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!--ANEXOS-->
+    <link rel="stylesheet" href="styles/navbar_UI.css">
+    <link rel="stylesheet" href="styles/custom-cards.css">
+
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Cabecera del perfil */
+        .perfil {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            align-items: center;
+            justify-content: flex-start;
+            background-image: url("https://images.pexels.com/photos/1426718/pexels-photo-1426718.jpeg?cs=srgb&dl=pexels-julieaagaard-1426718.jpg&fm=jpg") ;
+        }
+
+        .foto-perfil {
+            width: 138px;
+            height: 132px;
+            background-color: #D9D9D9;
+            border-radius: 50%;
+
+        }
+
+        .info {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .info h1 {
+            margin: 0;
+            font-size: 25px;
+            color: #000;
+        }
+
+        .info h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .info p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .seguir-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        /* Sección de álbumes */
+        .albumes {
+            padding: 20px;
+        }
+
+        .albumes h3 {
+            font-size: 12px;
+            color: #000;
+            margin: 0 0 10px;
+        }
+
+        .album {
+            display: flex;
+            align-items: center;
+        }
+
+        .album .foto-album {
+            width: 94px;
+            height: 92px;
+            background-color: #D9D9D9;
+            margin-right: 20px;
+        }
+
+        .album .nombre-album {
+            font-size: 16px;
+            color: #000;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="fondo">
+        <!-- Barra de navegación -->
+            <!-- SIDEBAR -->
+            <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+                <!--CABECERA SIDEBAR-->
+                <div class="offcanvas-header">
+                    <!-- LOGO -->
+                    <img src="images/logo.gif" alt=" Logo" class="sidebar-logo">
+                    <h3>SkellyTunes</h3>
+
+                    <!--BOTON SALIR-->
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <!--CUERPO SIDEBAR-->
+                <div class="offcanvas-body">
+                    
+                    <ul class="list-unstyled">
+                        <!--BOTON 1-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill me-2" viewBox="0 0 16 16">
+                                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+                                </svg>
+                                Inicio
+                            </button>
+                        </li>
+
+                        <!--BOTON 2-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">
+                                    <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2"/>
+                                    <path fill-rule="evenodd" d="M12 3v10h-1V3z"/>
+                                    <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1z"/>
+                                    <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5"/>
+                                </svg>
+                                Biblioteca
+                            </button>
+                        </li>
+
+                        <!--BOTON 3-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                </svg>
+                                Perfil
+                            </button>
+                        </li>
+
+                        <!--BOTON 4-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                                </svg>
+                                Comunidades
+                            </button>
+                        </li>
+
+                        <!--BOTON 5-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                    <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                                </svg>
+                                Configuracion
+                            </button>
+                        </li>
+
+                        <!--BOTON 6-->
+                        <li>
+                            <button class="btn btn-dark w-100 text-start d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                                </svg>
+                                Cerrar Sesión
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <footer class="sidebar-footer">@ 2024 SkellyTunes - Todos los derechos reservados</footer>
+            </div>
+
+            
+            <!--BARRA DE NAVEGACION-->
+            <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+                <div class="container-fluid d-flex justify-content-between align-items-center">
+
+                    <!--BOTON SIDEBAR -->
+                    <button type="button" class="btn btn-custom" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list icon-custom" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                        </svg>
+                    </button>
+
+                    <!--LOGO-->
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <a class="navbar-brand d-flex align-items-center" href="#">
+                            <img src="images/logo.gif" alt="MelodyStream Logo" class="me-2"> SkellyTunes
+                        </a>
+
+                        <!--BARRA DE BUSQUEDA-->
+                        <form class="d-flex ms-3 flex-grow-1" role="search">
+                            <input class="form-control me-2" type="search" placeholder="¿Que deseas buscar?" aria-label="Buscar">
+                            <button class="btn btn-outline-light" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!--BOTONES-->
+                    <div class="d-flex">
+                        <button class="btn btn-primary me-2" type="button">Iniciar Sesión</button>
+                        <button class="btn btn-secondary" type="button">Registrarse</button>
+                    </div>
+                </div>
+            </nav>
+
+        <div class="cuerpo">
+            <!-- Perfil -->
+            <div class="perfil">
+                <img class = "foto-perfil" src="https://f4.bcbits.com/img/0033779152_21.jpg">
+                <div class="info">
+                    <h1>[minimo]</h1>
+                    <h2>@minimo</h2>
+                    <p>Lo-Fi, Psychodelic Beats from my intoxicated mind.</p>
+                </div>
+                <div class="seguir-btn">
+                    <button type="button" class="btn btn-dark">Seguir</button>
+                </div>
+            </div>
+
+            <!--Nav Tab-->
+            <ul class="nav nav-tabs">
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Música</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Comunidad</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Acerca de</a>
+                  </li>
+
+
+              </ul>
+
+
+
+
+            <!-- Álbumes -->
+            <div class="albumes">
+                <!--Lista Albumes-->
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-img-container">
+                                    <img src="https://f4.bcbits.com/img/a0972302045_16.jpg" class="card-img-top" alt="Description of image 1">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Cul de Sac</h5>
+                                    <p class="card-text"></p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-img-container">
+                                    <img src="https://f4.bcbits.com/img/a0164762771_16.jpg" class="card-img-top" alt="Description of image 2">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">COSMIC TAPES VOL. I</h5>
+                                    <p class="card-text"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-img-container">
+                                    <img src="https://f4.bcbits.com/img/a0206112719_16.jpg" class="card-img-top" alt="Description of image 2">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">(Proto​-​Minimo - Separate EP​)​VOL​.​1</h5>
+                                    <p class="card-text"></p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
