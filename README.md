@@ -1,1 +1,6 @@
-Rama dedicada a ajustar la Barra de navegacion para mantener consistencia en el resto de htmls
+Rama dedicada testear elemintos y ajustarlos para mantener consistencia en el resto de htmls
+
+Elementos almacenados:
+- Navbar
+- Custom Cards
+
