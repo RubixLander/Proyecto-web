@@ -20,9 +20,9 @@
         </div>
 
         <div class="footer">
-            <form id="registrationForm">
-                <input type="email" id="email" placeholder="Correo electrónico" class="input-field" required oninput="checkCorreo(this)">
-                <input type="password" placeholder="Contraseña" class="input-field">
+            <form id="registrationForm" onsubmit="return validateForm(event)">
+                <input type="email" id="email" placeholder="Correo electrónico" class="input-field" required>
+                <input type="password" id="password" placeholder="Contraseña" class="input-field" required>
                 <input class="btn btn-primary" type="submit" value="Aceptar">
             </form>
         </div>
