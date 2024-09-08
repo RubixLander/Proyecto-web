@@ -20,12 +20,12 @@
         </div>
 
         <div class="footer">
-            <form id="registrationForm">
-                <input type="text" id="rut"  class="input-field" required oninput="checkRut(this)" placeholder="RUT">
-                <input type="email" id="email" placeholder="Correo electrónico" class="input-field" required oninput="checkCorreo(this)">
+            <form id="registrationForm" onsubmit="return validateForm(event)">
+                <input type="text" id="rut" class="input-field" required oninput="checkRut(this)" placeholder="RUT">
+                <input type="email" id="email" placeholder="Correo electrónico" class="input-field" required>
                 <input type="text" id="username" placeholder="Nombre de usuario" class="input-field" required>
-                <input type="password" id="password" placeholder="Contraseña" class="input-field" required oninput="checkPasswords(this)">
-                <input type="password" id="confirmPassword" placeholder="Confirmar contraseña" class="input-field" required oninput="checkPasswords(this)">
+                <input type="password" id="password" placeholder="Contraseña" class="input-field" required>
+                <input type="password" id="confirmPassword" placeholder="Confirmar contraseña" class="input-field" required>
                 <div class="d-flex justify-content-center">
                     <input class="btn btn-primary" type="submit" value="Aceptar">
                 </div>
