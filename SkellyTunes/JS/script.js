@@ -45,7 +45,7 @@ function isValidEmail(email) {
 }
 
 // Validar el formulario y redirigir
-function validateForm(event) {
+function validateFormm(event) {
     event.preventDefault(); // Evitar el envío del formulario
 
     const email = document.getElementById("email").value.trim();
