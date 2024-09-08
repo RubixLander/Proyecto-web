@@ -1,90 +1,142 @@
-//Validar rut
+//Agregar Imagenes
+document.getElementById('profileImage').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const previewContainer = document.getElementById('profileImagePreview');
+
+    // Clear previous previews
+    previewContainer.innerHTML = '';
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'card-img-top'; // Apply card image styling
+            previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+/*Banner*/
+
+document.getElementById('bannerImage').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const previewContainer = document.querySelector('#bannerImagePreview');
+
+    // Clear previous previews
+    previewContainer.innerHTML = '';
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Validar correo
+function isValidEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+}
+
+// Validar el formulario y redirigir
+function validateForm(event) {
+    event.preventDefault(); // Evitar el envío del formulario
+
+    const email = document.getElementById("email").value.trim();
+
+    // Validar campos
+    if (isValidEmail(email)) {
+        // Redirigir a otra página
+        window.location.href = "home.html"; // Cambia la ruta si es necesario
+        return true; // Permitir el envío si la redirección falla
+    } else {
+        alert("Por favor, asegúrate de que los campos sean correctos.");
+        return false; // No permitir el envío si hay errores
+    }
+}
+
+// Validar RUT
 function checkRut(rut) {
-    // Despejar Puntos
-    var valor = rut.value.replace('.','');
-    // Despejar Guión
-    valor = valor.replace('-','');
+    var valor = rut.value.replace('.', '');
+    valor = valor.replace('-', '');
     
-    // Aislar Cuerpo y Dígito Verificador
-    cuerpo = valor.slice(0,-1);
-    dv = valor.slice(-1).toUpperCase();
+    var cuerpo = valor.slice(0, -1);
+    var dv = valor.slice(-1).toUpperCase();
     
-    // Formatear RUN
-    rut.value = cuerpo + '-'+ dv
+    rut.value = cuerpo + '-' + dv;
     
-    // Si no cumple con el mínimo ej. (n.nnn.nnn)
-    if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
-    
-    // Calcular Dígito Verificador
-    suma = 0;
-    multiplo = 2;
-    
-    // Para cada dígito del Cuerpo
-    for(i=1;i<=cuerpo.length;i++) {
-    
-        // Obtener su Producto con el Múltiplo Correspondiente
-        index = multiplo * valor.charAt(cuerpo.length - i);
-        
-        // Sumar al Contador General
-        suma = suma + index;
-        
-        // Consolidar Múltiplo dentro del rango [2,7]
-        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
-  
+    if (cuerpo.length < 7) {
+        rut.setCustomValidity("RUT Incompleto");
+        return false;
     }
     
-    // Calcular Dígito Verificador en base al Módulo 11
-    dvEsperado = 11 - (suma % 11);
+    var suma = 0;
+    var multiplo = 2;
     
-    // Casos Especiales (0 y K)
-    dv = (dv == 'K')?10:dv;
-    dv = (dv == 11)?0:dv;
+    for (var i = 1; i <= cuerpo.length; i++) {
+        var index = multiplo * valor.charAt(cuerpo.length - i);
+        suma += index;
+        multiplo = multiplo < 7 ? multiplo + 1 : 2;
+    }
     
-    // Validar que el Cuerpo coincide con su Dígito Verificador
-    if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+    var dvEsperado = 11 - (suma % 11);
+    dv = dv == 'K' ? 10 : dv;
+    dv = dv == 11 ? 0 : dv;
     
-    // Si todo sale bien, eliminar errores (decretar que es válido)
+    if (dvEsperado != dv) {
+        rut.setCustomValidity("RUT Inválido");
+        return false;
+    }
+    
     rut.setCustomValidity('');
 }
 
-//Validar correo
-function checkCorreo(email){
-    const validateEmailButton = document.getElementById('validateEmailButton');
-    const emailInput = document.getElementById('email');
-    const result = document.getElementById('result');
-
-    validateEmailButton.addEventListener('click', () => {
-        const email = emailInput.value.trim();
-        result.innerHTML = '';
-
-        if (isValidEmail(email)) {
-            result.innerHTML = '<div class="alert alert-success">Correo electrónico válido.</div>';
-        } else {
-            result.innerHTML = '<div class="alert alert-danger">Correo electrónico inválido.</div>';
-        }
-    });
-
-    function isValidEmail(email) {
-        // Expresión regular para validar correos electrónicos
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailPattern.test(email);
-    }
+// Validar correo
+function isValidEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
 }
-// Función para verificar si las contraseñas coinciden
-function checkPasswords() {
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const result = document.getElementById('result');
 
-    const password = passwordInput.value.trim();
-    const confirmPassword = confirmPasswordInput.value.trim();
-    result.innerHTML = '';
+// Verificar si las contraseñas coinciden
+function checkPasswords() {
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+    const result = document.getElementById('result');
 
     if (password && confirmPassword) {
         if (password === confirmPassword) {
             result.innerHTML = '<div class="alert alert-success">Las contraseñas coinciden.</div>';
+            return true;
         } else {
             result.innerHTML = '<div class="alert alert-danger">Las contraseñas no coinciden.</div>';
+            return false;
         }
     }
+    return false;
 }
+
+// Validar el formulario y redirigir
+function validateForm(event) {
+    event.preventDefault(); // Evitar el envío del formulario
+    
+    const rut = document.getElementById('rut');
+    const email = document.getElementById('email').value.trim();
+    const passwordValid = checkPasswords(); // Verificar contraseñas
+
+    // Validar campos
+    if (rut.value && isValidEmail(email) && passwordValid) {
+        // Redirigir a otra página
+        window.location.href = "home.html"; // Cambia la ruta si es necesario
+        return true; // Permitir el envío si la redirección falla
+    } else {
+        alert("Por favor, asegúrate de que todos los campos sean correctos.");
+        return false; // No permitir el envío si hay errores
+    }
+}
+
