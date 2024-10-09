@@ -5,4 +5,5 @@ Descargue el codigo en un .zip y extraigalo, luego arranque el servidor con el c
 ## Interacciones implementadas
 -(Por especificar)
 ## Prototipado en Figma
-CLICK AQUI
+[CLICK AQUI](https://www.figma.com/proto/v62UgfvKEGSAvfzlcopPht/Prototipado?node-id=56-379&node-type=CANVAS&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=56%3A379)
+
