@@ -1,4 +1,4 @@
-Rama dedicada testear elemintos y ajustarlos para mantener consistencia en el resto de htmls
+Rama dedicada testear elementos y ajustarlos para mantener consistencia en el resto de htmls (SOLO BOOTSTRAP)
 
 Elementos almacenados:
 - Navbar
