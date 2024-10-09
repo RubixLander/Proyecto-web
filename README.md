@@ -1,4 +1,6 @@
-## SkellyTunes
+## SkellyTunesBootstrap
+
+Esta branch esta creada para almacenar el proyecto en su version Bootstrap. 
 
 ## Instrucciones
 
