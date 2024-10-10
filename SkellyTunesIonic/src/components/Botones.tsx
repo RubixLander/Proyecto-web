@@ -19,10 +19,10 @@ export const BotonesIconos: React.FC<datosBoton> = ({ icon, text, color, classNa
   const history = useHistory(); // Inicializa useHistory
 
   const handleClick = () => {
-      if (route) {
-          history.push(route); // Redirige a la ruta especificada
-      }
-  };
+    if (route) {
+        window.location.href = route; // O usa window.location.replace(route);
+    }
+};
 
   return (
       <IonButton shape = {shape} size = {size} className= {className} color = {color} expand = {expand} onClick={handleClick}>
@@ -36,9 +36,9 @@ export const BotonGeneral: React.FC<datosBoton> = ({ text, color, className, sha
   const history = useHistory(); // Inicializa useHistory
 
   const handleClick = () => {
-      if (route) {
-          history.push(route); // Redirige a la ruta especificada
-      }
+    if (route) {
+        window.location.href = route; // O usa window.location.replace(route);
+    }
   };
   return (
       <IonButton shape = {shape} size = {size} className= {className} color = {color} expand = {expand} onClick={handleClick}>

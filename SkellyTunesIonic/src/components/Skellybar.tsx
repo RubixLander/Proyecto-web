@@ -34,7 +34,7 @@ const MenuLayout: React.FC<MenuLayoutProps> = ({ children }) => {
 
             {/*Cuerpo de Sidebar*/}
             <div className="menu-content">
-                <BotonesIconos expand="block" shape="round" className="menuOpciones" icon={home} text="Inicio" route='/iniciosesion'/>
+                <BotonesIconos expand="block" shape="round" className="menuOpciones" icon={home} text="Inicio" route='/home'/>
                 <BotonesIconos expand="block" shape="round" icon={albums} className='menuOpciones' text="Biblioteca"/>
                 <BotonesIconos expand="block" shape="round" icon={person} className='menuOpciones' text="Perfil"/>
                 <BotonesIconos expand="block" shape="round" icon={people} className='menuOpciones' text="Comunidades"/>
@@ -74,7 +74,7 @@ const MenuLayout: React.FC<MenuLayoutProps> = ({ children }) => {
                 </div>
 
                 <div className="button-container">
-                  <BotonGeneral color="light" text="Iniciar Sesión"/>
+                  <BotonGeneral color="light" text="Iniciar Sesión" route="/iniciosesion"/>
                   <BotonGeneral color="success" text="Registrarse"/>
                 </div>
               </div>
