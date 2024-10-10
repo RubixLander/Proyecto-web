@@ -116,7 +116,7 @@
 
     .button-container {
         display: flex; 
-        flex-direction: column; /* Alinear los botones en columna */
+        flex-direction: row; /* Alinear los botones en columna */
         align-items: center; /* Centrar horizontalmente */
         margin-left: 0; /* Remueve margen izquierdo */
         gap: 10px; /* Espaciado entre los botones */
