@@ -3,8 +3,6 @@
 El principal objetivo de la aplicación es ofrecer al usuario una pagina web dedicada a compartir musica, donde tanto artistas como usuarios puedan participar de la comunidad. 
 
 ## Funcionalidades
-
-- Creación de perfil: El usuario podrá registrarse y asi obtener un perfil, en donde se guardara su registro.
   
 - Editar perfil: El usuario que posea un perfil , podra editar su perfil, pudiendo agregar un avatar como modificando sus datos.
   
@@ -17,6 +15,8 @@ El principal objetivo de la aplicación es ofrecer al usuario una pagina web ded
 - Reproductor de musica: La aplicación contará con un apartado para reproducir la musica que el usuario quiera, con ajuste de volumen y el listado de canciones que contiene un album.
 
 - Comentarios: Cada album tendrá su propia caja de comentarios, donde los usuarios pueden dejar sus opiniones.
+
+- Busqueda: El usuario podrá buscar canciones o artistas.
 
 ## Prototipado en Figma
 
