@@ -1,0 +1,39 @@
+.EstilosCards {
+    margin: 16px;
+    border-radius: 10px;
+    /* Se elimina el sombreado */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
+    width: 300px; /* Ancho de la tarjeta */
+    height: 400px; /* Alto de la tarjeta */
+    overflow: hidden; /* Evita que el contenido sobresalga */
+    display: flex; /* Para poder alinear la imagen y el contenido */
+    flex-direction: column; /* Colocar elementos en columna */
+    transition: transform 0.3s ease; /* Transiciones suaves */
+}
+
+.EstilosCards:hover {
+    transform: scale(1.05); /* Escalar ligeramente la tarjeta */
+    /* Se elimina el sombreado en hover */
+    /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); */
+}
+
+.EstilosCards img {
+    width: 100%; /* Imagen ocupa todo el ancho de la tarjeta */
+    height: auto; /* Altura automática para mantener la proporción */
+    aspect-ratio: 1; /* Mantiene la imagen cuadrada */
+    object-fit: cover; /* Cubre el espacio sin deformar */
+}
+
+.IonCardHeader, .IonCardContent {
+    padding: 16px; /* Agregar espacio alrededor del contenido */
+}
+
+/* src/Home.css o donde tengas tus estilos */
+.CardsContainer {
+    display: flex; /* Usar Flexbox para alinear elementos */
+    flex-wrap: wrap; /* Permitir que las tarjetas se muevan a la siguiente línea si no hay espacio */
+    justify-content: flex-start; /* Centrar las tarjetas en el contenedor */
+    gap: 90px; /* Espacio entre tarjetas */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    max-width: 1200px; /* O el ancho deseado para limitar el contenedor */
+}

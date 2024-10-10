@@ -1,0 +1,17 @@
+.menuOpciones{
+    --background: #202c33;
+    --background-hover: #69b9b9;
+    --background-activated: #202c33;
+    --background-focused: #699dbd;
+  
+    --color: rgb(255, 255, 255);
+  
+
+  
+    --box-shadow: 0 2px 6px 0 rgba(75, 73, 73, 0.25);
+  
+    --ripple-color: rgb(255, 255, 255);
+  
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+}
