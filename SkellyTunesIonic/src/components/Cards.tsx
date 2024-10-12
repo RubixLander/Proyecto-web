@@ -1,17 +1,20 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
-import './Cards.css'; // Asegúrate de tener un archivo CSS para estilos personalizados
+//Import de Elementos IONIC/REACT
 import React from 'react';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
 
-// Modificar contenido de cards.
+//Import de CSS
+import './Cards.css'; 
+
+
+//Contenido de card.
 interface CardProps {
   image: string;
-  title?: string; // Hacer que title sea opcional
-  subtitle?: string; // Hacer que subtitle sea opcional
-  content?: string; // Hacer que content sea opcional
+  title?: string; 
+  subtitle?: string; 
+  content?: string; 
 }
 
-//Se crea como constante para poder modificarla
-
+//Funcion card
 const Cards: React.FC<CardProps> = ({ image, title, subtitle, content }) => {
   return (
     <IonCard button={true} className="EstilosCards">

@@ -28,12 +28,3 @@
     padding: 16px; /* Agregar espacio alrededor del contenido */
 }
 
-/* src/Home.css o donde tengas tus estilos */
-.CardsContainer {
-    display: flex; /* Usar Flexbox para alinear elementos */
-    flex-wrap: wrap; /* Permitir que las tarjetas se muevan a la siguiente línea si no hay espacio */
-    justify-content: flex-start; /* Centrar las tarjetas en el contenedor */
-    gap: 90px; /* Espacio entre tarjetas */
-    margin: 0 auto; /* Centrar el contenedor horizontalmente */
-    max-width: 1200px; /* O el ancho deseado para limitar el contenedor */
-}

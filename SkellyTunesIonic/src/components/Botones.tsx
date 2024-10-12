@@ -1,43 +1,51 @@
+//Import de Elementos IONIC/REACT
 import React from 'react';
 import { IonButton, IonIcon } from '@ionic/react';
-import './Botones.css';
-import { useHistory } from 'react-router-dom'; // Importa useHistory
+import { useHistory } from 'react-router-dom';
 
+//Import de css
+import './Botones.css';
+
+//Variables de botones
 interface datosBoton {
     icon?: any;
-    text: string;
+    text?: string;
     color?: string;
     className?: string;
     shape?: 'round' | undefined;
     size?: "default" |"large" | "small" | undefined;
     expand?: "block" | "full" | undefined;
-    route?: string;  
+    route?: string;
+    slot?: string  
 } 
 
-
-export const BotonesIconos: React.FC<datosBoton> = ({ icon, text, color, className, shape, size, expand, route }) => {;
-  const history = useHistory(); // Inicializa useHistory
+//Boton que dibuja iconos
+export const BotonIcono: React.FC<datosBoton> = ({ icon, text, color, className, shape, size, expand, route, slot }) => {;
+  //Logica de redireccionado
+  const history = useHistory(); 
 
   const handleClick = () => {
     if (route) {
-        window.location.href = route; // O usa window.location.replace(route);
+        window.location.href = route;
     }
 };
 
   return (
       <IonButton shape = {shape} size = {size} className= {className} color = {color} expand = {expand} onClick={handleClick}>
-        <IonIcon slot="start" icon={icon}></IonIcon>
+        <IonIcon slot={slot} icon={icon}></IonIcon>
         {text}
       </IonButton>
     );
 }
 
+//Boton con solo texto
 export const BotonGeneral: React.FC<datosBoton> = ({ text, color, className, shape, size, expand, route }) => {
-  const history = useHistory(); // Inicializa useHistory
+  //Logica de redireccionado
+  const history = useHistory(); 
 
   const handleClick = () => {
     if (route) {
-        window.location.href = route; // O usa window.location.replace(route);
+        window.location.href = route; 
     }
   };
   return (
