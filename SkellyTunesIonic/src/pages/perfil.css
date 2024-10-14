@@ -1,7 +1,4 @@
 /* Cabecera del perfil */
-ion-content {
-    --ion-background-color: #ecf3f1; /* Para compatibilidad con Ionic */
-}
 
 .perfil {
     display: flex;
@@ -9,7 +6,7 @@ ion-content {
     padding: 20px;
     align-items: center;
     justify-content: flex-start;
-    background-image: url("https://images.pexels.com/photos/1426718/pexels-photo-1426718.jpeg?cs=srgb&dl=pexels-julieaagaard-1426718.jpg&fm=jpg") ;
+    background-image: url("https://images.pexels.com/photos/1426718/pexels-photo-1426718.jpeg?cs=srgb&dl=pexels-julieaagaard-1426718.jpg&fm=jpg");
 }
 
 .foto-perfil {
@@ -17,7 +14,6 @@ ion-content {
     height: 132px;
     background-color: #D9D9D9;
     border-radius: 50%;
-
 }
 
 .info {
@@ -50,6 +46,26 @@ ion-content {
     border-radius: 8px;
 }
 
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+    .foto-perfil {
+        width: 100px; /* Tamaño más pequeño para la foto de perfil */
+        height: 100px;
+    }
+
+    .info h1 {
+        font-size: 20px; /* Tamaño de fuente reducido */
+    }
+
+    .info h2 {
+        font-size: 16px; /* Tamaño de fuente reducido */
+    }
+
+    .info p {
+        font-size: 14px; /* Tamaño de fuente reducido */
+    }
+}
+
 /* Estilo para navegadores WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
     width: 8px; /* Ancho de la barra de desplazamiento */
@@ -73,5 +89,3 @@ ion-content {
     scrollbar-width: thin; /* Ancho de la barra de desplazamiento */
     scrollbar-color: #202c33 transparent; /* Color de la parte que arrastra y del fondo */
 }
-
-

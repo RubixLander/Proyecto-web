@@ -7,7 +7,10 @@ import { playCircle, library, people } from 'ionicons/icons';
 import Skellybar from '../components/InterfazNavegacion';
 import {BotonGeneral} from '../components/Botones';
 import TabsNavegacion from '../components/Tabs'
-import Cards from '../components/Cards';
+import {MediaCard} from '../components/Cards';
+
+//Import de datos
+import albumsData from '../data/albums.json';
 
 //Import de CSS
 import './perfil.css';
@@ -25,22 +28,16 @@ const Perfil: React.FC = () => {
 
             /*Contenido*/
             <IonContent className="scrollable">
-            <div className = "CardsContainer">
-            <Cards 
-              image="https://f4.bcbits.com/img/a0972302045_16.jpg"
-              title="Cul de Sac"
-            /> 
-
-            <Cards 
-              image="https://f4.bcbits.com/img/a0164762771_16.jpg"
-              title="COSMIC TAPES VOL.1"
-            /> 
-            <Cards
-              image="https://f4.bcbits.com/img/a0206112719_16.jpg"
-              title="(Proto​-​Minimo - Separate EP​)​VOL​.​1"
-            />
-          </div>
-          </IonContent>
+                <div className="CardsContainer">
+                    {albumsData.filter(album => album.tag === "@minimo").length > 0 ? (
+                        albumsData.filter(album => album.tag === "@minimo").map((album, index) => (
+                            <MediaCard key={index} image={album.image} title={album.title} />
+                        ))
+                    ) : (
+                        <h2>No hay álbumes disponibles.</h2>
+                    )}
+                </div>
+            </IonContent>
         },
 
         {
@@ -80,7 +77,7 @@ const Perfil: React.FC = () => {
                                     <p>Lo-Fi, Psychodelic Beats from my intoxicated mind.</p>
                                 </div>
                                 <div className="seguir-btn">
-                                    <BotonGeneral text='Seguir' color='dark'/>
+                                    <BotonGeneral text='Seguir' color='dark' size='small'/>
                                 </div>
                         </div>
                     </IonHeader>

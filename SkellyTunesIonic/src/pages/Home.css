@@ -1,13 +1,22 @@
-ion-content {
-    --ion-background-color: #ecf3f1; /* Para compatibilidad con Ionic */
-
-}
-
 .CardsContainer {
     display: flex; /* Usar Flexbox para alinear elementos */
     flex-wrap: wrap; /* Permitir que las tarjetas se muevan a la siguiente línea si no hay espacio */
-    justify-content: flex-start; /* Centrar las tarjetas en el contenedor */
+    justify-content: flex-start; /* Alinear las tarjetas al inicio */
     gap: 90px; /* Espacio entre tarjetas */
     margin: 0 auto; /* Centrar el contenedor horizontalmente */
     max-width: 1200px; /* O el ancho deseado para limitar el contenedor */
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 900px) {
+    .CardsContainer {
+        gap: 60px; /* Reducir espacio entre tarjetas */
+    }
+}
+
+@media (max-width: 600px) {
+    .CardsContainer {
+        gap: 30px; /* Reducir aún más el espacio entre tarjetas */
+        justify-content: center; /* Centrar tarjetas en pantallas pequeñas */
+    }
 }

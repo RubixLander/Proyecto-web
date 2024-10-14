@@ -1,8 +1,6 @@
 .EstilosCards {
     margin: 16px;
     border-radius: 10px;
-    /* Se elimina el sombreado */
-    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
     width: 300px; /* Ancho de la tarjeta */
     height: 400px; /* Alto de la tarjeta */
     overflow: hidden; /* Evita que el contenido sobresalga */
@@ -28,3 +26,10 @@
     padding: 16px; /* Agregar espacio alrededor del contenido */
 }
 
+
+/* DynamicCard.css */
+.card-image {
+    width: 100%;        /* Ajusta la imagen al ancho del contenedor */
+    height: auto;       /* Mantiene la proporción de la imagen */
+    object-fit: cover;  /* Cubre el contenedor sin distorsionar */
+  }
