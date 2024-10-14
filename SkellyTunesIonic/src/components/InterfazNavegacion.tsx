@@ -45,6 +45,8 @@ const Interfaz: React.FC<MenuLayoutProps> = ({ children }) => {
                         <BotonIcono expand="block" shape="round" icon={person} slot="start" className='menuOpciones' text="Perfil" route='/perfil' />
                         <BotonIcono expand="block" shape="round" icon={people} slot="start" className='menuOpciones' text="Comunidades" />
                         <BotonIcono expand="block" shape="round" icon={settings} slot="start" className='menuOpciones' text="Configuración" />
+                    {/*Cerrar sesion borra los datos locales guardados, por lo que al intentar iniciar sesion con un usuario creado anteriormente 
+                    no se podra, esto es para prototipar la funcion con backend para la proxima entrega.*/}
                         <BotonIcono expand="block" shape="round" icon={logOut} slot="start" className='menuOpciones' text="Cerrar Sesión" />
                         {/* Footer de Sidebar */}
                         <div className="menu-footer">
@@ -80,7 +82,7 @@ const Interfaz: React.FC<MenuLayoutProps> = ({ children }) => {
 
                             <div className="button-container">
                                 <BotonGeneral color="light" text="Iniciar Sesión" route="/iniciosesion" />
-                                <BotonGeneral color="success" text="Registrarse" />
+                                <BotonGeneral color="success" text="Registrarse" route="/registro"/>
                             </div>
 
                         </div>
