@@ -1,0 +1,45 @@
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .profile-image-container {
+    width: 100px; /* Ajusta el tamaño del contenedor */
+    height: 100px; /* Ajusta el tamaño del contenedor */
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    overflow: hidden; /* Recorta cualquier contenido que exceda el contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc; /* Color de fondo cuando no hay imagen */
+  }
+  
+  .profile-image {
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
+    object-fit: cover; /* Recorta la imagen para que se ajuste al círculo */
+  }
+  
+  .default-image {
+    width: 100%; /* Ajusta el tamaño al contenedor */
+    height: 100%; /* Ajusta el tamaño al contenedor */
+    background-color: #ccc; /* Color de fondo cuando no hay imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 50%; /* Hace que el círculo sea circular */
+  }
+  
+  /* Estilo para el botón de carga de imagen */
+  .custom-upload-button {
+    margin-top: 10px; /* Espacio adicional entre la imagen y el botón */
+    background-color: #007bff; /* Cambia el color según tu diseño */
+    color: white; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  }
+  

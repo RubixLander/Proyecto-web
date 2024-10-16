@@ -49,6 +49,7 @@ const Interfaz: React.FC<MenuLayoutProps> = ({ children }) => {
                     no se podra, esto es para prototipar la funcion con backend para la proxima entrega.*/}
                         <BotonIcono expand="block" shape="round" icon={logOut} slot="start" className='menuOpciones' text="Cerrar Sesión" />
                         {/* Footer de Sidebar */}
+                        <BotonGeneral expand="block" shape="round" slot="start" className='menuOpciones' text="Ajuste de Perfil" route= '/AjustePerfil' />
                         <div className="menu-footer">
                             <footer>@ 2024 SkellyTunes - Todos los derechos reservados</footer>
                         </div>
