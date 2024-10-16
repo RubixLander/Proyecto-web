@@ -1,8 +1,9 @@
 //Import de Elementos IONIC/REACT
 import React from 'react';
 import { IonButtons, IonHeader, IonMenu, IonMenuButton, IonPage, IonToolbar, IonButton, IonIcon, IonSearchbar } from '@ionic/react';
-import { close, home, albums, person, people, settings, logOut } from 'ionicons/icons';
+import { close, home, albums, person, people, settings, logOut, arrowUpCircle } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
+import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
 
 //Import de Componentes
 import { BotonIcono, BotonGeneral } from './Botones';
@@ -13,6 +14,10 @@ import logo from '../assets/logo.gif';
 //Import de CSS
 import './Interfaces.css';
 
+import { useAuth } from '../contexts/autentificacion';
+
+
+
 // Contenido de la Pagina
 interface MenuLayoutProps {
     children: React.ReactNode;
@@ -20,6 +25,8 @@ interface MenuLayoutProps {
 
 // Definir Interfaz
 export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
+    const { isAuthenticated } = useAuth();
+    const existingUsers = localStorage.getItem('users');
     return (
         <>
             {/* MENU (Sidebar) */}
@@ -66,9 +73,17 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                         <div className="toolbar-custom">
 
                             <div className="logo-menu-container">
-                              <IonButtons slot="start">
-                                  <IonMenuButton className="custom-menu-icon" />
-                              </IonButtons>
+                            {isAuthenticated ? (
+                                //Sesion Iniciada
+                                <IonButtons slot="start">
+                                    <IonMenuButton className="custom-menu-icon" />
+                                </IonButtons>
+                            ) : (
+                                //Sin  Iniciar
+                                <IonButtons slot="start">
+                                    <IonMenuButton className="custom-menu-icon" disabled={true}/>
+                                </IonButtons>
+                            )}
 
                               <Link to="/home" className="logo">
                                     <img src={logo} alt="skellydance" className="logo-image" />
@@ -81,10 +96,24 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                                 <IonSearchbar placeholder="¿Qué deseas buscar?" className="custom-searchbar" />
                             </div>
 
-                            <div className="button-container">
+                            {isAuthenticated ? (
+                                //Sesion Iniciada
+                                <div className="right-side-container">
+                                    <IonItem className='avatar-container'>
+                                        <IonLabel className='avatar-info' >(NOMBREUSUARIO) @tag</IonLabel>
+                                    </IonItem>
+                                    <IonAvatar slot="start" className='avatar'>
+                                        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                        </IonAvatar>
+
+                                </div>
+                            ) : (
+                                //Sin  Iniciar
+                                <div className="right-side-container">
                                 <BotonGeneral color="light" text="Iniciar Sesión" route="/iniciosesion" />
                                 <BotonGeneral color="success" text="Registrarse" route="/registro"/>
-                            </div>
+                                </div>
+                            )}
 
                         </div>
                     </IonToolbar>
@@ -109,19 +138,10 @@ export const InterfazSimple: React.FC<MenuLayoutProps> = ({ children }) => {
                     <IonToolbar className="toolbar">
                         <div className="toolbar-custom-simple">
 
-
-
-
                               <Link to="/home" className="logo">
                                     <img src={logo} alt="skellydance" className="logo-image" />
                                     <h1 className="title-custom">SkellyTunes</h1>
                                 </Link>
-                              
-
-                              
-
-
-
 
                         </div>
                     </IonToolbar>

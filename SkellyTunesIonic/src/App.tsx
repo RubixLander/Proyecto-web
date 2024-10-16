@@ -32,13 +32,13 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-
+      <IonRouterOutlet animated={false}>
+        
         <Route exact path="/registro"><Registro /></Route>
         <Route exact path ="/inicioSesion"><Inicio/></Route>
 
 
-        <InterfazGeneral>
+      <InterfazGeneral>  
       <Route exact path="/biblioteca"><Biblioteca /></Route>
         <Route exact path="/perfil"><Perfil /></Route>
         <Route exact path="/home"><Home /></Route>

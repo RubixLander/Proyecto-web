@@ -3,6 +3,8 @@ import React from 'react';
 import { IonButton, IonIcon } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 
+import { useAuth } from '../contexts/autentificacion';
+
 // Import de css
 import './Botones.css';
 
@@ -36,11 +38,13 @@ interface botonPeter {
 export const BotonIcono: React.FC<datosBoton> = ({ icon, text, color, className, shape, size, expand, route, slot }) => {
   // Lógica de cierre de sesión
   const history = useHistory();
+  const { logout } = useAuth();
   
   const handleClick = () => {
       // Si es el botón de cerrar sesión
       if (text === "Cerrar Sesión") {
           localStorage.clear(); // Elimina todos los datos de localStorage
+          logout();
           history.push('/inicioSesion'); // Redirigir a la página de inicio de sesión
       } else if (route) {
         history.push(route); // Redireccionar a la ruta especificada

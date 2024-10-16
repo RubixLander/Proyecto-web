@@ -6,6 +6,8 @@
     import { Link } from 'react-router-dom';
     import './Registro.css'
     import { InterfazSimple } from '../components/Interfaces';
+    import { useAuth } from '../contexts/autentificacion';
+    import { logIn } from 'ionicons/icons';
 
     //Estructura de json y registro
     const Registro: React.FC = () => {
@@ -14,6 +16,7 @@
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const history = useHistory();
+    const { login } = useAuth();
 
     const validateEmail = (email: string) => {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@mail\.[a-zA-Z]{2,}$/; // Formato: cualquier cosa@mail.xxxx
@@ -63,7 +66,9 @@
     
         // Guardar el nuevo array en localStorage
         localStorage.setItem('users', JSON.stringify(usersArray));
-    
+
+        login();
+        
         // Redirigir a la página de inicio
         history.push('/home');
     };

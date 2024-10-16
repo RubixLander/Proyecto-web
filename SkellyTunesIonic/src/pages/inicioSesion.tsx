@@ -6,11 +6,13 @@ import { useHistory } from 'react-router-dom';
 import './InicioSesion.css';
 import { Link } from 'react-router-dom';
 import { InterfazSimple } from '../components/Interfaces';
+import { useAuth } from '../contexts/autentificacion';
 
 const InicioSesion: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
+    const { login } = useAuth();
 
     const handleLogin = () => {
         // Obtener datos de usuarios existentes
@@ -22,6 +24,7 @@ const InicioSesion: React.FC = () => {
         
         if (user) {
             // Si el usuario existe, redirigir a la página de inicio
+            login();
             history.push('/home');
         } else {
             alert("Nombre de usuario o contraseña incorrectos");
