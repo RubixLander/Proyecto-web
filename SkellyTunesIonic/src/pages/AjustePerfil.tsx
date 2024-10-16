@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonText, IonImg } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import './AjustePerfil.css';
+import {InterfazGeneral} from '../components/Interfaces';
 
 interface User {
   username: string;
@@ -57,6 +58,7 @@ const AjustePerfil: React.FC = () => {
 
   return (
     <IonPage>
+      <InterfazGeneral>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Ajuste de Perfil</IonTitle>
@@ -101,6 +103,7 @@ const AjustePerfil: React.FC = () => {
           </div>
         </IonText>
       </IonContent>
+      </InterfazGeneral>
     </IonPage>
   );
 };

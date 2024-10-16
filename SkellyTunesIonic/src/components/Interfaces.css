@@ -22,7 +22,6 @@
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
     display: flex; /* Habilitar flexbox */
-    cursor: pointer; /* Cambia el cursor a puntero */
     text-decoration: none; /* Elimina el subrayado */
 }
 
@@ -147,6 +146,15 @@
         align-items: center; /* Centra verticalmente */
         margin-bottom: 0; /* Sin margen inferior */
     }
+}
+
+.toolbar-custom-simple {
+    background-color: #0f171b; /* Color de fondo de la toolbar */
+    padding: 10px; /* Ajusta el padding según lo necesites */
+    display: flex;
+    align-items: center; /* Alinea verticalmente al centro */
+    justify-content: center; /* Centra horizontalmente los contenidos */
+    width: 100%;
 }
 
 

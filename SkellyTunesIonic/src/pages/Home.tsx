@@ -2,7 +2,7 @@
 import { IonContent, IonPage,} from '@ionic/react';
 
 //Import de Componentes
-import Skellybar from '../components/InterfazNavegacion';
+import {InterfazGeneral} from '../components/Interfaces';
 import {MediaCard, CardList, DynamicCard} from '../components/Cards';
 import {BotonGeneral} from '../components/Botones'; 
 
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
     <IonPage>
 
       {/*Carga de Interfaz Skelly(Sidebar + Navbar)*/}
-      <Skellybar>
+      <InterfazGeneral>
 
         {/*Cuerpo Pagina*/}
         <IonContent className="scrollable">
@@ -64,7 +64,7 @@ const Home: React.FC = () => {
 
             </IonContent>
 
-      </Skellybar>
+      </InterfazGeneral>
 
     </IonPage>
   );

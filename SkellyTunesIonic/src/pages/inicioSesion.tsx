@@ -5,6 +5,7 @@ import { BotonPeter } from '../components/Botones';
 import { useHistory } from 'react-router-dom';
 import './InicioSesion.css';
 import { Link } from 'react-router-dom';
+import { InterfazSimple } from '../components/Interfaces';
 
 const InicioSesion: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -29,6 +30,7 @@ const InicioSesion: React.FC = () => {
 
     return (
         <IonPage>
+            <InterfazSimple>
             <IonHeader>
                 <IonToolbar>
                     <IonTitle>Iniciar Sesión</IonTitle>
@@ -67,6 +69,7 @@ const InicioSesion: React.FC = () => {
                     </div>
                 </IonText>
             </IonContent>
+            </InterfazSimple>
         </IonPage>
     );
 };

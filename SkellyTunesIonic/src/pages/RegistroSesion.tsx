@@ -5,6 +5,7 @@
     import { useHistory } from 'react-router-dom';
     import { Link } from 'react-router-dom';
     import './Registro.css'
+    import { InterfazSimple } from '../components/Interfaces';
 
     //Estructura de json y registro
     const Registro: React.FC = () => {
@@ -69,6 +70,7 @@
     
     return (
         <IonPage>
+            <InterfazSimple>
         <IonHeader>
             <IonToolbar>
             <IonTitle>Registro</IonTitle>
@@ -128,6 +130,7 @@
             </IonText>
 
         </IonContent>
+        </InterfazSimple>
         </IonPage>
     );
     };

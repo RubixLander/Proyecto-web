@@ -43,7 +43,7 @@ export const BotonIcono: React.FC<datosBoton> = ({ icon, text, color, className,
           localStorage.clear(); // Elimina todos los datos de localStorage
           history.push('/inicioSesion'); // Redirigir a la página de inicio de sesión
       } else if (route) {
-          window.location.href = route; // Redireccionar a la ruta especificada
+        history.push(route); // Redireccionar a la ruta especificada
       }
   };
 
@@ -57,10 +57,11 @@ export const BotonIcono: React.FC<datosBoton> = ({ icon, text, color, className,
 
 // Boton con solo texto
 export const BotonGeneral: React.FC<datosBoton> = ({ text, color, className, shape, size, expand, route }) => {
+    const history = useHistory();
     // Lógica de redireccionado
     const handleClick = () => {
         if (route) {
-            window.location.href = route;
+            history.push(route);
         }
     };
     

@@ -7,6 +7,7 @@ import Perfil from './pages/perfil';
 import Biblioteca from './pages/biblioteca';
 import Registro from './pages/RegistroSesion';
 import AjustePerfil from './pages/AjustePerfil';
+import {InterfazGeneral , InterfazSimple} from './components/Interfaces';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,15 +33,21 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
+
+        <Route exact path="/registro"><Registro /></Route>
+        <Route exact path ="/inicioSesion"><Inicio/></Route>
+
+
+        <InterfazGeneral>
       <Route exact path="/biblioteca"><Biblioteca /></Route>
         <Route exact path="/perfil"><Perfil /></Route>
-        <Route exact path ="/inicioSesion"><Inicio/></Route>
         <Route exact path="/home"><Home /></Route>
-        <Route exact path="/registro"><Registro /></Route>
+
         <Route exact path="/ajustePerfil"><AjustePerfil /></Route>
         <Route exact path="">
-          <Redirect to="/registro" />
+          <Redirect to="/home" />
         </Route>
+        </InterfazGeneral>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

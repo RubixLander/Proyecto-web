@@ -2,6 +2,7 @@
 import React from 'react';
 import { IonButtons, IonHeader, IonMenu, IonMenuButton, IonPage, IonToolbar, IonButton, IonIcon, IonSearchbar } from '@ionic/react';
 import { close, home, albums, person, people, settings, logOut } from 'ionicons/icons';
+import { Link } from 'react-router-dom';
 
 //Import de Componentes
 import { BotonIcono, BotonGeneral } from './Botones';
@@ -10,7 +11,7 @@ import { BotonIcono, BotonGeneral } from './Botones';
 import logo from '../assets/logo.gif';
 
 //Import de CSS
-import './Interfaz.css';
+import './Interfaces.css';
 
 // Contenido de la Pagina
 interface MenuLayoutProps {
@@ -18,7 +19,7 @@ interface MenuLayoutProps {
 }
 
 // Definir Interfaz
-const Interfaz: React.FC<MenuLayoutProps> = ({ children }) => {
+export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
     return (
         <>
             {/* MENU (Sidebar) */}
@@ -44,12 +45,11 @@ const Interfaz: React.FC<MenuLayoutProps> = ({ children }) => {
                         <BotonIcono expand="block" shape="round" icon={albums} slot="start" className='menuOpciones' text="Biblioteca" route='/biblioteca'/>
                         <BotonIcono expand="block" shape="round" icon={person} slot="start" className='menuOpciones' text="Perfil" route='/perfil' />
                         <BotonIcono expand="block" shape="round" icon={people} slot="start" className='menuOpciones' text="Comunidades" />
-                        <BotonIcono expand="block" shape="round" icon={settings} slot="start" className='menuOpciones' text="Configuración" />
+                        <BotonIcono expand="block" shape="round" icon={settings} slot="start" className='menuOpciones' text="Ajustes" route='/AjustePerfil'/>
                     {/*Cerrar sesion borra los datos locales guardados, por lo que al intentar iniciar sesion con un usuario creado anteriormente 
                     no se podra, esto es para prototipar la funcion con backend para la proxima entrega.*/}
                         <BotonIcono expand="block" shape="round" icon={logOut} slot="start" className='menuOpciones' text="Cerrar Sesión" />
                         {/* Footer de Sidebar */}
-                        <BotonGeneral expand="block" shape="round" slot="start" className='menuOpciones' text="Ajuste de Perfil" route= '/AjustePerfil' />
                         <div className="menu-footer">
                             <footer>@ 2024 SkellyTunes - Todos los derechos reservados</footer>
                         </div>
@@ -70,10 +70,10 @@ const Interfaz: React.FC<MenuLayoutProps> = ({ children }) => {
                                   <IonMenuButton className="custom-menu-icon" />
                               </IonButtons>
 
-                              <div className="logo" onClick={() => window.location.href = '/home'}>
-                                <img src={logo} alt="skellydance" className="logo-image" />
-                                <h1 className="title-custom">SkellyTunes</h1>
-                              </div>
+                              <Link to="/home" className="logo">
+                                    <img src={logo} alt="skellydance" className="logo-image" />
+                                    <h1 className="title-custom">SkellyTunes</h1>
+                                </Link>
                               
                             </div>
 
@@ -97,4 +97,41 @@ const Interfaz: React.FC<MenuLayoutProps> = ({ children }) => {
     );
 };
 
-export default Interfaz;
+// Definir Interfaz
+export const InterfazSimple: React.FC<MenuLayoutProps> = ({ children }) => {
+    return (
+        <>
+            {/* Creación de pagina */}
+            <IonPage id="main-content">
+                {/* Header de Pagina */}
+                <IonHeader>
+                    {/* TOOLBAR (Navbar) */}
+                    <IonToolbar className="toolbar">
+                        <div className="toolbar-custom-simple">
+
+
+
+
+                              <Link to="/home" className="logo">
+                                    <img src={logo} alt="skellydance" className="logo-image" />
+                                    <h1 className="title-custom">SkellyTunes</h1>
+                                </Link>
+                              
+
+                              
+
+
+
+
+                        </div>
+                    </IonToolbar>
+                </IonHeader>
+
+                {/* CUERPO DE LA PAGINA */}
+                {children}
+            </IonPage>
+        </>
+    );
+};
+
+

@@ -4,7 +4,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/rea
 import { playCircle, library, people } from 'ionicons/icons';
 
 //Import de Componentes
-import Skellybar from '../components/InterfazNavegacion';
+import {InterfazGeneral} from '../components/Interfaces';
 import {BotonGeneral} from '../components/Botones';
 import TabsNavegacion from '../components/Tabs'
 import {MediaCard} from '../components/Cards';
@@ -64,7 +64,8 @@ const Perfil: React.FC = () => {
         /*ESTRUCTURA DE PAGINA*/
         <IonPage>
             {/*Carga de Interfaz Skelly(Sidebar + Navbar)*/}
-            <Skellybar>
+            <InterfazGeneral>
+                <IonContent>
 
                 {/*CONTENIDO PAGINA*/}
                     {/*CABECERA DE PERFIL*/}
@@ -86,8 +87,9 @@ const Perfil: React.FC = () => {
                     <IonContent>
                         <TabsNavegacion tabs={tabs} /> {/*CONTENIDO TABS DEFINIDOS ARRIBA*/}
                     </IonContent>
+                    </IonContent>
 
-            </Skellybar>
+            </InterfazGeneral>
         </IonPage>
     );
 };
