@@ -7,7 +7,7 @@
     import './Registro.css'
     import { InterfazSimple } from '../components/Interfaces';
     import { useAuth } from '../contexts/autentificacion';
-    import { logIn } from 'ionicons/icons';
+    import skellymage from '../assets/Skelly.png';
 
     //Estructura de json y registro
     const Registro: React.FC = () => {
@@ -75,65 +75,63 @@
     
     return (
         <IonPage>
-            <InterfazSimple>
+        <InterfazSimple>
         <IonHeader>
-            <IonToolbar>
-            <IonTitle>Registro</IonTitle>
-            </IonToolbar>
         </IonHeader>
-        <IonContent>
-            <IonList>
-            <IonItem className="registrocs">
-                <IonLabel position="stacked">Nombre De Usuario</IonLabel>
-                <IonInput
-                placeholder='Example: SilksongClown44'
-                value={username}
-                onIonChange={e => setUsername(e.detail.value!)}
-                type="text"
-                required
-                />
-            </IonItem>
-            <IonItem className="registrocs">
-                <IonLabel position="stacked">Email</IonLabel>
-                <IonInput
-                placeholder='clown@mail.com'
-                value={email}
-                onIonChange={e => setEmail(e.detail.value!)}
-                type="email"
-                required
-                />
-            </IonItem>
-            <IonItem className="registrocs">
-                <IonLabel position="stacked">Contraseña</IonLabel>
-                <IonInput
-                placeholder='clowntraseña44'
-                value={password}
-                onIonChange={e => setPassword(e.detail.value!)}
-                type="password"
-                required
-                />
-            </IonItem>
-            <IonItem className="registrocs">
-                <IonLabel position="stacked">Confirmar contraseña</IonLabel>
-                <IonInput
-                placeholder='clowntraseña44'
-                value={confirmPassword}
-                onIonChange={e => setConfirmPassword(e.detail.value!)}
-                type="password"
-                required
-                />
-            </IonItem>
+        <IonContent className='registroc'>
+            <div className="registro-container">
+                <IonList className='asd'>
+                <IonItem>
+                    <IonLabel position="stacked">Nombre De Usuario</IonLabel>
+                    <IonInput
+                    placeholder='Example: SilksongClown44'
+                    value={username}
+                    onIonChange={e => setUsername(e.detail.value!)}
+                    type="text"
+                    required
+                    />
+                </IonItem>
+                <IonItem>
+                    <IonLabel position="stacked">Email</IonLabel>
+                    <IonInput
+                    placeholder='clown@mail.com'
+                    value={email}
+                    onIonChange={e => setEmail(e.detail.value!)}
+                    type="email"
+                    required
+                    />
+                </IonItem>
+                <IonItem>
+                    <IonLabel position="stacked">Contraseña</IonLabel>
+                    <IonInput
+                    placeholder='clowntraseña44'
+                    value={password}
+                    onIonChange={e => setPassword(e.detail.value!)}
+                    type="password"
+                    required
+                    />
+                </IonItem>
+                <IonItem>
+                    <IonLabel position="stacked">Confirmar contraseña</IonLabel>
+                    <IonInput
+                    placeholder='clowntraseña44'
+                    value={confirmPassword}
+                    onIonChange={e => setConfirmPassword(e.detail.value!)}
+                    type="password"
+                    required
+                    />
+                </IonItem>
             </IonList>
             <BotonPeter onClick={handleRegister} className="menuOpciones" expand= "full" text= "Registrarse"/>
             <IonText>
-                <div style={{textAlign:'center', margin:'20px 0'}}>
+                <div style={{textAlign:'center', margin:'20px 0', color: 'white'}}>
                     <p>¿Ya tienes cuenta?</p>
-                    <Link to="/inicioSesion" style={{ textDecoration: 'underline', color: 'blue' }}>
+                    <Link to="/inicioSesion" style={{ textDecoration: 'underline', color: 'white' }}>
                          Inicia sesión aquí
                     </Link>.
                 </div>
             </IonText>
-
+        </div>
         </IonContent>
         </InterfazSimple>
         </IonPage>
