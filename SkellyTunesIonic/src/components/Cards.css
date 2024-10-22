@@ -1,35 +1,51 @@
 .EstilosCards {
     margin: 16px;
     border-radius: 10px;
-    width: 300px; /* Ancho de la tarjeta */
-    height: 400px; /* Alto de la tarjeta */
-    overflow: hidden; /* Evita que el contenido sobresalga */
-    display: flex; /* Para poder alinear la imagen y el contenido */
-    flex-direction: column; /* Colocar elementos en columna */
-    transition: transform 0.3s ease; /* Transiciones suaves */
+    width: 300px;
+    min-height: 400px; /* Cambiado de height a min-height */
+    overflow: hidden; /* Cambiado para que el contenido no sobresalga */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
 }
 
 .EstilosCards:hover {
-    transform: scale(1.05); /* Escalar ligeramente la tarjeta */
-    /* Se elimina el sombreado en hover */
-    /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); */
+    transform: scale(1.05);
 }
 
+.image-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    margin: 0 !important; /* Asegúrate de que no haya márgenes */
+}
+
+
+
 .EstilosCards img {
-    width: 100%; /* Imagen ocupa todo el ancho de la tarjeta */
-    height: auto; /* Altura automática para mantener la proporción */
-    aspect-ratio: 1; /* Mantiene la imagen cuadrada */
-    object-fit: cover; /* Cubre el espacio sin deformar */
+    width: 100%;
+    height: auto; /* Mantiene la proporción de la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor */
+    display: block; /* Elimina el espacio en la parte inferior */
 }
 
 .IonCardHeader, .IonCardContent {
-    padding: 16px; /* Agregar espacio alrededor del contenido */
+    padding: 16px;
+    flex-grow: 1; /* Asegura que el contenido crezca si es necesario */
 }
 
+.overlay-icon {
+    position: absolute; /* Posiciona el icono sobre la imagen */
+    top: 10px; /* Ajusta según sea necesario */
+    right: 10px; /* Ajusta según sea necesario */
+    color: white; /* Cambia el color del icono según tu diseño */
+    font-size: 24px; /* Ajusta el tamaño del icono */
+    z-index: 1; /* Asegura que el icono esté por encima de la imagen */
+}
 
-/* DynamicCard.css */
 .card-image {
     width: 100%;        /* Ajusta la imagen al ancho del contenedor */
     height: auto;       /* Mantiene la proporción de la imagen */
     object-fit: cover;  /* Cubre el contenedor sin distorsionar */
-  }
+}

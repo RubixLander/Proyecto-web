@@ -66,26 +66,30 @@
     }
 }
 
-/* Estilo para navegadores WebKit (Chrome, Safari) */
-::-webkit-scrollbar {
-    width: 8px; /* Ancho de la barra de desplazamiento */
+.about-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Centra los elementos hijos horizontalmente */
+    align-items: center; /* Centra los elementos hijos verticalmente, si es necesario */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    max-width: 1200px; /* O el ancho deseado para limitar el contenedor */
+    padding-left: 25px; /* Usa padding en lugar de margin para el espaciado interno */
+    padding-right: 25px; /* Usa padding en lugar de margin para el espaciado interno */
 }
 
-::-webkit-scrollbar-track {
-    background: transparent; /* Fondo de la pista de la barra */
+.about-info {
+    margin: 16px;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #202c33; /* Color de la parte que arrastra */
-    border-radius: 10px; /* Bordes redondeados */
+.detail-item {
+    display: flex; /* Utiliza Flexbox para alinear en fila */
+    align-items: center; /* Centra verticalmente los iconos y labels */
+    margin-bottom: 8px; /* Espaciado entre los elementos */
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(32, 44, 51, 0.8); /* Color al pasar el ratón (un poco más claro) */
+.detail-item IonIcon {
+    margin-right: 8px; /* Espaciado entre el icono y el label */
 }
 
-/* Estilo para Firefox */
-.scrollable {
-    scrollbar-width: thin; /* Ancho de la barra de desplazamiento */
-    scrollbar-color: #202c33 transparent; /* Color de la parte que arrastra y del fondo */
-}
+
+

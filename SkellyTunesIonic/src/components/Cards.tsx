@@ -2,7 +2,8 @@
 import React from 'react';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonList, IonItem, IonThumbnail, IonLabel } from '@ionic/react';
 import { IonImg, IonGrid, IonRow, IonCol } from '@ionic/react';
-
+import { IonIcon } from '@ionic/react';
+import { globe } from 'ionicons/icons'; // Importa el icono que quieras usar
 
 //Import de CSS
 import './Cards.css'; 
@@ -13,18 +14,21 @@ interface CardProps {
   image?: string;
   title?: string; 
   subtitle?: string; 
-  content?: string; 
+  content?: string;
+  icon?: string; 
 }
 
 interface CardListProps {
   items: Array<{ id: number; label: string; imageUrl: string }>;
 }
 
-//Funcion card
-export const MediaCard: React.FC<CardProps> = ({ image, title, subtitle, content }) => {
+export const MediaCard: React.FC<CardProps> = ({ image, title, subtitle, content, icon }) => {
   return (
     <IonCard button={true} className="EstilosCards">
-      <img alt={title} src={image} />
+      <div className="image-container">
+        <img alt={title} src={image} className="card-image" />
+        {icon && <IonIcon icon={icon} className="overlay-icon" />}
+      </div>
       <IonCardHeader>
         <IonCardTitle>{title}</IonCardTitle>
         <IonCardSubtitle>{subtitle}</IonCardSubtitle>
@@ -35,6 +39,7 @@ export const MediaCard: React.FC<CardProps> = ({ image, title, subtitle, content
     </IonCard>
   );
 }
+
 
 export const DynamicCard: React.FC<CardProps> = ({ title, subtitle, content,image }) => {
   return (

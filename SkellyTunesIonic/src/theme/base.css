@@ -1,3 +1,26 @@
 ion-content {
     --ion-background-color: #e9f1ef; /* Para compatibilidad con Ionic */
 }
+
+::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* Fondo de la pista de la barra */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #202c33; /* Color de la parte que arrastra */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(32, 44, 51, 0.8); /* Color al pasar el ratón (un poco más claro) */
+}
+
+
+.scrollable {
+    scrollbar-width: thin; /* Ancho de la barra de desplazamiento */
+    scrollbar-color: #202c33 transparent; /* Color de la parte que arrastra y del fondo */
+}

@@ -7,7 +7,7 @@ import Perfil from './pages/perfil';
 import Biblioteca from './pages/biblioteca';
 import Registro from './pages/RegistroSesion';
 import AjustePerfil from './pages/AjustePerfil';
-import {InterfazGeneral , InterfazSimple} from './components/Interfaces';
+import {InterfazGeneral} from './components/Interfaces';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

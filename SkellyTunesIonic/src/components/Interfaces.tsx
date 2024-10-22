@@ -1,15 +1,18 @@
 //Import de Elementos IONIC/REACT
-import React from 'react';
-import { IonButtons, IonHeader, IonMenu, IonMenuButton, IonPage, IonToolbar, IonButton, IonIcon, IonSearchbar } from '@ionic/react';
-import { close, home, albums, person, people, settings, logOut, arrowUpCircle } from 'ionicons/icons';
+import React, { useState, useEffect } from 'react';
+import { IonButtons, IonHeader, IonMenu, IonMenuButton, IonPage, IonToolbar, IonButton, IonIcon, IonSearchbar, IonToast } from '@ionic/react';
+import { close, home, library, person, people, settings, logOut, alert} from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
+import { useLogo } from '../contexts/eventoespecial';
 
 //Import de Componentes
 import { BotonIcono, BotonGeneral } from './Botones';
+import Toast from './Toast';
 
 //Import de assets
-import logo from '../assets/logo.gif';
+import normallogo from '../assets/logo.gif';
+import shinylogo from '../assets/shinylogo.gif'
 
 //Import de CSS
 import './Interfaces.css';
@@ -25,12 +28,23 @@ interface MenuLayoutProps {
 
 // Definir Interfaz
 export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
+    const { isShiny, toastShown, setToastShown } = useLogo(); // Obtiene isShiny y toastShown
+    const logo = isShiny ? shinylogo : normallogo; // Determina el logo
     const { isAuthenticated } = useAuth();
-    const existingUsers = localStorage.getItem('users');
+    
+    const [showToast, setShowToast] = useState(false);
+
+    useEffect(() => {
+        if (isShiny && !toastShown) {
+            setShowToast(true); // Muestra el toast si isShiny es true
+            setToastShown(true); // Marca el toast como mostrado en el contexto
+        }
+    }, [isShiny, toastShown, setToastShown]);
+
     return (
         <>
             {/* MENU (Sidebar) */}
-            <IonMenu contentId="main-content">
+            <IonMenu contentId="main-content" swipeGesture={false}>
                 <div className="menu-container">
                     {/* Header de Sidebar */}
                     <div className='menu-header-button'>
@@ -40,16 +54,17 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                     </div>
 
                     <div className='menu-header'>
-                        <div className="logo">
-                            <img src={logo} alt="skellydance" className="logo-image" />
-                            <h1 className="title-custom">SkellyTunes</h1>
-                        </div>
+                    <div className="logo">
+                <img src={logo} alt="skellydance" className="logo-image" />
+                <h1 className={isShiny ? 'shiny-title-custom' : 'title-custom'}>Skelly</h1>
+                <h1 className='title-custom'>Tunes</h1>
+            </div>
                     </div>
 
                     {/* Cuerpo de Sidebar */}
                     <div className="menu-content">
                         <BotonIcono expand="block" shape="round" icon={home} slot="start" className="menuOpciones" text="Inicio" route='/home' />
-                        <BotonIcono expand="block" shape="round" icon={albums} slot="start" className='menuOpciones' text="Biblioteca" route='/biblioteca'/>
+                        <BotonIcono expand="block" shape="round" icon={library} slot="start" className='menuOpciones' text="Biblioteca" route='/biblioteca'/>
                         <BotonIcono expand="block" shape="round" icon={person} slot="start" className='menuOpciones' text="Perfil" route='/perfil' />
                         <BotonIcono expand="block" shape="round" icon={people} slot="start" className='menuOpciones' text="Comunidades" />
                         <BotonIcono expand="block" shape="round" icon={settings} slot="start" className='menuOpciones' text="Ajustes" route='/AjustePerfil'/>
@@ -73,22 +88,20 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                         <div className="toolbar-custom">
 
                             <div className="logo-menu-container">
-                            {isAuthenticated ? (
+                            {isAuthenticated && (
                                 //Sesion Iniciada
                                 <IonButtons slot="start">
                                     <IonMenuButton className="custom-menu-icon" />
                                 </IonButtons>
-                            ) : (
-                                //Sin  Iniciar
-                                <IonButtons slot="start">
-                                    <IonMenuButton className="custom-menu-icon" disabled={true}/>
-                                </IonButtons>
                             )}
 
-                              <Link to="/home" className="logo">
-                                    <img src={logo} alt="skellydance" className="logo-image" />
-                                    <h1 className="title-custom">SkellyTunes</h1>
-                                </Link>
+
+                            <Link to="/home" className="logo">
+                            <img src={logo} alt="skellydance" className="logo-image" />
+                            <h1 className={isShiny ? 'shiny-title-custom' : 'title-custom'}>Skelly</h1>
+                            <h1 className='title-custom'>Tunes</h1>
+                            </Link>
+
                               
                             </div>
 
@@ -100,10 +113,10 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                                 //Sesion Iniciada
                                 <div className="right-side-container">
                                     <IonItem className='avatar-container'>
-                                        <IonLabel className='avatar-info' >(NOMBREUSUARIO) @tag</IonLabel>
+                                        <IonLabel className='avatar-info' >[minimo] @minimo</IonLabel>
                                     </IonItem>
                                     <IonAvatar slot="start" className='avatar'>
-                                        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                        <img alt="avatar" src="https://f4.bcbits.com/img/0033779152_21.jpg" />
                                         </IonAvatar>
 
                                 </div>
@@ -120,6 +133,9 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                 </IonHeader>
 
                 {/* CUERPO DE LA PAGINA */}
+                {showToast && (
+                    <Toast icon={alert} message="Ha aparecido un Shiny Skelly" duration={4000} />
+                )}
                 {children}
             </IonPage>
         </>
@@ -128,6 +144,11 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
 
 // Definir Interfaz
 export const InterfazSimple: React.FC<MenuLayoutProps> = ({ children }) => {
+    const { isShiny } = useLogo(); // Obtiene isShiny y toastShown
+    const logo = isShiny ? shinylogo : normallogo; // Determina el logo
+
+
+
     return (
         <>
             {/* Creación de pagina */}
@@ -139,8 +160,9 @@ export const InterfazSimple: React.FC<MenuLayoutProps> = ({ children }) => {
                         <div className="toolbar-custom-simple">
 
                               <Link to="/home" className="logo">
-                                    <img src={logo} alt="skellydance" className="logo-image" />
-                                    <h1 className="title-custom">SkellyTunes</h1>
+                              <img src={logo} alt="skellydance" className="logo-image" />
+                              <h1 className={isShiny ? 'shiny-title-custom' : 'title-custom'}>Skelly</h1>
+                              <h1 className='title-custom'>Tunes</h1>
                                 </Link>
 
                         </div>

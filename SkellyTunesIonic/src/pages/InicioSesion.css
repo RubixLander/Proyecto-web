@@ -1,19 +1,25 @@
+.iniciocs {
+    margin-bottom: 40px; /* Ajusta el valor según sea necesario */
+}
+
+/*---EXPERIMENTAL V 0.2.6.3
 .inicio-container {
-    background-image: url(https://media.tenor.com/LKe9vlvsutQAAAAi/skeleton-spooky.gif); /* Usa la imagen como fondo */
+    background-image: url(https://media.tenor.com/LKe9vlvsutQAAAAi/skeleton-spooky.gif); 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Para centrar verticalmente el contenedor en la pantalla */
-    background-color: #B0B0B0; /* Fondo plomo */
+    height: 100vh;
+    background-color: #B0B0B0; 
 }
 
 .inicio-box {
-    background-color: #3f3f3f; /* Color de fondo plomo */
-    border-radius: 8px; /* Bordes redondeados */
-    padding: 40px; /* Espaciado interno */
-    width: 100%; /* Asegúrate de que el ancho sea adecuado */
-    max-width: 600px; /* Ancho máximo para el contenedor */
-    height: 400px; /* Ajusta la altura a 400px o más */
-    box-shadow: 0 4px 8px rgba(226, 14, 14, 0.2); /* Sombra para resaltar la caja */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-}
+    background-color: #3f3f3f; 
+    border-radius: 8px; 
+    padding: 40px; 
+    width: 100%; 
+    max-width: 600px; 
+    height: 400px; 
+    box-shadow: 0 4px 8px rgba(226, 14, 14, 0.2); 
+    margin: 0 auto; 
+} 
+/* 

@@ -1,24 +1,29 @@
+.registrocs {
+    margin-bottom: 30px; /* Ajusta el valor según sea necesario */
+}
+
+/*---EXPERIMENTAL V 0.2.6.3
 .registro-container {
-    background-image: url(https://media1.tenor.com/m/-ROOryBOHygAAAAC/skeleton-dancing-skeleton.gif); /* Usa la imagen como fondo */
-    background-position: center; /* Centra la imagen */
-    background-repeat: repeat; /* No repite la imagen */
+    background-image: url(https://media1.tenor.com/m/-ROOryBOHygAAAAC/skeleton-dancing-skeleton.gif); 
+    background-position: center; 
+    background-repeat: repeat; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Abarca toda la pantalla */
+    height: 100vh; 
     padding: 10px;
     text-align: center;
     --ion-background-color:#636262;
   }
   
-/* Registro.css */
 
 .registroc{
-   background-color: #3f3f3f; /* Color de fondo plomo */
-    padding: 20px; /* Espaciado interno */
-    width: 100%; /* Asegúrate de que el ancho sea adecuado */
-    height: 400px; /* Ajusta la altura a 400px o más */
-    box-shadow: 0 4px 8px rgba(226, 14, 14, 0.2); /* Sombra para resaltar la caja */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
+   background-color: #3f3f3f; 
+    padding: 20px;
+    width: 100%; 
+    height: 400px;
+    box-shadow: 0 4px 8px rgba(226, 14, 14, 0.2); 
+    margin: 0 auto; 
 }
+*/

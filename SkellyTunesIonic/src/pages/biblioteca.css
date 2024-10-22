@@ -1,0 +1,35 @@
+.biblioteca-header {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Asegura que el contenido esté centrado verticalmente */
+    height: 56px; /* Ajusta según la altura de tu toolbar */
+    --background: #323f44;
+    color: white
+}
+
+.biblioteca-header-contenido {
+    display: flex;
+    align-items: center; /* Centra verticalmente el ícono y el título */
+}
+
+.biblioteca-header-icono {
+    font-size: 24px; /* Ajusta el tamaño del ícono */
+    margin-left: 25px;
+}
+
+
+.biblioteca-header-titulo {
+    font-size: 24px; /* Ajusta el tamaño del título */
+
+}
+
+.TabContentContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Centra los elementos hijos horizontalmente */
+    align-items: center; /* Centra los elementos hijos verticalmente, si es necesario */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    max-width: 1200px; /* O el ancho deseado para limitar el contenedor */
+    padding-left: 25px; /* Usa padding en lugar de margin para el espaciado interno */
+    padding-right: 25px; /* Usa padding en lugar de margin para el espaciado interno */
+}
