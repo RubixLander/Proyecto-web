@@ -1,25 +1,25 @@
-.iniciocs {
-    margin-bottom: 40px; /* Ajusta el valor según sea necesario */
+.registro-container {
+    background-image: url(https://media1.tenor.com/m/qGHCT_3gV4EAAAAd/tuts-skeleton.gif); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/*---EXPERIMENTAL V 0.2.6.3
 .inicio-container {
     background-image: url(https://media.tenor.com/LKe9vlvsutQAAAAi/skeleton-spooky.gif); 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #B0B0B0; 
+    background-color: black;
 }
 
-.inicio-box {
-    background-color: #3f3f3f; 
+.rigin-box {
     border-radius: 8px; 
     padding: 40px; 
     width: 100%; 
     max-width: 600px; 
     height: 400px; 
-    box-shadow: 0 4px 8px rgba(226, 14, 14, 0.2); 
     margin: 0 auto; 
 } 
-*/ 
