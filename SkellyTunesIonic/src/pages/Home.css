@@ -20,3 +20,30 @@
         justify-content: center; /* Centrar tarjetas en pantallas pequeñas */
     }
 }
+
+.playlist-card-container {
+    display: flex; /* Usar Flexbox para alinear elementos */
+    flex-wrap: wrap; /* Permitir que las tarjetas se muevan a la siguiente línea si no hay espacio */
+    justify-content: flex-start; /* Alinear las tarjetas al inicio */
+
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    max-width: 1200px; /* O el ancho deseado para limitar el contenedor */
+    padding: 20px; /* Espaciado alrededor del contenedor */
+}
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .playlist-card-container {
+        gap: 20px; /* Reduce el espacio entre tarjetas */
+        padding: 10px; /* Reduce el espaciado alrededor del contenedor */
+    }
+
+    .playlist-card {
+        max-width: 100%; /* Permite que la tarjeta ocupe todo el ancho en dispositivos pequeños */
+    }
+
+    /* Opcional: Ajustar el tamaño de las tarjetas en pantallas muy pequeñas */
+    .playlist-card {
+        flex: 1 1 100%; /* Permite que las tarjetas ocupen todo el ancho en pantallas pequeñas */
+    }
+}

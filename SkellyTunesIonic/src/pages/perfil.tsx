@@ -7,7 +7,7 @@ import { playCircle, library, people, list , radio, albums, calendar, earth, log
 import {InterfazGeneral} from '../components/Interfaces';
 import {BotonGeneral} from '../components/Botones';
 import TabsNavegacion from '../components/Tabs'
-import {MediaCard} from '../components/Cards';
+import {AlbumCard} from '../components/Cards';
 
 //Import de datos
 import albumsData from '../data/albums.json';
@@ -36,7 +36,7 @@ const Perfil: React.FC = () => {
                 <div className="CardsContainer">
                     {albumsData.filter(album => album.tag === "@minimo").length > 0 ? (
                         albumsData.filter(album => album.tag === "@minimo").map((album, index) => (
-                            <MediaCard key={index} image={album.image} title={album.title} />
+                            <AlbumCard key={index} image={album.image} title={album.title} />
                         ))
                     ) : (
                         <h2>No hay álbumes disponibles.</h2>
@@ -54,11 +54,11 @@ const Perfil: React.FC = () => {
              /*Contenido*/
              <IonContent className="scrollable">
                  <div className="CardsContainer">
-                 <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                 <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                 <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                 <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                 <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                 <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                 <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                 <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                 <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                 <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
                  </div>
  
              </IonContent>

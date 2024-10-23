@@ -3,7 +3,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonIcon, IonList, 
 import { albums, library, time, personAdd, thumbsUp, list, bookmark, arrowUpCircle} from 'ionicons/icons';
 import {InterfazGeneral} from '../components/Interfaces';
 import './biblioteca.css';
-import { MediaCard, DynamicCard } from '../components/Cards';
+import { AlbumCard, DynamicCard, UserCard } from '../components/Cards';
 import TabsNavegacion from '../components/Tabs'
 
 const Biblioteca: React.FC = () => {
@@ -21,10 +21,10 @@ const Biblioteca: React.FC = () => {
                     </div>
                 
                     <div className="CardsContainer">
-                        <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"reflection"} subtitle={"아버지"} icon={bookmark} />
-                        <MediaCard image={"https://f4.bcbits.com/img/a0972302045_16.jpg"} title={"Cul de Sac"} subtitle={"[minimo]"} icon={arrowUpCircle} />
-                        <MediaCard image={"https://f4.bcbits.com/img/a0164762771_16.jpg"} title={"COSMIC TAPES VOL.1"} subtitle={"[minimo]"} icon={arrowUpCircle} />
-                        <MediaCard image={"https://f4.bcbits.com/img/a0206112719_16.jpg"} title={"(Proto​-​Minimo - Separate EP​)​VOL​.​1"} subtitle={"[minimo]"} icon={arrowUpCircle} />
+                        <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"reflection"} subtitle={"아버지"} icon={bookmark} />
+                        <AlbumCard image={"https://f4.bcbits.com/img/a0972302045_16.jpg"} title={"Cul de Sac"} subtitle={"[minimo]"} icon={arrowUpCircle} />
+                        <AlbumCard image={"https://f4.bcbits.com/img/a0164762771_16.jpg"} title={"COSMIC TAPES VOL.1"} subtitle={"[minimo]"} icon={arrowUpCircle} />
+                        <AlbumCard image={"https://f4.bcbits.com/img/a0206112719_16.jpg"} title={"(Proto​-​Minimo - Separate EP​)​VOL​.​1"} subtitle={"[minimo]"} icon={arrowUpCircle} />
                     </div>
                 
 
@@ -42,11 +42,11 @@ const Biblioteca: React.FC = () => {
                 <h4>Observa tus listas y las listas de otras personas!</h4>
                 </div>
                 <div className="CardsContainer">
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
                 </div>
 
             </IonContent>
@@ -65,8 +65,8 @@ const Biblioteca: React.FC = () => {
                 </div>
                 <div className="CardsContainer">
 
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
                 </div>
 
             </IonContent>
@@ -83,7 +83,8 @@ const Biblioteca: React.FC = () => {
                 <h4>Ve a las personas que sigues!</h4>
                 </div>
                 <div className="CardsContainer">
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                    <UserCard image={"https://f4.bcbits.com/img/0009898048_10.jpg"} title={"Jack Stauber"} subtitle={"@jackstauber"} />
+                    <UserCard image={"https://static1.personality-database.com/profile_images/b32c45f4aa9f41caba35d3c0f1687688.png"} title={"RubixLander"} subtitle={"@rubixlander"} />
 
                 </div>
 
@@ -102,9 +103,9 @@ const Biblioteca: React.FC = () => {
                 </div>
                 <div className="CardsContainer">
                 
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <MediaCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
                 </div>
 
             </IonContent>

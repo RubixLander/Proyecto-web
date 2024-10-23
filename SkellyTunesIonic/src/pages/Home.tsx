@@ -3,7 +3,7 @@ import { IonContent, IonPage,} from '@ionic/react';
 
 //Import de Componentes
 import {InterfazGeneral} from '../components/Interfaces';
-import {MediaCard, CardList, DynamicCard} from '../components/Cards';
+import {AlbumCard, CardList, DynamicCard, UserCard} from '../components/Cards';
 import {BotonGeneral} from '../components/Botones'; 
 
 //Import de datos
@@ -51,15 +51,25 @@ const Home: React.FC = () => {
         <div className="CardsContainer">
           {limitedAlbums.length > 0 ? (
           limitedAlbums.map((album, index) => (
-            <MediaCard key={index} image={album.image} title={album.title} subtitle={album.artist} />
+            <AlbumCard key={index} image={album.image} title={album.title} subtitle={album.artist} />
           ))
           ) : (
               <h2>No hay álbumes disponibles.</h2>
               )}
         </div>
-                <DynamicCard title="Mi Título Dinámico" subtitle="Mi Subtítulo Dinámico" content="Aquí va el contenido dinámico de la tarjeta." image="https://i.scdn.co/image/ab67616d0000b273d8ff4bc4a6a3f1beefbeb26c"/>
+                <div className='playlist-card-container'>
+                <DynamicCard title="Nier OST" subtitle="Creado por: RubixLander" content="A" image="https://cossky.com/cdn/shop/files/nier_-automata-game-emil-cosplay-latex-masks-halloween-party-costume-props-6_800x.jpg?v=1715844867"/>
+                <DynamicCard title="Lofi mix" subtitle="Creado por: RubixLander" content="" image="https://i1.sndcdn.com/artworks-8CkwZ3ukd9P5-0-t500x500.jpg"/>
+                <DynamicCard title="Nier OST" subtitle="Creado por: RubixLander" content="" image="https://cossky.com/cdn/shop/files/nier_-automata-game-emil-cosplay-latex-masks-halloween-party-costume-props-6_800x.jpg?v=1715844867"/>
+                </div>
 
                 <CardList items={items} />
+
+                <div className="CardsContainer">
+                <UserCard image={"https://f4.bcbits.com/img/0033779152_10.jpg"} title={"[minimo]"} subtitle={"@minimo"} />
+                <UserCard image={"https://f4.bcbits.com/img/0011554563_10.jpg"} title={"b e g o t t e n 自杀"} subtitle={"@begotten"} />
+                <UserCard image={"https://f4.bcbits.com/img/0025284024_10.jpg"} title={"아버지"} subtitle={"@father2006"} />
+                </div>
 
 
             </IonContent>

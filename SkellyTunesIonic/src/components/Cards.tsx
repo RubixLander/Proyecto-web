@@ -1,9 +1,8 @@
 //Import de Elementos IONIC/REACT
 import React from 'react';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonList, IonItem, IonThumbnail, IonLabel } from '@ionic/react';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonList, IonItem, IonThumbnail, IonLabel, IonButton,IonBadge, IonIcon } from '@ionic/react';
 import { IonImg, IonGrid, IonRow, IonCol } from '@ionic/react';
-import { IonIcon } from '@ionic/react';
-import { globe } from 'ionicons/icons'; // Importa el icono que quieras usar
+import { musicalNotes } from 'ionicons/icons'; 
 
 //Import de CSS
 import './Cards.css'; 
@@ -22,11 +21,11 @@ interface CardListProps {
   items: Array<{ id: number; label: string; imageUrl: string }>;
 }
 
-export const MediaCard: React.FC<CardProps> = ({ image, title, subtitle, content, icon }) => {
+export const AlbumCard: React.FC<CardProps> = ({ image, title, subtitle, content, icon }) => {
   return (
-    <IonCard button={true} className="EstilosCards">
-      <div className="image-container">
-        <img alt={title} src={image} className="card-image" />
+    <IonCard button={true} className="AlbumCard">
+      <div className="album-image-container">
+        <img alt={title} src={image} className="album-image" />
         {icon && <IonIcon icon={icon} className="overlay-icon" />}
       </div>
       <IonCardHeader>
@@ -40,33 +39,62 @@ export const MediaCard: React.FC<CardProps> = ({ image, title, subtitle, content
   );
 }
 
-
-export const DynamicCard: React.FC<CardProps> = ({ title, subtitle, content,image }) => {
+export const UserCard: React.FC<CardProps> = ({ image, title, subtitle, content }) => {
   return (
-    <IonCard button={true}>
+    <IonCard button={true} className="UserCard">
+      <div className="user-image-container">
+        <img alt={title} src={image} className="user-image" />
+      </div>
+      <IonCardHeader>
+        <IonCardTitle>{title}</IonCardTitle>
+        <IonCardSubtitle>{subtitle}</IonCardSubtitle>
+      </IonCardHeader>
+      <IonCardContent>
+        {content}
+        <IonButton  color="dark" size='small'>Seguir</IonButton>
+      </IonCardContent>
+    </IonCard>
+  );
+}
+
+export const DynamicCard: React.FC<CardProps> = ({ title, subtitle, content, image }) => {
+  return (
+    <IonCard button={true} className="playlist-card">
       <IonGrid>
         <IonRow>
           {image && (
-            <IonCol size="4">
-              <IonImg src={image} className="card-image" />
-            </IonCol>
+            <IonCol size="4" style={{ display: 'flex' }}>
+    <div className="image-container">
+        <IonImg src={image} className="playlist-square-image" />
+    </div>
+</IonCol>
           )}
-          <IonCol size={image ? "8" : "12"}>
-            <IonCardHeader>
-              <IonCardTitle>{title}</IonCardTitle>
-              <IonCardSubtitle>{subtitle}</IonCardSubtitle>
-            </IonCardHeader>
-            <IonCardContent>
-              {content}
-            </IonCardContent>
+          <IonCol>
+            <div className="playlist-content-container">
+              <div className="playlist-title-container">
+                <div>
+                  <IonCardHeader>
+                    <IonCardTitle>{title}</IonCardTitle>
+                    <IonCardSubtitle>{subtitle}</IonCardSubtitle>
+                  </IonCardHeader>
+                </div>
+              </div>
+              <IonCardContent>
+                <div>{content}</div>
+              </IonCardContent>
+            </div>
           </IonCol>
         </IonRow>
       </IonGrid>
+      <div className="playlist-badge-container">
+        <IonBadge className="playlist-custom-badge" color="primary">
+          <IonIcon icon={musicalNotes} color="light" className="playlist-badge-icon" /> 
+          12
+        </IonBadge>
+      </div>
     </IonCard>
   );
 };
-
-
 
 export const CardList: React.FC<CardListProps> = ({ items }) => {
   return (
