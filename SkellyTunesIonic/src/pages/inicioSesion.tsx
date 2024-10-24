@@ -1,13 +1,17 @@
-
-// src/pages/inicioSesion.tsx
+//Import de Elementos IONIC/REACT
 import React, { useState } from 'react';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonItem, IonLabel, IonList, IonText } from '@ionic/react';
+import { IonPage, IonHeader, IonContent, IonInput, IonItem, IonLabel, IonList, IonText } from '@ionic/react';
+import { useHistory, Link } from 'react-router-dom';
+
+//Import de Componentes
 import { BotonPeter } from '../components/Botones';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { InterfazSimple } from '../components/Interfaces';
-import { useAuth } from '../contexts/autentificacion';
+
+//Import de css
 import './Reginit.css';
+
+//Import de contexto
+import { useAuth } from '../contexts/autentificacion';
 
 const InicioSesion: React.FC = () => {
     const [username, setUsername] = useState('');

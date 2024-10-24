@@ -10,7 +10,7 @@ import AjustePerfil from './pages/AjustePerfil';
 import Comunidades from './pages/comunidades';
 import Comunidad from './pages/comunidad';
 import {InterfazGeneral} from './components/Interfaces';
-
+import Reproductor from './pages/Reproductor';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -29,6 +29,7 @@ import '@ionic/react/css/display.css';
 
 import './theme/variables.css';
 
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -41,6 +42,7 @@ const App: React.FC = () => (
 
 
       <InterfazGeneral>  
+        <Route exact path="/reproductor"><Reproductor /></Route>
         <Route exact path="/comunidades"><Comunidades /></Route>
         <Route exact path="/comunidad"><Comunidad /></Route>
         <Route exact path="/biblioteca"><Biblioteca /></Route>

@@ -137,6 +137,7 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                     <Toast icon={alert} message="Ha aparecido un Shiny Skelly" duration={4000} />
                 )}
                 {children}
+
             </IonPage>
         </>
     );

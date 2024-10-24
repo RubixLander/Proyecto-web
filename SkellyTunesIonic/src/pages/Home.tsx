@@ -1,9 +1,9 @@
 //Import de Elementos IONIC/REACT
-import { IonContent, IonPage,} from '@ionic/react';
+import { IonContent, IonPage} from '@ionic/react';
 
 //Import de Componentes
 import {InterfazGeneral} from '../components/Interfaces';
-import {AlbumCard, CardList, DynamicCard, UserCard, CommunityCard} from '../components/Cards';
+import {AlbumCard,  PlaylistCard, UserCard, CommunityCard} from '../components/Cards';
 
 //Import de datos
 import albumsData from '../data/albums.json';
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
 
           {/*Seccion Albumes*/}
           <div className='TabContentContainer'>
-            <h4>Albumes Destacados</h4>
+            <h4>Álbumes en Tendencia</h4>
           </div>
 
           <div className="CardsContainer">
@@ -61,19 +61,19 @@ const Home: React.FC = () => {
             <h4>Listas de la semana</h4>
           </div>
           <div className='playlist-card-container'>
-            <DynamicCard 
+            <PlaylistCard
               title="Nier OST" 
               subtitle="Creado por: t e l e p a t h" 
               content="The entire Nier series OST, in one place!" 
               image="https://cossky.com/cdn/shop/files/nier_-automata-game-emil-cosplay-latex-masks-halloween-party-costume-props-6_800x.jpg?v=1715844867"
             />
-            <DynamicCard 
+            <PlaylistCard
               title="Lofi mix" 
               subtitle="Creado por: lofiman" 
               content="A nice mix to study/relax to" 
               image="https://i1.sndcdn.com/artworks-8CkwZ3ukd9P5-0-t500x500.jpg"
             />
-            <DynamicCard 
+            <PlaylistCard
               title="Meme collection" 
               subtitle="Creado por: RubixLander" 
               content="Music from various memes" 
@@ -115,6 +115,9 @@ const Home: React.FC = () => {
               title={"Ducks"}
             />
           </div>
+
+
+
         </IonContent>
       </InterfazGeneral>
     </IonPage>

@@ -1,18 +1,65 @@
 .registro-container {
-    background-image: url(https://media1.tenor.com/m/qGHCT_3gV4EAAAAd/tuts-skeleton.gif); 
+    background-image: url(https://media1.tenor.com/m/qGHCT_3gV4EAAAAd/tuts-skeleton.gif);
+    background-color: #060306;
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: left center; /* Coloca la imagen a la izquierda */
+    background-size: contain; /* Mantiene las proporciones originales de la imagen */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    position: relative; /* Necesario para posicionar el pseudo-elemento */
 }
 
+.registro-container::after {
+    content: '';
+    background-image: url(https://media1.tenor.com/m/qGHCT_3gV4EAAAAd/tuts-skeleton.gif);
+    background-size: contain; /* Mantiene las proporciones originales de la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    position: absolute; /* Posiciona el pseudo-elemento */
+    right: 0; /* Alinea a la derecha */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%) scaleX(-1); /* Gira la imagen horizontalmente */
+    width: 50%; /* Ajusta el ancho como necesites */
+    height: 100%; /* Ocupa toda la altura */
+}
+
+/* Media query para ocultar la imagen de la derecha en pantallas menores a 1036px */
+@media (max-width: 1023px) {
+    .registro-container::after {
+        display: none; /* Oculta la imagen de la derecha */
+    }
+}
+
+
 .inicio-container {
-    background-image: url(https://media.tenor.com/LKe9vlvsutQAAAAi/skeleton-spooky.gif); 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: black;
+    position: relative; /* Necesario para los pseudo-elementos */
+}
+
+.inicio-container::before,
+.inicio-container::after {
+    content: "";
+    background-image: url(https://media.tenor.com/LKe9vlvsutQAAAAi/skeleton-spooky.gif);
+    background-size: contain; /* Mantiene las proporciones originales de la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%; /* Ocupa la mitad de la pantalla */
+}
+
+.inicio-container::before {
+    left: 0; /* Imagen a la izquierda */
+}
+
+.inicio-container::after {
+    right: 0; /* Imagen a la derecha */
+    transform: scaleX(-1); /* Gira horizontalmente la imagen de la derecha */
 }
 
 .rigin-box {
@@ -22,4 +69,6 @@
     max-width: 600px; 
     height: 400px; 
     margin: 0 auto; 
-} 
+    position: relative; /* Asegura que esté por encima */
+    z-index: 1; /* Asegura que esté encima de las imágenes */
+}

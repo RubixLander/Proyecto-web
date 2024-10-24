@@ -11,6 +11,7 @@
 
 .AlbumCard:hover {
     transform: scale(1.05);
+    background-color: #c6d8d2;
 }
 
 .album-image-container {
@@ -61,6 +62,7 @@
 
 .UserCard:hover {
     transform: scale(1.05);
+    background-color: #c6d8d2;
 }
 
 .user-image-container {
@@ -104,6 +106,7 @@
 
 .playlist-card:hover {
     transform: scale(1.05); /* Eleva y escala la tarjeta */
+    background-color: #c6d8d2;
 
 }
 
@@ -198,7 +201,7 @@
 /* Efecto hover */
 .community-card:hover {
     transform: scale(1.05); /* Aumenta ligeramente el tamaño */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Añade sombra */
+    background-color: #c6d8d2;
 }
 
 /* Media Queries para pantallas más pequeñas */
@@ -220,7 +223,7 @@
 
     .community-card ion-card-header,
     .community-card ion-card-content {
-        margin-top: 20px; /* Ajusta margen en pantallas pequeñas */
+        margin-top: 50px; /* Ajusta margen en pantallas pequeñas */
     }
 }
 
@@ -230,6 +233,116 @@
         max-width: 100%;
     }
 }
+
+.disussion-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .disussion-card-image {
+    width: 40px; /* Ajusta el tamaño deseado */
+    height: 40px;
+    overflow: hidden;
+    border-radius: 4px; /* Bordes redondeados por defecto */
+    position: relative;
+    margin-right: 10px;
+  }
+  
+  .disussion-card-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Mantiene la relación de aspecto y recorta si es necesario */
+  }
+  
+  /* Estilo para redondear la imagen si inCommunity es true */
+  .in-community {
+    border-radius: 50%; /* Bordes completamente redondeados */
+  }
+  
+  .disussion-card-separator {
+    border-bottom: 1px solid #ccc; /* Color y grosor de la línea */
+    margin: 2px 0; /* Espacio arriba y abajo de la línea */
+  }
+  
+  .disussion-card-content {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .discussion-card {
+    margin-bottom: 20px; /* Espacio entre tarjetas */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para transformaciones y sombras */
+  }
+  
+  .discussion-card:hover {
+    background-color: #c6d8d2; /* Cambia el color de fondo al pasar el ratón */
+    transform: scale(1.03); /* Aumenta ligeramente el tamaño */
+  }
+  
+  .track-duration {
+    background-color: #668d8d; /* Color de fondo */
+    color: white; /* Color del texto */
+    border-radius: 16px; /* Bordes más redondeados */
+    padding: 6px 12px; /* Aumento del espaciado interno */
+    font-size: 1em; /* Tamaño de fuente más grande */
+    display: inline-block; /* Comportamiento como un badge */
+    font-weight: bold; /* Hacer el texto más destacado */
+    position: absolute; /* Posiciona el badge */
+    right: 16px; /* Ajusta la posición desde la derecha */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajusta para que quede exactamente centrado */
+}
+
+.track-card {
+    position: relative; /* Para el badge */
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido de la tarjeta esté en columna */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+
+.track-card:hover {
+    transform: scale(1.05); /* Eleva y escala la tarjeta */
+    background-color: #c6d8d2;
+}
+
+.track-square-image {
+    width: 100%; /* Ocupa el 100% del ancho del contenedor */
+    max-width: 200px; /* Tamaño máximo de la imagen */
+    min-width: 100px; /* Tamaño mínimo de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    aspect-ratio: 1 / 1; /* Mantiene una relación de aspecto cuadrada */
+    object-fit: cover; /* Cubre el contenedor sin distorsionar */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.track-content-container {
+    padding: 16px; /* Ajusta el padding según sea necesario */
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido esté en columna */
+}
+
+.track-title-container {
+    display: flex;
+    align-items: center; /* Centra verticalmente el botón y el título */
+}
+.track-badge-container {
+    position: absolute; /* Posiciona el contenedor del badge */
+    top: 10px; /* Ajusta la posición desde la parte superior */
+    right: 10px; /* Ajusta la posición desde la derecha */
+    display: flex; /* Permite alinear el contenido dentro */
+    align-items: center; /* Centra el contenido verticalmente */
+}
+
 
   
   

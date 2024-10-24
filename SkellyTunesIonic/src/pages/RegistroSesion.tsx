@@ -1,14 +1,19 @@
-    import React, { useState } from 'react';
-    import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonItem, IonLabel, IonList, IonText } from '@ionic/react';
-    import { BotonPeter } from '../components/Botones';
-    import { useHistory } from 'react-router-dom';
-    import { Link } from 'react-router-dom';
-    import './Reginit.css';
-    import { InterfazSimple } from '../components/Interfaces';
-    import { useAuth } from '../contexts/autentificacion';
+//Import de Elementos IONIC/REACT
+import React, { useState } from 'react';
+import { IonPage, IonHeader, IonContent, IonInput, IonItem, IonLabel, IonList, IonText } from '@ionic/react';
+import { useHistory,Link } from 'react-router-dom';
 
-    //Estructura de json y registro
-    const Registro: React.FC = () => {
+//Import componentes
+import { BotonPeter } from '../components/Botones';
+import { InterfazSimple } from '../components/Interfaces';
+    
+//Import de css
+import './Reginit.css';
+    
+//Import de contexto
+import { useAuth } from '../contexts/autentificacion';
+
+const Registro: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -121,7 +126,7 @@
                     />
                 </IonItem>
             </IonList>
-            <BotonPeter onClick={handleRegister} className="menuOpciones" expand= "full" text= "Registrarse"/>
+            <BotonPeter onClick={handleRegister} className="menuOpciones" expand="full" text="Registrarse"/>
             <IonText>
                 <div style={{textAlign:'center', margin:'20px 0', color: 'white'}}>
                     <p>¿Ya tienes cuenta?</p>
@@ -138,4 +143,5 @@
 );
 };
 
-    export default Registro;
+export default Registro;
+

@@ -60,3 +60,21 @@
     padding: 0 20px; /* Añade padding a los lados para un margen */
     margin: 0 auto; /* Centra el contenedor en la página */
   }
+
+  .discussion-container {
+    max-width: 1200px; /* Adjust the width as needed */
+    margin: 0 auto;   /* Center the container */
+    padding: 10px;    /* Optional padding */
+
+
+  }
+
+  .track-card-container {
+    max-width: 1000px; /* Limita el tamaño del contenedor */
+    margin: 0 auto; /* Centra el contenedor en la página */
+    display: flex; /* Permite el uso de flexbox */
+    flex-direction: column; /* Alinea las tarjetas en una columna */
+    gap: 16px; /* Espacio entre tarjetas */
+    padding: 16px; /* Añadir padding alrededor del contenedor */
+    box-sizing: border-box; /* Incluye el padding en el cálculo del ancho total */
+}
