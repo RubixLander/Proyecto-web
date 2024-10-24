@@ -99,6 +99,12 @@
     flex: 1; /* Permite que la tarjeta crezca para ocupar espacio */
     display: flex; /* Para permitir que el contenido se alinee verticalmente */
     flex-direction: column; /* Asegura que el contenido de la tarjeta esté en columna */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para transformaciones y sombras */
+}
+
+.playlist-card:hover {
+    transform: scale(1.05); /* Eleva y escala la tarjeta */
+
 }
 
 .playlist-square-image {
@@ -139,4 +145,98 @@
     border-radius: 12px; /* Personaliza el borde */
 }
 
+/* Estilos generales para pantallas más grandes */
+/* Estilos generales para pantallas más grandes */
+.community-card {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1 1 calc(33.33% - 10px); /* Hasta 3 tarjetas por fila */
+    max-width: calc(33.33% - 10px); /* Asegura que no exceda este ancho */
+    height: auto; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    margin: 10px auto; /* Centrando la tarjeta */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+}
 
+.community-card .image-line {
+    height: 20vw; /* Usa unidades relativas */
+    max-height: 100px; /* Máxima altura para pantallas grandes */
+    background-size: cover; 
+    background-position: center; 
+}
+
+.community-card .top-image {
+    position: absolute; 
+    top: 5%; /* Usa porcentaje para mayor flexibilidad */
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 25vw; /* Ajusta el ancho de forma relativa */
+    height: 25vw; /* Establece la altura igual al ancho para mantener la forma cuadrada */
+    max-width: 100px; /* Establece un ancho máximo */
+    max-height: 100px; /* Asegúrate de que la altura máxima también sea 100px */
+    object-fit: cover; /* Mantiene la relación de aspecto y recorta si es necesario */
+    border-radius: 4px; /* Si deseas bordes redondeados */
+    z-index: 1; 
+}
+
+
+.community-card ion-card-header,
+.community-card ion-card-content {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px; 
+    position: relative; 
+    z-index: 0; 
+    margin-top: 25px; 
+}
+
+/* Efecto hover */
+.community-card:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Añade sombra */
+}
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 600px) {
+    .community-card {
+        flex: 1 1 calc(50% - 10px); /* 2 tarjetas por fila en pantallas pequeñas */
+        max-width: calc(50% - 10px);
+    }
+
+    .community-card .top-image {
+        width: 50vw; /* Ajusta para pantallas pequeñas */
+        max-width: 80px; 
+    }
+
+    .community-card .image-line {
+        height: 15vw; /* Ajusta para pantallas pequeñas */
+        max-height: 80px; 
+    }
+
+    .community-card ion-card-header,
+    .community-card ion-card-content {
+        margin-top: 20px; /* Ajusta margen en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 400px) {
+    .community-card {
+        flex: 1 1 100%; /* 1 tarjeta por fila en pantallas muy pequeñas */
+        max-width: 100%;
+    }
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  

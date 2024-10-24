@@ -24,3 +24,28 @@ ion-content {
     scrollbar-width: thin; /* Ancho de la barra de desplazamiento */
     scrollbar-color: #202c33 transparent; /* Color de la parte que arrastra y del fondo */
 }
+
+.custom-header {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Asegura que el contenido esté centrado verticalmente */
+    height: 56px; /* Ajusta según la altura de tu toolbar */
+    --background: #323f44;
+    color: white
+}
+
+.custom-header-contenido {
+    display: flex;
+    align-items: center; /* Centra verticalmente el ícono y el título */
+}
+
+.custom-header-icono {
+    font-size: 24px; /* Ajusta el tamaño del ícono */
+    margin-left: 25px;
+}
+
+
+.custom-header-titulo {
+    font-size: 24px; /* Ajusta el tamaño del título */
+
+}

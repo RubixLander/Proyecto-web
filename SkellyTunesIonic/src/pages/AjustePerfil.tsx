@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonText, IonImg } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonText, IonImg, IonIcon } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
+import { settings} from 'ionicons/icons';
 import './AjustePerfil.css';
 import {InterfazGeneral} from '../components/Interfaces';
 
@@ -60,10 +61,13 @@ const AjustePerfil: React.FC = () => {
     <IonPage>
       <InterfazGeneral>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Ajuste de Perfil</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+                    <IonToolbar className="custom-header">
+                        <div className="custom-header-contenido">
+                            <IonIcon icon={settings} className="custom-header-icono" />
+                            <IonTitle className="custom-header-titulo">Ajustes</IonTitle>
+                        </div>
+                    </IonToolbar>
+                </IonHeader>
       <IonContent>
         <div className="image-container">
           <div className="profile-image-container">

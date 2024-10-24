@@ -2,15 +2,16 @@
     display: flex; /* Usar Flexbox para alinear elementos */
     flex-wrap: wrap; /* Permitir que las tarjetas se muevan a la siguiente línea si no hay espacio */
     justify-content: flex-start; /* Alinear las tarjetas al inicio */
-    gap: 90px; /* Espacio entre tarjetas */
+    gap: 50px; /* Espacio entre tarjetas */
     margin: 0 auto; /* Centrar el contenedor horizontalmente */
-    max-width: 1200px; /* O el ancho deseado para limitar el contenedor */
+    max-width: 1100px; /* O el ancho deseado para limitar el contenedor */
 }
 
 /* Media query para pantallas pequeñas */
-@media (max-width: 900px) {
+@media (max-width: 1135px) {
     .CardsContainer {
         gap: 60px; /* Reducir espacio entre tarjetas */
+        justify-content: center;
     }
 }
 
@@ -21,13 +22,14 @@
     }
 }
 
+
 .playlist-card-container {
     display: flex; /* Usar Flexbox para alinear elementos */
     flex-wrap: wrap; /* Permitir que las tarjetas se muevan a la siguiente línea si no hay espacio */
     justify-content: flex-start; /* Alinear las tarjetas al inicio */
-
+    gap:50px;
     margin: 0 auto; /* Centrar el contenedor horizontalmente */
-    max-width: 1200px; /* O el ancho deseado para limitar el contenedor */
+    max-width: 1400px; /* O el ancho deseado para limitar el contenedor */
     padding: 20px; /* Espaciado alrededor del contenedor */
 }
 
@@ -47,3 +49,14 @@
         flex: 1 1 100%; /* Permite que las tarjetas ocupen todo el ancho en pantallas pequeñas */
     }
 }
+
+.community-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se muevan a la siguiente línea */
+    justify-content: flex-start; /* Centra las tarjetas en la línea */
+    gap: 15px; /* Espacio entre las tarjetas */
+    max-width: 1200px; /* Ajusta el máximo ancho según tus necesidades */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho disponible */
+    padding: 0 20px; /* Añade padding a los lados para un margen */
+    margin: 0 auto; /* Centra el contenedor en la página */
+  }

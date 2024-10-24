@@ -39,14 +39,11 @@ const Biblioteca: React.FC = () => {
             /*Contenido*/
             <IonContent className="scrollable">
                 <div className='TabContentContainer'>
-                <h4>Observa tus listas y las listas de otras personas!</h4>
+                <h4>Observa las listas que has guardado y creado!</h4>
                 </div>
-                <div className="CardsContainer">
-                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
-                <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"a"} subtitle={"a"} />
+                <div className="playlist-card-container">
+                <DynamicCard title="Meme collection" subtitle="Creado por: RubixLander" content="Music from various memes" image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiYkZu9T9U6sDTl9vaTUJoAJ1WIx6igyZIfyhyEETbCEP4gsm58RbjFtE4RzFjSTDalO8&usqp=CAU"/>
+                <DynamicCard title="cosas" subtitle="Creado por: [minimo]" content="cosas xd" image="https://i1.sndcdn.com/artworks-2M8nUwmmzUULy03L-NOmCVg-t500x500.jpg"/>
                 </div>
 
             </IonContent>
@@ -99,7 +96,7 @@ const Biblioteca: React.FC = () => {
             /*Contenido*/
             <IonContent className="scrollable">
                 <div className='TabContentContainer'>
-                <h4>Observa tu historial de musica escuchada</h4>
+                <h4>Observa que has estado escuchando recientemente!</h4>
                 </div>
                 <div className="CardsContainer">
                 
@@ -116,10 +113,10 @@ const Biblioteca: React.FC = () => {
         <IonPage>
             <InterfazGeneral>
             <IonHeader>
-                    <IonToolbar className="biblioteca-header">
-                        <div className="biblioteca-header-contenido">
-                            <IonIcon icon={library} className="biblioteca-header-icono" />
-                            <IonTitle className="biblioteca-header-titulo">Biblioteca</IonTitle>
+                    <IonToolbar className="custom-header">
+                        <div className="custom-header-contenido">
+                            <IonIcon icon={library} className="custom-header-icono" />
+                            <IonTitle className="custom-header-titulo">Biblioteca</IonTitle>
                         </div>
                     </IonToolbar>
                 </IonHeader>

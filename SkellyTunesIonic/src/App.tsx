@@ -7,6 +7,8 @@ import Perfil from './pages/perfil';
 import Biblioteca from './pages/biblioteca';
 import Registro from './pages/RegistroSesion';
 import AjustePerfil from './pages/AjustePerfil';
+import Comunidades from './pages/comunidades';
+import Comunidad from './pages/comunidad';
 import {InterfazGeneral} from './components/Interfaces';
 
 /* Core CSS required for Ionic components to work properly */
@@ -39,7 +41,9 @@ const App: React.FC = () => (
 
 
       <InterfazGeneral>  
-      <Route exact path="/biblioteca"><Biblioteca /></Route>
+        <Route exact path="/comunidades"><Comunidades /></Route>
+        <Route exact path="/comunidad"><Comunidad /></Route>
+        <Route exact path="/biblioteca"><Biblioteca /></Route>
         <Route exact path="/perfil"><Perfil /></Route>
         <Route exact path="/home"><Home /></Route>
 

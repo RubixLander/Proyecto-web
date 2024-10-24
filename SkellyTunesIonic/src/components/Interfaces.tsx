@@ -66,7 +66,7 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                         <BotonIcono expand="block" shape="round" icon={home} slot="start" className="menuOpciones" text="Inicio" route='/home' />
                         <BotonIcono expand="block" shape="round" icon={library} slot="start" className='menuOpciones' text="Biblioteca" route='/biblioteca'/>
                         <BotonIcono expand="block" shape="round" icon={person} slot="start" className='menuOpciones' text="Perfil" route='/perfil' />
-                        <BotonIcono expand="block" shape="round" icon={people} slot="start" className='menuOpciones' text="Comunidades" />
+                        <BotonIcono expand="block" shape="round" icon={people} slot="start" className='menuOpciones' text="Comunidades" route="/comunidades"/>
                         <BotonIcono expand="block" shape="round" icon={settings} slot="start" className='menuOpciones' text="Ajustes" route='/AjustePerfil'/>
                     {/*Cerrar sesion borra los datos locales guardados, por lo que al intentar iniciar sesion con un usuario creado anteriormente 
                     no se podra, esto es para prototipar la funcion con backend para la proxima entrega.*/}

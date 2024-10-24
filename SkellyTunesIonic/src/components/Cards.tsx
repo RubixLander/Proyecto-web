@@ -3,6 +3,9 @@ import React from 'react';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonList, IonItem, IonThumbnail, IonLabel, IonButton,IonBadge, IonIcon } from '@ionic/react';
 import { IonImg, IonGrid, IonRow, IonCol } from '@ionic/react';
 import { musicalNotes } from 'ionicons/icons'; 
+import { people, chatbubbles } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
+
 
 //Import de CSS
 import './Cards.css'; 
@@ -14,7 +17,9 @@ interface CardProps {
   title?: string; 
   subtitle?: string; 
   content?: string;
-  icon?: string; 
+  icon?: string;
+  topImage?: string;
+  route?: string; 
 }
 
 interface CardListProps {
@@ -39,9 +44,16 @@ export const AlbumCard: React.FC<CardProps> = ({ image, title, subtitle, content
   );
 }
 
-export const UserCard: React.FC<CardProps> = ({ image, title, subtitle, content }) => {
+export const UserCard: React.FC<CardProps> = ({ image, title, subtitle, content,route }) => {
+  const history = useHistory();
+  // Lógica de redireccionado
+  const handleClick = () => {
+      if (route) {
+          history.push(route);
+      }
+  };
   return (
-    <IonCard button={true} className="UserCard">
+    <IonCard button={true} className="UserCard" onClick={handleClick}>
       <div className="user-image-container">
         <img alt={title} src={image} className="user-image" />
       </div>
@@ -51,11 +63,61 @@ export const UserCard: React.FC<CardProps> = ({ image, title, subtitle, content 
       </IonCardHeader>
       <IonCardContent>
         {content}
-        <IonButton  color="dark" size='small'>Seguir</IonButton>
+        <IonButton  color="dark" size='small'     onClick={(e) => {
+        e.stopPropagation(); // Evita que el evento de clic se propague al IonCard
+        // Aquí puedes agregar la lógica de seguir si la necesitas
+    }}>Seguir</IonButton>
       </IonCardContent>
     </IonCard>
   );
 }
+
+export const CommunityCard: React.FC<CardProps> = ({ image, title, topImage, route }) => {
+  const history = useHistory();
+  // Lógica de redireccionado
+  const handleClick = () => {
+      if (route) {
+          history.push(route);
+      }
+  };
+  return (
+    <IonCard className="community-card" button={true} onClick={handleClick}>
+      {/* Imagen superior con tamaño fijo */}
+      {topImage && <img src={topImage} alt={title} className="top-image" />}
+      
+      {/* Línea de imagen como fondo */}
+      <div className="image-line" style={{ backgroundImage: `url(${image})` }} />
+      
+      <IonCardHeader>
+        <IonCardTitle>{title}</IonCardTitle>
+        <IonButton
+    size="small"
+    color="dark"
+    onClick={(e) => {
+        e.stopPropagation(); // Evita que el evento de clic se propague al IonCard
+        // Aquí puedes agregar la lógica de seguir si la necesitas
+    }}
+>
+    Unirse
+</IonButton>
+      </IonCardHeader>
+      <IonCardContent>
+        {/* Fila con íconos y texto */}
+        <IonRow className="member-discussion-row" style={{ textAlign: 'center', margin: '10px 0' }}>
+          <IonCol>
+            <IonIcon icon={people} /> {/* Ícono de miembros */}
+            <span>10</span>
+          </IonCol>
+          <IonCol>
+            <IonIcon icon={chatbubbles} /> {/* Ícono de discusiones */}
+            <span>10</span>
+          </IonCol>
+        </IonRow>
+      </IonCardContent>
+    </IonCard>
+  );
+};
+
 
 export const DynamicCard: React.FC<CardProps> = ({ title, subtitle, content, image }) => {
   return (
