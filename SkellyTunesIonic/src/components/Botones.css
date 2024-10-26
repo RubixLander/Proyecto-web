@@ -15,4 +15,16 @@
     --padding-top: 10px;
     --padding-bottom: 10px;
 }
+
+.like-dislike-buttons {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    gap: 10px; /* Espacio entre los botones */
+  }
+  
+  .like-dislike-count {
+    font-size: 1rem; /* Tamaño del texto del conteo */
+    text-align: center; /* Centra el texto */
+    width: 50px; /* Ancho fijo para el conteo */
+  }
   

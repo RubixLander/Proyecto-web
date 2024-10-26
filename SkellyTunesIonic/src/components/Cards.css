@@ -343,7 +343,44 @@
     align-items: center; /* Centra el contenido verticalmente */
 }
 
+.main-player-card {
+    background-color: #000000; /* Color fijo */
+  }
+  
+  .main-player-card-image {
+    width: 100%;
+    height: auto; /* Mantener la proporción de la imagen */
+    aspect-ratio: 1 / 1; /* Asegura que la imagen sea cuadrada */
+    object-fit: cover; /* Recorta la imagen para llenar el área */
+  }
+  
+  .player-controls {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 10px; /* Espaciado entre los botones */
+    margin-top: 10px; /* Espaciado superior para separar de otros contenidos */
+  }
+  
+  /* Estilo para los botones en pantallas grandes */
+  @media (min-width: 768px) { /* Ajusta el ancho según tus necesidades */
+    .player-controls ion-button {
+      font-size: 1.5rem; /* Aumenta el tamaño del texto del botón */
+      padding: 12px 20px; /* Ajusta el padding para aumentar el tamaño del botón */
+    }
+  }
+  
+  IonProgressBar {
+    margin-top: 10px; /* Espaciado superior para separar de otros contenidos */
+  }
 
+  .time-display {
+    display: flex;
+    justify-content: space-between; /* Espacia los elementos a los extremos */
+    padding: 0 10px; /* Espaciado lateral */
+    margin-top: 5px; /* Espaciado superior */
+    color: white; /* Cambia el color según sea necesario */
+  }
+  
   
   
   

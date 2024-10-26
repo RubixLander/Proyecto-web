@@ -14,7 +14,7 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     useEffect(() => {
         const randomNum = Math.random();
-        setIsShiny(randomNum < 0.5); // 50% de probabilidad
+        setIsShiny(randomNum < 0.3); // 
     }, []);
 
     return (
