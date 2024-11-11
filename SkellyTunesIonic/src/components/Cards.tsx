@@ -1,8 +1,8 @@
 //Import de Elementos IONIC/REACT
 import React from 'react';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonList, IonItem, IonThumbnail, IonLabel, IonButton,IonBadge, IonIcon, IonProgressBar } from '@ionic/react';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonList, IonItem, IonThumbnail, IonLabel, IonButton,IonBadge, IonIcon } from '@ionic/react';
 import { IonImg, IonGrid, IonRow, IonCol } from '@ionic/react';
-import { musicalNotes, thumbsUp, chatbubble, thumbsDown, play,shareSocial, playSkipBack, playSkipForward } from 'ionicons/icons'; 
+import { musicalNotes, thumbsUp, chatbubble, thumbsDown, play,shareSocial } from 'ionicons/icons'; 
 import { people, chatbubbles } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 
@@ -187,16 +187,9 @@ export const PlaylistCard: React.FC<CardProps> = ({ title, subtitle, content, im
     </IonCard>
   );
 };
-export const TrackCard: React.FC<TrackCardProps> = ({ title, subtitle, artist, content, image, duration, route }) => {
-  const history = useHistory();
-  // Lógica de redireccionado
-  const handleClick = () => {
-      if (route) {
-          history.push(route);
-      }
-  };
+export const TrackCard: React.FC<TrackCardProps> = ({ title, subtitle, artist, content, image, duration }) => {
   return (
-    <IonCard button={true} className="track-card" onClick={handleClick}>
+    <IonCard button={true} className="track-card">
       <IonGrid>
         <IonRow>
           {image && (
@@ -209,10 +202,7 @@ export const TrackCard: React.FC<TrackCardProps> = ({ title, subtitle, artist, c
           <IonCol size="8">
             <div className="track-content-container">
               <div className="track-title-container">
-                <IonButton fill="clear"     onClick={(e) => {
-        e.stopPropagation(); // Evita que el evento de clic se propague al IonCard
-        // Aquí puedes agregar la lógica de seguir si la necesitas
-    }}style={{ marginRight: '8px', padding: '0' }}>
+                <IonButton fill="clear" style={{ marginRight: '8px', padding: '0' }}>
                   <IonIcon icon={play} />
                 </IonButton>
                 <IonCardTitle style={{ margin: 0 }}>{title}</IonCardTitle>
@@ -226,24 +216,15 @@ export const TrackCard: React.FC<TrackCardProps> = ({ title, subtitle, artist, c
                 {duration && <div className="track-duration">{duration}</div>} {/* Duración como badge */}
               </IonCardContent>
               <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '10px' }}>
-                <IonButton fill="clear" size="small"     onClick={(e) => {
-        e.stopPropagation(); // Evita que el evento de clic se propague al IonCard
-        // Aquí puedes agregar la lógica de seguir si la necesitas
-    }}style={{ marginRight: '8px' }}>
+                <IonButton fill="clear" size="small" style={{ marginRight: '8px' }}>
                   <IonIcon icon={thumbsUp} />
                   0
                 </IonButton>
-                <IonButton fill="clear" size="small"     onClick={(e) => {
-        e.stopPropagation(); // Evita que el evento de clic se propague al IonCard
-        // Aquí puedes agregar la lógica de seguir si la necesitas
-    }}style={{ marginRight: '8px' }}>
+                <IonButton fill="clear" size="small" style={{ marginRight: '8px' }}>
                   <IonIcon icon={thumbsDown} />
                   0
                 </IonButton>
-                <IonButton fill="clear" size="small"     onClick={(e) => {
-        e.stopPropagation(); // Evita que el evento de clic se propague al IonCard
-        // Aquí puedes agregar la lógica de seguir si la necesitas
-    }}>
+                <IonButton fill="clear" size="small">
                   <IonIcon icon={shareSocial} />
                   Compartir
                 </IonButton>
@@ -256,35 +237,7 @@ export const TrackCard: React.FC<TrackCardProps> = ({ title, subtitle, artist, c
   );
 };
 
-export const MainPlayerCard: React.FC<CardProps> = ({ image, title, subtitle }) => {
-  return (
-    <IonCard className="main-player-card">
-      <img className="main-player-card-image" alt="album" src={image} />
-      <IonCardHeader>
-        <IonCardTitle style={{ color: 'white', textAlign: 'center' }}>{title}</IonCardTitle>
-        <IonCardSubtitle style={{ color: 'white', textAlign: 'center' }}>{subtitle}</IonCardSubtitle>
-      </IonCardHeader>
-      <IonCardContent>
-        <div className="player-controls">
-          <IonButton fill="clear" onClick={() => console.log('Rewind')}>
-            <IonIcon slot="icon-only" icon={playSkipBack} style={{ color: 'white' }} />
-          </IonButton>
-          <IonButton fill="clear" onClick={() => console.log('Play')}>
-            <IonIcon slot="icon-only" icon={play} style={{ color: 'white' }} />
-          </IonButton>
-          <IonButton shape="round" fill="clear" onClick={() => console.log('Forward')}>
-            <IonIcon slot="icon-only" icon={playSkipForward} style={{ color: 'white' }} />
-          </IonButton>
-        </div>
-      </IonCardContent>
-      <div className="time-display">
-        <span>0:30</span>
-        <span style={{ marginLeft: 'auto' }}>1:00</span>
-      </div>
-      <IonProgressBar value={0.5} />
-    </IonCard>
-  );
-};
+
 
 
 

@@ -29,7 +29,6 @@ import '@ionic/react/css/display.css';
 
 import './theme/variables.css';
 
-
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -48,10 +47,9 @@ const App: React.FC = () => (
         <Route exact path="/biblioteca"><Biblioteca /></Route>
         <Route exact path="/perfil"><Perfil /></Route>
         <Route exact path="/home"><Home /></Route>
-
         <Route exact path="/ajustePerfil"><AjustePerfil /></Route>
         <Route exact path="">
-          <Redirect to="/home" />
+         <Redirect to="/home" />
         </Route>
         </InterfazGeneral>
       </IonRouterOutlet>

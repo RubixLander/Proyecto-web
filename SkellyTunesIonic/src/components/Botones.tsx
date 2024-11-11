@@ -2,7 +2,6 @@
 import React from 'react';
 import { IonButton, IonIcon } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import { thumbsDown, thumbsUp } from 'ionicons/icons';
 
 import { useAuth } from '../contexts/autentificacion';
 
@@ -93,21 +92,3 @@ export const BotonPeter: React.FC<botonPeter> = ({ onClick, text, color, classNa
         </IonButton>
     );
 }
-
-export const LikeDislikeButtons = () => {
-    const likeCount = 120; // Ejemplo de recuento de "me gusta"
-    const dislikeCount = 30; // Ejemplo de recuento de "no me gusta"
-  
-    return (
-      <div className="like-dislike-buttons">
-        <IonButton fill="clear" color="success">
-          <IonIcon icon={thumbsUp} />
-        </IonButton>
-        <span className="like-dislike-count">{likeCount - dislikeCount}</span>
-        <IonButton fill="clear" color="danger">
-          <IonIcon icon={thumbsDown} />
-        </IonButton>
-      </div>
-    );
-  };
-  
