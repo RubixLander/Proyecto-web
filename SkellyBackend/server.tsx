@@ -1,5 +1,5 @@
-const express = required('express');
-const cors = required('cors'); // Importa CORS
+const express = require('express');
+const cors = require('cors'); // Importa CORS
 const app = express();
 const port = 3000;
 
