@@ -25,6 +25,7 @@ const Biblioteca: React.FC = () => {
               <h4>Escucha álbumes que has subido y que has guardado!</h4>
             </div>
             <div className="CardsContainer">
+              <AlbumCard image={"https://f4.bcbits.com/img/a0827190352_16.jpg"} title={"失​わ​れ​た​時​REGRET"} subtitle={"death's dynamic shroud.wmv"} icon={bookmark} route='/reproductor'/>
               <AlbumCard image={"https://f4.bcbits.com/img/a1986450066_16.jpg"} title={"reflection"} subtitle={"아버지"} icon={bookmark} />
               <AlbumCard image={"https://f4.bcbits.com/img/a0972302045_16.jpg"} title={"Cul de Sac"} subtitle={"[minimo]"} icon={arrowUpCircle} />
               <AlbumCard image={"https://f4.bcbits.com/img/a0164762771_16.jpg"} title={"COSMIC TAPES VOL.1"} subtitle={"[minimo]"} icon={arrowUpCircle} />
@@ -69,6 +70,7 @@ const Biblioteca: React.FC = () => {
                 duration='1:00'
                 artist="death's dynamic shroud.wmv"
                 image="https://f4.bcbits.com/img/a0827190352_16.jpg"
+                route='/reproductor'
               />
             </div>
           </IonContent>
@@ -110,8 +112,8 @@ const Biblioteca: React.FC = () => {
             </div>
 
             <div className="CardsContainer">
-              <AlbumCard image="https://f4.bcbits.com/img/a0827190352_16.jpg" title="失​わ​れ​た​時​REGRET" subtitle="death's dynamic shroud.wmv" />
-              <AlbumCard image={"https://f4.bcbits.com/img/a0972302045_16.jpg"} title={"Cul de Sac"} subtitle={"[minimo]"} icon={arrowUpCircle} route='/reproductor' />
+              <AlbumCard image="https://f4.bcbits.com/img/a0827190352_16.jpg" title="失​わ​れ​た​時​REGRET" subtitle="death's dynamic shroud.wmv" route='/reproductor'/>
+              <AlbumCard image={"https://f4.bcbits.com/img/a0972302045_16.jpg"} title={"Cul de Sac"} subtitle={"[minimo]"} icon={arrowUpCircle}  />
             </div>
 
             <div className='TabContentContainer'>
@@ -125,6 +127,7 @@ const Biblioteca: React.FC = () => {
                 duration='1:00'
                 artist="death's dynamic shroud.wmv"
                 image="https://f4.bcbits.com/img/a0827190352_16.jpg"
+                route='/reproductor'
               />
               <TrackCard
                 title="Cul de Sac"
