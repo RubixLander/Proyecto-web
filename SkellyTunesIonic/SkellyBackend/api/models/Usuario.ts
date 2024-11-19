@@ -1,6 +1,7 @@
 // models/Usuario.ts
-import { Sequelize, DataTypes, Model } from 'sequelize';
+import { Sequelize, DataTypes, Model, Association } from 'sequelize';
 import sequelize from '../../config/skellybase';  // Asegúrate de que la conexión a la DB esté configurada correctamente
+import Perfiles from './Perfiles';  // Importa el modelo de Perfil
 
 class Usuario extends Model {
   public tag!: string;
@@ -8,6 +9,14 @@ class Usuario extends Model {
   public contrasena!: string;
   public rol!: string;
   public correo!: string;
+
+  // Definir la relación con el perfil
+  public Perfil?: Perfiles;  // Esta propiedad será opcional, ya que no siempre estará presente
+
+  // Para establecer la asociación correctamente
+  public static associations: {
+    Perfil: Association<Usuario, Perfiles>;
+  };
 }
 
 // Inicializa el modelo de Usuario con la conexión a Sequelize
@@ -44,5 +53,8 @@ Usuario.init(
     timestamps: false, // Si no estás usando timestamps
   }
 );
+
+Usuario.hasOne(Perfiles, { foreignKey: 'tag' });
+Perfiles.belongsTo(Usuario, { foreignKey: 'tag' });
 
 export default Usuario;

@@ -4,7 +4,7 @@ dotenv.config(); // Cargar las variables de entorno desde el archivo .env
 
 // Importar dependencias y rutas
 import authRoutes from './api/routes/authRoutes'; // Rutas de autenticación
-import usuarioRoutes from './api/routes/usuarioRoutes'; // Rutas de usuarios
+import usuarioRoutes from './api/routes/usuarioRouter'; // Rutas de usuarios
 import cors from 'cors';
 import express, { Request, Response } from 'express'; // Importa express y los tipos de Request y Response
 import sequelize from './config/skellybase'; // Configuración de la base de datos
@@ -72,13 +72,8 @@ app.use(express.json());
 app.use(cors());
 
 // Usar las rutas de autenticación y usuarios
-app.use('/api/auth', authRoutes);
-app.use('/api/usuarios', usuarioRoutes);
-
-// Ruta de prueba
-app.get('/api/data', (req: Request, res: Response) => {
-  res.json({ message: 'Datos del backend' });
-});
+app.use('/api/routes', authRoutes);
+app.use('/api/routes', usuarioRoutes);
 
 // Inicializar los modelos con Sequelize
 const models = {
