@@ -1,3 +1,13 @@
+// /server.ts
+import "./types/express.d";  // Asegúrate de que esta ruta sea correcta
+import dotenv from 'dotenv';
+dotenv.config();  // Cargar las variables de entorno del archivo .env
+
+// Importar las rutas
+import authRoutes from './api/auth/authRoutes'; // Rutas de autenticación
+import usuarioRoutes from './api/Usuarios/usuarioRoutes'; // Rutas de usuarios
+
+// Importar los modelos y las dependencias necesarias
 import cors from 'cors';
 import sequelize from './config/skellybase'; // Configuración de la base de datos
 import express, { Request, Response } from 'express';  // Importa express y los tipos de Request y Response
@@ -14,26 +24,30 @@ import Discusion from './models/Discusion';
 import Respuesta from './models/Respuesta';
 import PlaylistCancion from './models/PlaylisCancion';
 import CancionGenero from './models/CancionGenero';
-import AlbumGenero from './models/Albumgenero';
+import AlbumGenero from './models/AlbumGenero';
 import MiembroComunidad from './models/MiembroComunidad';
 import AlbumArtista from './models/AlbumArtista';
 
-// Declara e inicializa la aplicación express
+// Inicializar la aplicación express
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware para parsear JSON y habilitar CORS
 app.use(express.json());
 app.use(cors());  // Asegúrate de haber instalado y configurado correctamente CORS
 
-// Ruta de prueba (debe ir después de la declaración de 'app')
+// Usar las rutas de autenticación y usuarios
+app.use('/api/auth', authRoutes);
+app.use('/api/usuarios', usuarioRoutes);
+
+// Ruta de prueba
 app.get('/api/data', (req: Request, res: Response) => {
   res.json({ message: 'Datos del backend' });
 });
 
 // Inicializar los modelos con Sequelize
 const models = {
-  Usuario: Usuario(sequelize),
+  Usuario,
   Genero: Genero(sequelize),
   Cancion: Cancion(sequelize),
   Album: Album(sequelize),
@@ -81,13 +95,15 @@ models.Usuario.hasMany(models.Respuesta, { foreignKey: 'creador' });
 models.Respuesta.belongsTo(models.Usuario, { foreignKey: 'creador' });
 
 // Sincronizar la base de datos y arrancar el servidor solo después de que la base de datos esté sincronizada
-sequelize.sync({ force: false, alter: true }).then(() => {
-  console.log('Base de datos sincronizada y tablas creadas.');
-
-  // Iniciar el servidor solo después de que la base de datos esté sincronizada
-  app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
+sequelize.sync({ force: false, alter: true })
+  .then(() => {
+    console.log('Base de datos sincronizada y tablas creadas.');
+    
+    // Iniciar el servidor solo después de que la base de datos esté sincronizada
+    app.listen(port, () => {
+      console.log(`Servidor corriendo en http://localhost:${port}`);
+    });
+  })
+  .catch((error: Error) => {
+    console.error('Error al sincronizar la base de datos:', error);
   });
-}).catch(error => {
-  console.error('Error al sincronizar la base de datos:', error);
-});

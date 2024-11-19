@@ -1,26 +1,42 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+// models/Usuario.ts
+import { Sequelize, DataTypes, Model } from 'sequelize';
+import sequelize from '../config/skellybase';  // Asegúrate de que la conexión a la DB esté configurada correctamente
 
-// Extiende de Model para tipos más seguros
 class Usuario extends Model {
   public tag!: string;
   public nombre!: string;
   public contrasena!: string;
+  public rol!: string;
 }
 
-export default (sequelize: Sequelize) => {
-  // Inicializar el modelo con sequelize
-  Usuario.init(
-    {
-      tag: { type: DataTypes.STRING, primaryKey: true },
-      nombre: { type: DataTypes.STRING, allowNull: false },
-      contrasena: { type: DataTypes.STRING, allowNull: false },
+// Inicializa el modelo de Usuario con la conexión a Sequelize
+Usuario.init(
+  {
+    tag: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
     },
-    {
-      sequelize,             // Pasa la instancia de sequelize
-      modelName: 'Usuario',  // Nombre del modelo
-      tableName: 'usuarios', // Nombre de la tabla
-    }
-  );
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    contrasena: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    rol: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'user',  // Por defecto, el rol es 'user'
+    },
+  },
+  {
+    sequelize, // La instancia de sequelize para conectar
+    modelName: 'Usuario',
+    tableName: 'usuarios',
+    timestamps: false, // Si no estás usando timestamps
+  }
+);
 
-  return Usuario;
-};
+export default Usuario;

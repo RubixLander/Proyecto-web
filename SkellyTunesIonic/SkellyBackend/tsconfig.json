@@ -1,21 +1,27 @@
 {
-    "compilerOptions": {
-      "target": "ES6",
-      "module": "CommonJS",
-      "outDir": "./dist",
-      "rootDir": "./",
-      "esModuleInterop": true,
-      "strict": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "jsx": "react"
-    },
-    "include": [
-      "**/*.ts",
-      "server.tsx"
-, "models/Album.ts"    ],
-    "exclude": [
-      "node_modules"
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
     ]
-  }
-  
+  },
+  "include": [
+    "**/*.ts",
+    "server.tsx",
+    "models/Album.ts",
+    "routes/auth.ts"
+, "types/express.d.tsx"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
