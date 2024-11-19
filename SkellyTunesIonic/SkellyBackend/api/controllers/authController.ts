@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import Usuario from '../../models/Usuario';
+import Usuario from '../models/Usuario';
 
 // Wrapper para manejar promesas asincrónicas de forma correcta
 const asyncHandler = (fn: Function) => (req: Request, res: Response, next: Function) =>
@@ -10,7 +10,7 @@ const asyncHandler = (fn: Function) => (req: Request, res: Response, next: Funct
 
 // Registrar nuevo usuario
 export const registrarUsuario = async (req: Request, res: Response): Promise<Response> => {
-  const { tag, nombre, contrasena } = req.body;
+  const { tag, nombre, contrasena, correo } = req.body;
 
   // Verificar si el usuario ya existe
   const usuarioExistente = await Usuario.findByPk(tag);
@@ -18,12 +18,18 @@ export const registrarUsuario = async (req: Request, res: Response): Promise<Res
     return res.status(400).json({ error: 'El usuario ya existe' });
   }
 
+  // Verificar si el correo ya está registrado
+  const correoExistente = await Usuario.findOne({ where: { correo } });
+  if (correoExistente) {
+    return res.status(400).json({ error: 'El correo ya está registrado' });
+  }
+
   // Cifrar la contraseña
   const contrasenaCifrada = await bcrypt.hash(contrasena, 10);
 
   // Crear un nuevo usuario
   try {
-    const nuevoUsuario = await Usuario.create({ tag, nombre, contrasena: contrasenaCifrada });
+    const nuevoUsuario = await Usuario.create({ tag, nombre, contrasena: contrasenaCifrada, correo });
     return res.status(201).json({ message: 'Usuario registrado correctamente', usuario: nuevoUsuario });
   } catch (error) {
     return res.status(500).json({ error: 'Error al registrar el usuario' });

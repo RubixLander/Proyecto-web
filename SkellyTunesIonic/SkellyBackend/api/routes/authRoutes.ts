@@ -2,13 +2,13 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';  // Para cifrar contraseñas
 import jwt from 'jsonwebtoken';  // Para manejar JWT
-import Usuario from '../../models/Usuario';
+import Usuario from '../models/Usuario';
 
 const router = express.Router();
 
 // Ruta para registrar un nuevo usuario
 router.post('/register', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const { tag, nombre, contrasena } = req.body;
+  const { tag, nombre, contrasena, correo } = req.body;
 
   try {
     // Verificar si el usuario ya existe
@@ -18,12 +18,19 @@ router.post('/register', async (req: Request, res: Response, next: NextFunction)
       return; // Evitar continuar con el código si el usuario ya existe
     }
 
+    // Verificar si el correo ya está registrado
+    const correoExistente = await Usuario.findOne({ where: { correo } });
+    if (correoExistente) {
+        res.status(400).json({ error: 'El correo ya está registrado' });
+        return;
+    }
+
     // Cifrar la contraseña antes de guardarla
     const salt = await bcrypt.genSalt(10);
     const contrasenaCifrada = await bcrypt.hash(contrasena, salt);
 
     // Crear el nuevo usuario
-    const nuevoUsuario = await Usuario.create({ tag, nombre, contrasena: contrasenaCifrada });
+    const nuevoUsuario = await Usuario.create({ tag, nombre, contrasena: contrasenaCifrada, correo });
 
     // Responder exitosamente
     res.status(201).json({

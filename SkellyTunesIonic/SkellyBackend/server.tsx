@@ -1,32 +1,66 @@
-// /server.ts
-import "./types/express.d";  // Asegúrate de que esta ruta sea correcta
 import dotenv from 'dotenv';
-dotenv.config();  // Cargar las variables de entorno del archivo .env
+dotenv.config(); // Cargar las variables de entorno desde el archivo .env
 
-// Importar las rutas
-import authRoutes from './api/auth/authRoutes'; // Rutas de autenticación
-import usuarioRoutes from './api/Usuarios/usuarioRoutes'; // Rutas de usuarios
-
-// Importar los modelos y las dependencias necesarias
+// Importar dependencias y rutas
+import authRoutes from './api/routes/authRoutes'; // Rutas de autenticación
+import usuarioRoutes from './api/routes/usuarioRoutes'; // Rutas de usuarios
 import cors from 'cors';
+import express, { Request, Response } from 'express'; // Importa express y los tipos de Request y Response
 import sequelize from './config/skellybase'; // Configuración de la base de datos
-import express, { Request, Response } from 'express';  // Importa express y los tipos de Request y Response
+import bcrypt from 'bcryptjs';
 
 // Importar los modelos
-import Usuario from './models/Usuario';
-import Genero from './models/Genero';
-import Cancion from './models/Cancion';
-import Album from './models/Album';
-import Playlist from './models/Playlist';
-import Comentario from './models/Comentario';
-import Comunidad from './models/Comunidad';
-import Discusion from './models/Discusion';
-import Respuesta from './models/Respuesta';
-import PlaylistCancion from './models/PlaylisCancion';
-import CancionGenero from './models/CancionGenero';
-import AlbumGenero from './models/AlbumGenero';
-import MiembroComunidad from './models/MiembroComunidad';
-import AlbumArtista from './models/AlbumArtista';
+import Usuario from './api/models/Usuario'; // Modelo de Usuario
+import Genero from './api/models/Genero';
+import Cancion from './api/models/Cancion';
+import Album from './api/models/Album';
+import Playlist from './api/models/Playlist';
+import Comentario from './api/models/Comentario';
+import Comunidad from './api/models/Comunidad';
+import Discusion from './api/models/Discusion';
+import Respuesta from './api/models/Respuesta';
+import PlaylistCancion from './api/models/PlaylisCancion';
+import CancionGenero from './api/models/CancionGenero';
+import AlbumGenero from './api/models/AlbumGenero';
+import MiembroComunidad from './api/models/MiembroComunidad';
+import AlbumArtista from './api/models/AlbumArtista';
+import Perfil from './api/models/Perfiles'; // Nuevo modelo de Perfil
+import SeguidosUsuarios from './api/models/SeguidosUsuarios'; // Nuevo modelo de SeguidosUsuarios
+
+async function crearAdminSiNoExiste() {
+  try {
+    // Verificar si el usuario admin ya existe
+    const usuarioExistente = await Usuario.findByPk('admin');
+    if (usuarioExistente) {
+      console.log('El usuario admin ya existe');
+      return;
+    }
+
+    const contrasenaAdmin = process.env.ADMIN_PASSWORD;
+    const correoAdmin = process.env.ADMIN_EMAIL;  // Asegúrate de tener esta variable en .env
+    if (!contrasenaAdmin || !correoAdmin) {
+      console.error('No se ha configurado la contraseña o correo del administrador en el archivo .env');
+      return;
+    }
+
+    // Cifrar la contraseña del administrador
+    const contrasenaCifrada = await bcrypt.hash(contrasenaAdmin, 10);
+
+    // Crear el nuevo usuario admin con el correo
+    const nuevoAdmin = await Usuario.create({
+      tag: 'admin',
+      nombre: 'Administrador',
+      contrasena: contrasenaCifrada,
+      rol: 'admin',
+      correo: correoAdmin,  // Aquí agregamos el correo
+    });
+
+    console.log('Usuario admin creado exitosamente:', nuevoAdmin);
+  } catch (error) {
+    console.error('Error al crear el usuario admin:', error);
+  }
+}
+
 
 // Inicializar la aplicación express
 const app = express();
@@ -34,7 +68,7 @@ const port = process.env.PORT || 3000;
 
 // Middleware para parsear JSON y habilitar CORS
 app.use(express.json());
-app.use(cors());  // Asegúrate de haber instalado y configurado correctamente CORS
+app.use(cors());
 
 // Usar las rutas de autenticación y usuarios
 app.use('/api/auth', authRoutes);
@@ -61,9 +95,25 @@ const models = {
   AlbumGenero: AlbumGenero(sequelize),
   MiembroComunidad: MiembroComunidad(sequelize),
   AlbumArtista: AlbumArtista(sequelize),
+  Perfil: Perfil, // Inicialización del modelo Perfil
+  SeguidosUsuarios: SeguidosUsuarios, // Inicialización del modelo SeguidosUsuarios
 };
 
 // Establecer las relaciones entre los modelos
+models.Usuario.hasOne(models.Perfil, { foreignKey: 'tag' });
+models.Perfil.belongsTo(models.Usuario, { foreignKey: 'tag' });
+
+models.Usuario.belongsToMany(models.Usuario, {
+  as: 'Seguidores',
+  through: models.SeguidosUsuarios,
+  foreignKey: 'seguido_tag',
+});
+models.Usuario.belongsToMany(models.Usuario, {
+  as: 'Seguidos',
+  through: models.SeguidosUsuarios,
+  foreignKey: 'seguidor_tag',
+});
+
 models.Usuario.hasMany(models.Comentario, { foreignKey: 'usuario' });
 models.Comentario.belongsTo(models.Usuario, { foreignKey: 'usuario' });
 
@@ -98,8 +148,9 @@ models.Respuesta.belongsTo(models.Usuario, { foreignKey: 'creador' });
 sequelize.sync({ force: false, alter: true })
   .then(() => {
     console.log('Base de datos sincronizada y tablas creadas.');
-    
-    // Iniciar el servidor solo después de que la base de datos esté sincronizada
+
+    crearAdminSiNoExiste();
+
     app.listen(port, () => {
       console.log(`Servidor corriendo en http://localhost:${port}`);
     });
