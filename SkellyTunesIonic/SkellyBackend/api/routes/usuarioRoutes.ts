@@ -1,4 +1,4 @@
-import "../types/express.d"; 
+import "../../types/express.d"; 
 
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
