@@ -25,8 +25,9 @@ import CancionGenero from './api/models/CancionGenero';
 import AlbumGenero from './api/models/AlbumGenero';
 import MiembroComunidad from './api/models/MiembroComunidad';
 import AlbumArtista from './api/models/AlbumArtista';
-import Perfil from './api/models/Perfiles'; // Nuevo modelo de Perfil
-import SeguidosUsuarios from './api/models/SeguidosUsuarios'; // Nuevo modelo de SeguidosUsuarios
+import Perfil from './api/models/Perfiles'; 
+import SeguidosUsuarios from './api/models/SeguidosUsuarios'; 
+import seguidoresRoutes from './api/routes/seguidoresRoutes';
 
 async function crearAdminSiNoExiste() {
   try {
@@ -74,6 +75,7 @@ app.use(cors());
 // Usar las rutas de autenticación y usuarios
 app.use('/api/routes', authRoutes);
 app.use('/api/routes', usuarioRoutes);
+app.use('/api/routes', seguidoresRoutes);
 
 // Inicializar los modelos con Sequelize
 const models = {
@@ -98,17 +100,6 @@ const models = {
 // Establecer las relaciones entre los modelos
 models.Usuario.hasOne(models.Perfil, { foreignKey: 'tag' });
 models.Perfil.belongsTo(models.Usuario, { foreignKey: 'tag' });
-
-models.Usuario.belongsToMany(models.Usuario, {
-  as: 'Seguidores',
-  through: models.SeguidosUsuarios,
-  foreignKey: 'seguido_tag',
-});
-models.Usuario.belongsToMany(models.Usuario, {
-  as: 'Seguidos',
-  through: models.SeguidosUsuarios,
-  foreignKey: 'seguidor_tag',
-});
 
 models.Usuario.hasMany(models.Comentario, { foreignKey: 'usuario' });
 models.Comentario.belongsTo(models.Usuario, { foreignKey: 'usuario' });
