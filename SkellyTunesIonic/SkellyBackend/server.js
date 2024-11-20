@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('./db'); // Importa el módulo de la base de datos
+const usuariosRoutes = require('./routes/usuarios '); // Importar las rutas
 
 const app = express();
 const port = 3000;
@@ -9,29 +9,13 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Endpoint para obtener todos los registros de la base de datos
-app.get('/api/usuarios', (req, res) => {
-  const sql = 'SELECT * FROM usuarios';
-  db.all(sql, [], (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json({ usuarios: rows });
-  });
-});
+// Rutas
+app.use('/api/usuarios', usuariosRoutes); // Usar las rutas de usuarios
 
-// Endpoint para crear un nuevo usuario
-app.post('/api/usuarios', (req, res) => {
-  const { nombre, correo } = req.body;
-  const sql = 'INSERT INTO usuarios (nombre, correo) VALUES (?, ?)';
-  db.run(sql, [nombre, correo], function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.status(201).json({ id: this.lastID, nombre, correo });
-  });
+// Middleware de manejo de errores global
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Ocurrió un error en el servidor.' });
 });
 
 // Iniciar el servidor
