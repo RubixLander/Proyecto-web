@@ -1,9 +1,14 @@
 import { DataTypes, Model, Association } from 'sequelize';
 import sequelize from '../../config/skellybase';
-import Comentario from './Comentario';  // Importar Comentario aquí
+import Comentario from './Comentario';
+import Playlist from './Playlist';
+import Genero from './Genero';  // Aseguramos que importamos Genero
 
 // Definimos la clase Cancion que extiende de Model
 class Cancion extends Model {
+  setGeneros(generosEncontrados: Genero[]) {
+      throw new Error('Method not implemented.');
+  }
   public id!: number;
   public track!: number;
   public titulo!: string;
@@ -12,16 +17,26 @@ class Cancion extends Model {
 
   // Relación con los comentarios
   public readonly Comentarios?: Comentario[];
+  public readonly Playlists?: Playlist[];
+  public readonly Generos?: Genero[];
 
   // Para establecer la asociación correctamente
   public static associations: {
     Comentarios: Association<Cancion, Comentario>;
+    Playlists: Association<Cancion, Playlist>;
+    Generos: Association<Cancion, Genero>;
   };
 
-  // Método estático para establecer la relación
+  // Método estático para establecer las relaciones
   public static associate(models: any) {
-    // Relación hasMany
+    // Relación hasMany con Comentario
     Cancion.hasMany(models.Comentario, { foreignKey: 'cancion' });
+
+    // Relación belongsToMany con Playlist (muchos a muchos)
+    Cancion.belongsToMany(models.Playlist, { through: models.PlaylistCancion, foreignKey: 'cancionId' });
+
+    // Relación belongsToMany con Genero (muchos a muchos)
+    Cancion.belongsToMany(models.Genero, { through: models.CancionGenero, foreignKey: 'cancionId' });
   }
 }
 

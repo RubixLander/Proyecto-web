@@ -79,10 +79,10 @@ app.use('/api/routes', seguidoresRoutes);
 // Inicializar los modelos con Sequelize
 const models = {
   Usuario,
-  Genero: Genero(sequelize),
+  Genero,
   Cancion,
-  Album: Album(sequelize),
-  Playlist: Playlist(sequelize),
+  Album,
+  Playlist,
   Comentario,
   Comunidad: Comunidad(sequelize),
   Discusion: Discusion(sequelize),

@@ -1,32 +1,52 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Model, Sequelize, Association } from 'sequelize';
+import Cancion from './Cancion';  // Aseguramos que importamos Cancion
+import Album from './Album';      // Aseguramos que importamos Album
+import sequelize from '../../config/skellybase';
 
 // Definimos la clase Genero que extiende de Model
 class Genero extends Model {
-  public id!: number;      // El ID es la clave primaria y es un número
-  public nombre!: string;  // El nombre del género es una cadena de texto
+  public id!: number;
+  public nombre!: string;
+
+  // Relación con las canciones y álbumes
+  public readonly Canciones?: Cancion[];
+  public readonly Albums?: Album[];
+
+  // Para establecer la asociación correctamente
+  public static associations: {
+    Canciones: Association<Genero, Cancion>;
+    Albums: Association<Genero, Album>;
+  };
+
+  // Método estático para establecer las relaciones
+  public static associate(models: any) {
+    // Relación belongsToMany con Cancion (muchos a muchos)
+    Genero.belongsToMany(models.Cancion, { through: models.CancionGenero, foreignKey: 'generoId' });
+
+    // Relación belongsToMany con Album (muchos a muchos)
+    Genero.belongsToMany(models.Album, { through: models.AlbumGenero, foreignKey: 'generoId' });
+  }
 }
 
 // Inicializamos el modelo Genero
-export default (sequelize: Sequelize) => {
-  Genero.init(
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true, // Esto indica que el ID es autoincremental
-      },
-      nombre: {
-        type: DataTypes.STRING,
-        allowNull: false, // Aseguramos que el nombre no pueda ser nulo
-      },
+Genero.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-      sequelize, // Pasamos la instancia de Sequelize
-      modelName: 'Genero', // Nombre del modelo
-      tableName: 'generos', // Nombre de la tabla en la base de datos
-      timestamps: false, // Desactivamos los campos createdAt y updatedAt si no los usamos
-    }
-  );
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false, // Aseguramos que el nombre no sea nulo
+    },
+  },
+  {
+    sequelize,
+    modelName: 'Genero',
+    tableName: 'generos',
+    timestamps: false, // Desactivamos los timestamps (createdAt y updatedAt)
+  }
+);
 
-  return Genero;
-};
+export default Genero;
