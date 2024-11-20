@@ -2,6 +2,7 @@ import { Sequelize, DataTypes, Model, Association } from 'sequelize';
 import sequelize from '../../config/skellybase';  // Asegúrate de que la conexión a la DB esté configurada correctamente
 import Perfiles from './Perfiles';  // Importa el modelo de Perfil
 import SeguidosUsuarios from './SeguidosUsuarios'; // Importar el modelo de SeguidosUsuarios
+import Comentario from './Comentario'; // Importa el modelo de Comentario
 
 class Usuario extends Model {
   public tag!: string;
@@ -18,11 +19,15 @@ class Usuario extends Model {
   public readonly Seguidores?: Usuario[];  // Usuarios que siguen a este usuario
   public readonly Seguidos?: Usuario[];    // Usuarios que este usuario sigue
 
+  // Relación con los comentarios
+  public readonly Comentarios?: Comentario[];  // Los comentarios de este usuario
+
   // Para establecer la asociación correctamente
   public static associations: {
     Perfil: Association<Usuario, Perfiles>;
     Seguidores: Association<Usuario, Usuario>;
     Seguidos: Association<Usuario, Usuario>;
+    Comentarios: Association<Usuario, Comentario>;
   };
 }
 
@@ -81,5 +86,9 @@ Usuario.belongsToMany(Usuario, {
   through: SeguidosUsuarios,
   foreignKey: 'seguidor_tag',
 });
+
+// Relación con Comentarios
+Usuario.hasMany(Comentario, { foreignKey: 'usuario' });
+Comentario.belongsTo(Usuario, { foreignKey: 'usuario' });
 
 export default Usuario;

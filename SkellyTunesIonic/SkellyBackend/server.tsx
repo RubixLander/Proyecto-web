@@ -5,6 +5,7 @@ dotenv.config(); // Cargar las variables de entorno desde el archivo .env
 // Importar dependencias y rutas
 import authRoutes from './api/routes/authRoutes'; // Rutas de autenticación
 import usuarioRoutes from './api/routes/usuarioRouter'; // Rutas de usuarios
+import seguidoresRoutes from './api/routes/seguidoresRoutes';
 import cors from 'cors';
 import express, { Request, Response } from 'express'; // Importa express y los tipos de Request y Response
 import sequelize from './config/skellybase'; // Configuración de la base de datos
@@ -27,7 +28,6 @@ import MiembroComunidad from './api/models/MiembroComunidad';
 import AlbumArtista from './api/models/AlbumArtista';
 import Perfil from './api/models/Perfiles'; 
 import SeguidosUsuarios from './api/models/SeguidosUsuarios'; 
-import seguidoresRoutes from './api/routes/seguidoresRoutes';
 
 async function crearAdminSiNoExiste() {
   try {
@@ -63,7 +63,6 @@ async function crearAdminSiNoExiste() {
   }
 }
 
-
 // Inicializar la aplicación express
 const app = express();
 const port = process.env.PORT || 3000;
@@ -81,10 +80,10 @@ app.use('/api/routes', seguidoresRoutes);
 const models = {
   Usuario,
   Genero: Genero(sequelize),
-  Cancion: Cancion(sequelize),
+  Cancion,
   Album: Album(sequelize),
   Playlist: Playlist(sequelize),
-  Comentario: Comentario(sequelize),
+  Comentario,
   Comunidad: Comunidad(sequelize),
   Discusion: Discusion(sequelize),
   Respuesta: Respuesta(sequelize),
@@ -136,8 +135,10 @@ sequelize.sync({ force: false, alter: true })
   .then(() => {
     console.log('Base de datos sincronizada y tablas creadas.');
 
+    // Crear admin si no existe
     crearAdminSiNoExiste();
 
+    // Arrancar el servidor
     app.listen(port, () => {
       console.log(`Servidor corriendo en http://localhost:${port}`);
     });
