@@ -7,6 +7,10 @@ const buscar = require('./routes/buscar');
 const biblioteca = require('./routes/biblioteca');
 const userRoutes = require('./routes/usuario'); // Importar las rutas
 const album = require('./routes/album');
+const comunidades = require('./routes/comunidades');
+const artistas = require('./routes/artistas');
+const subirAlbum = require('./routes/subirAlbum');
+const subirCanciones = require('./routes/subirCanciones');
 
 
 const app = express();
@@ -23,6 +27,10 @@ app.use('api/buscar', buscar);
 app.use('api/biblioteca', biblioteca);
 app.use('/api/usuario', userRoutes);
 app.use('/api/album', album); 
+app.use('/api/comunidades', comunidades);
+app.use('api/artistas', artistas);
+app.use('/api/subirAlbum', subirAlbum);
+app.use('/api/subirCanciones', subirCanciones);
 //Usar esta estructura de arriba xd
 
 // Middleware de manejo de errores global
