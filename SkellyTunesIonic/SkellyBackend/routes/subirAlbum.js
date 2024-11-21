@@ -7,28 +7,34 @@ const router = express.Router();
 
 // Configuración de multer para subir archivos
 const storage = multer.diskStorage({
+    // Destino de los archivos
     destination: function (req, file, cb) {
-        cb(null, './uploads');  // Carpeta donde se almacenarán los archivos
+        if (file.fieldname === 'coverart') {
+            cb(null, './uploads/albums');  // Portadas se suben a 'uploads/albums'
+        } else {
+            cb(new Error('Archivo no permitido'), false);  // Si no es portada, no se permite
+        }
     },
+    // Nombre del archivo
     filename: function (req, file, cb) {
-        const ext = path.extname(file.originalname);  // Obtener la extensión
-        cb(null, Date.now() + ext);  // Guardamos el archivo con un nombre único
+        const ext = path.extname(file.originalname);  // Obtener la extensión del archivo
+        cb(null, Date.now() + ext);  // Nombre único para evitar sobrescribir
     }
 });
 
 const upload = multer({ storage: storage });
 
-// Ruta para subir un álbum (sin canciones)
+// Ruta para subir un álbum
 router.post('/subirAlbum', upload.single('coverart'), (req, res) => {
     const { titulo, año, usuario_tag } = req.body;  // Datos del álbum
-    const coverart = req.file ? req.file.path : null;
+    const coverart = req.file ? req.file.path : null;  // Ruta de la portada
 
-    // Verificar que recibimos los datos necesarios
+    // Verificación de datos necesarios
     if (!titulo || !año || !usuario_tag) {
         return res.status(400).json({ message: 'Faltan campos obligatorios' });
     }
 
-    // Insertar el álbum en la tabla 'albums'
+    // Insertar el álbum en la base de datos
     const queryAlbum = `INSERT INTO albums (coverart, titulo, año) VALUES (?, ?, ?)`;
     db.run(queryAlbum, [coverart, titulo, año], function (err) {
         if (err) {
@@ -38,7 +44,7 @@ router.post('/subirAlbum', upload.single('coverart'), (req, res) => {
 
         const albumId = this.lastID;  // Obtener el ID del álbum recién insertado
 
-        // Relacionar el álbum con el artista (usuario_tag) en 'albumartista'
+        // Relacionar el álbum con el artista (usuario_tag)
         const queryAlbumArtista = `INSERT INTO albumartista (usuario_tag, album_id) VALUES (?, ?)`;
         db.run(queryAlbumArtista, [usuario_tag, albumId], function (err) {
             if (err) {
