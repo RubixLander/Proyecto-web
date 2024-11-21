@@ -19,7 +19,8 @@ import './Interfaces.css';
 
 import { useAuth } from '../contexts/autentificacion';
 
-
+//Puentes
+import api from '../api/api';
 
 // Contenido de la Pagina
 interface MenuLayoutProps {
@@ -28,6 +29,10 @@ interface MenuLayoutProps {
 
 // Definir Interfaz
 export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
+    const [userData, setUserData] = useState<{ avatar: string; nombre: string; tag: string } | null>(null);
+    const userTag = localStorage.getItem('userTag');
+    const [error, setError] = useState<string | null>(null);
+
     const { isShiny, toastShown, setToastShown } = useLogo(); // Obtiene isShiny y toastShown
     const logo = isShiny ? shinylogo : normallogo; // Determina el logo
     const { isAuthenticated } = useAuth();
@@ -40,6 +45,36 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
             setToastShown(true); // Marca el toast como mostrado en el contexto
         }
     }, [isShiny, toastShown, setToastShown]);
+
+    useEffect(() => {
+        // Obtener el userTag del localStorage
+        const userTag = localStorage.getItem('userTag');
+        
+        if (!userTag) {
+          console.error('El usuario no está autenticado');
+          setError('No estás autenticado');
+          return;
+        }
+    
+        // Codificar el tag si está presente
+        const encodedUserTag = encodeURIComponent(userTag);
+    
+        // Método para obtener los datos del usuario
+        const fetchUserData = async () => {
+          try {
+            const response = await api.get('/usuarios/datosbarra', { params: { userTag: encodedUserTag } });
+            setUserData(response.data); // Guardar los datos en el estado
+          } catch (err: any) {
+            if (err.response) {
+              setError(err.response.data.error); // Error proporcionado por el servidor
+            } else {
+              setError('Error al conectar con el servidor.');
+            }
+          }
+        };
+    
+        fetchUserData();
+      }, []); // El array vacío asegura que se ejecute solo una vez cuando el componente se monte
 
     return (
         <>
@@ -68,8 +103,6 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                         <BotonIcono expand="block" shape="round" icon={person} slot="start" className='menuOpciones' text="Perfil" route='/perfil' />
                         <BotonIcono expand="block" shape="round" icon={people} slot="start" className='menuOpciones' text="Comunidades" route="/comunidades"/>
                         <BotonIcono expand="block" shape="round" icon={settings} slot="start" className='menuOpciones' text="Ajustes" route='/AjustePerfil'/>
-                    {/*Cerrar sesion borra los datos locales guardados, por lo que al intentar iniciar sesion con un usuario creado anteriormente 
-                    no se podra, esto es para prototipar la funcion con backend para la proxima entrega.*/}
                         <BotonIcono expand="block" shape="round" icon={logOut} slot="start" className='menuOpciones' text="Cerrar Sesión" />
                         {/* Footer de Sidebar */}
                         <div className="menu-footer">
@@ -113,10 +146,10 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                                 //Sesion Iniciada
                                 <div className="right-side-container">
                                     <IonItem className='avatar-container'>
-                                        <IonLabel className='avatar-info' >[minimo] @minimo</IonLabel>
+                                        <IonLabel className='avatar-info' >{userData?.nombre} {userData?.tag}</IonLabel>
                                     </IonItem>
                                     <IonAvatar slot="start" className='avatar'>
-                                        <img alt="avatar" src="https://f4.bcbits.com/img/0033779152_21.jpg" />
+                                        <img alt="avatar" src={userData?.avatar} />
                                         </IonAvatar>
 
                                 </div>

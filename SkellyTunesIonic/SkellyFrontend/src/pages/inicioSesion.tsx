@@ -14,10 +14,9 @@ import './Reginit.css';
 import { useAuth } from '../contexts/autentificacion';
 
 //Puentes
-import axios from 'axios';
+import api from '../api/api';
 
 const InicioSesion: React.FC = () => {
-    const [tag, setTag] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
@@ -42,14 +41,16 @@ const InicioSesion: React.FC = () => {
     
         try {
             // Llamada a la API para realizar el login
-            const response = await axios.post('http://localhost:3000/api/autentificacion/login', userData);
+            const response = await api.post('autentificacion/login', userData);
     
             // Si la respuesta es exitosa, puedes guardar el token en el localStorage
             if (response.status === 200) {
                 console.log('Login exitoso', response.data);
                 localStorage.setItem('token', response.data.token); // Guarda el token donde sea necesario
+                localStorage.setItem('userTag', response.data.tag);
     
                 // Redirigir al usuario a la página de inicio
+                
                 login();  // Si usas un hook de contexto para gestionar el estado de autenticación
                 history.push('/home'); // Redirige a la página de inicio o la página que elijas
             }

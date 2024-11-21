@@ -14,7 +14,7 @@ import './Reginit.css';
 import { useAuth } from '../contexts/autentificacion';
 
 //Puentes
-import axios from 'axios';
+import api from '../api/api';
 
 const Registro: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -79,10 +79,13 @@ const Registro: React.FC = () => {
             };
     
             // Realizar la solicitud POST con Axios
-            const response = await axios.post('http://localhost:3000/api/autentificacion/registro', userData); // Realiza la petición directamente a la API
+            const response = await api.post('autentificacion/registro', userData); // Realiza la petición directamente a la API
     
             if (response.status === 201) {
                 alert(response.data.message || "Usuario registrado exitosamente!");  // Mostrar mensaje de éxito
+
+                // Guardar el tag en localStorage
+                localStorage.setItem('userTag', tag);
                 login();  // Cambiar el contexto de autenticación
                 history.push('/home');  // Redirigir al inicio
             } else {
