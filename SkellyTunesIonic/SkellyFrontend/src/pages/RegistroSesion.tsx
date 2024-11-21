@@ -74,7 +74,7 @@ const Registro: React.FC = () => {
                 correo: email, 
                 informacion: "No he escrito nada aun!", 
                 avatar: "https://media.istockphoto.com/id/1818754016/vector/skull-human-skeleton-silhouette-human-skeleton-head-side-view-human-body-structure-anatomy-x.jpg?s=612x612&w=0&k=20&c=KgdJFMcH-k67VSjpb6KK_rNA_NPni4Bq6PlligzATcc=", 
-                background: "https://everwallpaper.com/cdn/shop/products/skeleton-art-wall-mural.jpg?v=1650356286&width=533", 
+                background: "https://wallpapercave.com/wp/wp3454723.jpg", 
                 headerText: "Bone-chilling!"
             };
     

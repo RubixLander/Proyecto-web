@@ -74,7 +74,7 @@ router.put('/modificar-contraseña/:tag', verificarToken, async (req, res) => {
   const { nuevaContraseña } = req.body; // Se obtiene la nueva contraseña desde el cuerpo de la solicitud
 
   const decodedtag = decodeURIComponent(tag);
-  console.log('Tag Recibido:', decodetag);  // Verifica que el valor sea correcto
+  console.log('Tag Recibido:', decodedtag);  // Verifica que el valor sea correcto
 
   if (!nuevaContraseña) {
       return res.status(400).json({ error: 'La nueva contraseña es obligatoria.' });

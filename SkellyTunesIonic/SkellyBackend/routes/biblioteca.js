@@ -1,10 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const sqlite3 = require('sqlite3');  // Librería para conectar a SQLite
-const { Buffer } = require('buffer'); // Para manejar la decodificación
-
-// Establecer la conexión a SQLite
-const db = new sqlite3.Database('./db/musicLibrary.db');  // Ajusta la ruta a tu base de datos
+const db = require('../db');  // Tu conexión a la base de datos
 
 // Función para decodificar los tags
 const decodeTag = (encodedTag) => {

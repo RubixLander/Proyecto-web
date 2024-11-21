@@ -1,38 +1,77 @@
 //Import de Elementos IONIC/REACT
+import React, { useEffect, useState } from 'react'
 import { IonContent, IonPage} from '@ionic/react';
 
 //Import de Componentes
 import {InterfazGeneral} from '../components/Interfaces';
 import {AlbumCard,  PlaylistCard, UserCard, CommunityCard} from '../components/Cards';
 
-//Import de datos
-import albumsData from '../data/albums.json';
-
 //Import de CSS
 import './Home.css';
 import '../theme/base.css';
 
+//Puentes
+import api from '../api/api';
+
 interface Album {
-  image: string;
-  title: string;
-  artist: string;
+  id: number;
+  coverart: string;
+  album_titulo: string;
+  año: number;
+  artista_nombre: string;
 }
 
-//Logica Aleatorización
+// Lógica de aleatorización
 const shuffleArray = (array: Album[]): Album[] => {
   for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]]; 
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 };
 
 // Comienzo Pagina Home
 const Home: React.FC = () => {
-  const shuffledAlbums = shuffleArray([...albumsData]);
-  const limitedAlbums = shuffledAlbums.slice(0, 6);
+  const [albums, setAlbums] = useState<Album[]>([]); // Estado para los álbumes originales
+  const [limitedAlbums, setLimitedAlbums] = useState<Album[]>([]); // Álbumes aleatorizados y limitados
+  const [loading, setLoading] = useState<boolean>(true); // Estado de carga
+  const [error, setError] = useState<string | null>(null); // Estado de error
 
+  // Efecto para obtener los álbumes al cargar el componente
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      try {
+        const response = await api.get<Album[]>('/album/albums'); // Petición GET a la API
+        setAlbums(response.data); // Guardar los álbumes en el estado
+      } catch (err) {
+        console.error('Error al obtener los álbumes', err);
+        setError('No se pudieron cargar los álbumes');
+      } finally {
+        setLoading(false); // Desactivar el estado de carga
+      }
+    };
 
+    fetchAlbums();
+  }, []);
+
+  // Lógica para aleatorizar y limitar los álbumes
+  useEffect(() => {
+    if (albums.length > 0) {
+      const shuffled = shuffleArray(albums); // Aleatorizar los álbumes
+      const limited = shuffled.slice(0, 6); // Limitar a 6 álbumes
+      setLimitedAlbums(limited); // Actualizar el estado con los álbumes limitados
+    }
+  }, [albums]); // Este efecto se ejecuta cada vez que cambia 'albums'
+
+  // Muestra un mensaje de carga si está en proceso
+  if (loading) {
+    return <IonContent><div>Cargando álbumes...</div></IonContent>;
+  }
+
+  // Muestra un mensaje de error si ocurre un problema
+  if (error) {
+    return <IonContent><div>{error}</div></IonContent>;
+  }
 
   return (
     <IonPage>
@@ -49,7 +88,7 @@ const Home: React.FC = () => {
           <div className="CardsContainer">
             {limitedAlbums.length > 0 ? (
               limitedAlbums.map((album, index) => (
-                <AlbumCard key={index} image={album.image} title={album.title} subtitle={album.artist} />
+                <AlbumCard key={index} image={album.coverart} title={album.album_titulo} subtitle={album.artista_nombre} />
               ))
             ) : (
               <h2>No hay álbumes disponibles.</h2>

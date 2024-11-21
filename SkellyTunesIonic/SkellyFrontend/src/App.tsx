@@ -49,7 +49,7 @@ const App: React.FC = () => (
         <Route exact path="/comunidades"><Comunidades /></Route>
         <Route exact path="/comunidad"><Comunidad /></Route>
         <Route exact path="/biblioteca"><Biblioteca /></Route>
-        <Route exact path="/perfil"><Perfil /></Route>
+        <Route path="/perfil/:tag" component={Perfil} />
         <Route exact path="/home"><Home /></Route>
 
         <Route exact path="/ajustePerfil"><AjustePerfil /></Route>

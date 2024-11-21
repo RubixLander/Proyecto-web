@@ -1,7 +1,8 @@
 //Import de Elementos IONIC/REACT
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonLabel, IonItem, IonList, IonIcon } from '@ionic/react';
 import { playCircle, library, people, list , radio, albums, calendar, earth, logoSoundcloud, logoInstagram, information} from 'ionicons/icons';
+import { useParams } from 'react-router-dom';
 
 //Import de Componentes
 import {InterfazGeneral} from '../components/Interfaces';
@@ -18,9 +19,73 @@ import './perfil.css';
 //Import de contexto
 import { useAuth } from '../contexts/autentificacion';
 
+//Puentes
+import api from '../api/api';
+
 
 const Perfil: React.FC = () => {
     const { isAuthenticated } = useAuth();
+    const userTag = localStorage.getItem('userTag'); // Tag del usuario autenticado
+
+    const { tag } = useParams<{ tag: string }>(); // Extrae el parámetro 'tag' desde la URL
+
+    const [profileData, setProfileData] = useState<any>(null); // Datos del perfil
+    const [loading, setLoading] = useState<boolean>(true); // Estado de carga
+    const [error, setError] = useState<string | null>(null); // Estado de error
+  
+    const [username, setUsername] = useState<string>(''); // Nombre de usuario
+    const [headerText, setHeaderText] = useState<string>(''); // Texto del header
+    const [informacion, setInformacion] = useState<string>(''); // Información adicional
+    const [profileImage, setProfileImage] = useState<string | null>(null); // Imagen de perfil
+    const [backgroundImage, setBackgroundImage] = useState<string | null>(null); // Imagen de fondo
+
+  // Efecto para obtener los datos del perfil
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (!tag) {
+        console.error('No se ha proporcionado un tag de usuario');
+        setError('Tag de usuario no encontrado');
+        setLoading(false);
+        return;
+      }
+
+      const encodedUserTag = encodeURIComponent(tag); // Codificar el tag para la URL
+      try {
+        const response = await api.get(`/perfil/obtener/${encodedUserTag}`); // Petición GET a la API
+        console.log('Datos del perfil:', response.data);
+        
+        setProfileData(response.data); // Guardamos los datos en el estado
+      } catch (err) {
+        setError('Error al obtener el perfil'); // Manejamos el error
+        console.error(err);
+      } finally {
+        setLoading(false); // Finalizamos el estado de carga
+      }
+    };
+
+    fetchUserProfile();
+  }, [tag]); // El efecto se ejecuta cuando el 'tag' cambia
+
+  // Cuando los datos del perfil cambian, actualiza los estados locales
+  useEffect(() => {
+    if (profileData) {
+      setUsername(profileData.nombre || ''); // Actualiza el nombre
+      setHeaderText(profileData.headerText || ''); // Actualiza el texto del header
+      setInformacion(profileData.informacion || ''); // Actualiza la información adicional
+      setProfileImage(profileData.avatar || null); // Imagen de perfil
+      setBackgroundImage(profileData.background || null); // Imagen de fondo
+    }
+  }, [profileData]); // Este efecto se ejecuta cuando profileData cambia
+
+  // Renderiza los estados de carga y error
+  if (loading) {
+    return <IonContent><div>Cargando...</div></IonContent>; // Muestra un mensaje de carga
+  }
+
+  if (error) {
+    return <IonContent><div>{error}</div></IonContent>; // Muestra un mensaje de error
+  }
+
 
     /* CONTENIDO DE PAGINAS DE PERFIL */
     const tabs = [
@@ -92,7 +157,7 @@ const Perfil: React.FC = () => {
                     <div className='about-container'>
                         <div className="about-info">
                             <h2>Información</h2>
-                            <p>Inspired by the Low End Theory beat scene in Los Angeles like Flying Lotus, Mndsgn, Dibia$e, STLNDMS and more. Chilean local beatmakers like Flakodiablo, Bagre and more.</p>
+                            <p>{informacion}</p>
                             <h2>Detalles</h2>
                             <div className="detail-item">
                                 <IonIcon aria-hidden="true" icon={radio} slot="start" />
@@ -133,16 +198,16 @@ const Perfil: React.FC = () => {
                 <IonContent>
                     {/* CABECERA DE PERFIL */}
                     <IonHeader>
-                        <div className="perfil">
-                            <img className="foto-perfil" src="https://f4.bcbits.com/img/0033779152_21.jpg" />
+                        <div className="perfil"  style={{backgroundImage: `url(${backgroundImage})`}}>
+                            <img className="foto-perfil" src={profileImage} />
                             <div className="info">
-                                <h1>[minimo]</h1>
-                                <h2>@minimo</h2>
-                                <p>Lo-Fi, Psychodelic Beats from my intoxicated mind.</p>
+                                <h1>{username}</h1>
+                                <h2>{tag}</h2>
+                                <p>{headerText}</p>
                             </div>
-                            {!isAuthenticated && (
+                            {isAuthenticated && userTag !== tag && (
                                 <div className="seguir-btn">
-                                    <BotonGeneral text='Seguir' color='dark' size='small' />
+                                <BotonGeneral text="Seguir" color="dark" size="small" />
                                 </div>
                             )}
                         </div>

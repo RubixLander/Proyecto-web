@@ -1,9 +1,6 @@
 const express = require('express');
-const sqlite3 = require('sqlite3');  // Librería para conectar a SQLite
+const db = require('../db');  // Tu conexión a la base de datos
 const router = express.Router();
-
-// Establecer la conexión a la base de datos SQLite
-const db = new sqlite3.Database('./db/musicLibrary.db');  // Ajusta la ruta a tu base de datos
 
 // Ruta para buscar álbumes
 router.get('/buscar/albumes', (req, res) => {

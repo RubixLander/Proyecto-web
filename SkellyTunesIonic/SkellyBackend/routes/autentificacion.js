@@ -87,7 +87,7 @@ router.post('/registro', (req, res) => {
             return res.status(500).json({ error: 'Error al insertar el perfil.' });
           }
 
-          const token = jwt.sign({ correo: row.correo, tag: row.tag }, process.env.SECRET_KEY, { expiresIn: '1h' });
+          const token = jwt.sign({ correo, tag }, process.env.SECRET_KEY, { expiresIn: '1h' });
           return res.status(201).json({ message: 'Usuario registrado exitosamente.', token });
         });
       });

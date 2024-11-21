@@ -100,7 +100,7 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                     <div className="menu-content">
                         <BotonIcono expand="block" shape="round" icon={home} slot="start" className="menuOpciones" text="Inicio" route='/home' />
                         <BotonIcono expand="block" shape="round" icon={library} slot="start" className='menuOpciones' text="Biblioteca" route='/biblioteca'/>
-                        <BotonIcono expand="block" shape="round" icon={person} slot="start" className='menuOpciones' text="Perfil" route='/perfil' />
+                        <BotonIcono expand="block" shape="round" icon={person} slot="start" className='menuOpciones' text="Perfil" route={`/perfil/${userData?.tag}`} />
                         <BotonIcono expand="block" shape="round" icon={people} slot="start" className='menuOpciones' text="Comunidades" route="/comunidades"/>
                         <BotonIcono expand="block" shape="round" icon={settings} slot="start" className='menuOpciones' text="Ajustes" route='/AjustePerfil'/>
                         <BotonIcono expand="block" shape="round" icon={logOut} slot="start" className='menuOpciones' text="Cerrar Sesión" />

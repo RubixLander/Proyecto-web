@@ -24,12 +24,14 @@ const AjustePerfil: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<string>(''); // URL de la imagen de perfil (opcional para que el usuario ingrese una URL)
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null); // Para la imagen de fondo
   const [backgroundImageUrl, setBackgroundImageUrl] = useState<string>(''); // URL de la imagen de fondo (opcional)
+
+  const userTag = localStorage.getItem('userTag');
   const history = useHistory();
 
   // Efecto para obtener los datos del perfil
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const userTag = localStorage.getItem('userTag');
+      
       if (!userTag) {
         console.error('El usuario no está autenticado');
         setError('No estás autenticado');
@@ -147,7 +149,7 @@ const AjustePerfil: React.FC = () => {
   
       if (response.status === 200) {
         console.log('Perfil actualizado con éxito');
-        history.push('/perfil');
+        history.push(`/perfil/${userTag}`);
       } else {
         console.error('Error al actualizar el perfil:', response.data.message);
       }

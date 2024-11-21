@@ -20,4 +20,6 @@ router.get('/albums', (req, res) => {
   });
 });
 
+
+
 module.exports = router; // Exporta el router para ser usado en server.js
