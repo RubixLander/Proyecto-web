@@ -13,28 +13,58 @@ import './Reginit.css';
 //Import de contexto
 import { useAuth } from '../contexts/autentificacion';
 
+//Puentes
+import axios from 'axios';
+
 const InicioSesion: React.FC = () => {
-    const [username, setUsername] = useState('');
+    const [tag, setTag] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
     const { login } = useAuth();
 
-    const handleLogin = () => {
-        // Obtener datos de usuarios existentes
-        const existingUsers = localStorage.getItem('users');
-        const usersArray = existingUsers ? JSON.parse(existingUsers) : [];
 
-        // Verificar si el usuario existe y si la contraseña es correcta
-        const user = usersArray.find((user: { username: string; password: string; }) => user.username === username && user.password === password);
-        
-        if (user) {
-            // Si el usuario existe, redirigir a la página de inicio
-            login();
-            history.push('/home');
-        } else {
-            alert("Nombre de usuario o contraseña incorrectos");
+
+    const validateEmail = (email: string) => {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@mail\.[a-zA-Z]{2,}$/; // Formato: cualquier cosa@mail.xxxx
+        return emailPattern.test(email);
+    };
+
+    
+    const handleLogin = async () => {
+        const userData = { correo: email, contraseña: password }; // Los datos que envías a la API
+    
+        // Validar el correo antes de hacer la solicitud
+        if (!validateEmail(email)) {
+            alert("Por favor, ingrese un correo electrónico válido con el formato @mail");
+            return;
+        }
+    
+        try {
+            // Llamada a la API para realizar el login
+            const response = await axios.post('http://localhost:3000/api/autentificacion/login', userData);
+    
+            // Si la respuesta es exitosa, puedes guardar el token en el localStorage
+            if (response.status === 200) {
+                console.log('Login exitoso', response.data);
+                localStorage.setItem('token', response.data.token); // Guarda el token donde sea necesario
+    
+                // Redirigir al usuario a la página de inicio
+                login();  // Si usas un hook de contexto para gestionar el estado de autenticación
+                history.push('/home'); // Redirige a la página de inicio o la página que elijas
+            }
+        } catch (error) {
+            console.error('Error al iniciar sesión', error);
+    
+            // Si el error es una respuesta de error del backend
+            if (error.response && error.response.data && error.response.data.error) {
+                alert(error.response.data.error);  // Muestra el mensaje de error que el backend devuelve
+            } else {
+                alert("Hubo un error al iniciar sesión. Por favor, inténtelo nuevamente.");
+            }
         }
     };
+    
 
     return (
         <IonPage>
@@ -46,11 +76,11 @@ const InicioSesion: React.FC = () => {
                         <div className="rigin-box"> 
                     <IonList>
                         <IonItem>
-                            <IonLabel position="stacked">Nombre De Usuario</IonLabel>
+                            <IonLabel position="stacked">Correo electronico</IonLabel>
                             <IonInput
-                                placeholder='Ingrese su nombre de usuario'
-                                value={username}
-                                onIonChange={e => setUsername(e.detail.value!)}
+                                placeholder='Ingrese su Correo electronico'
+                                value={email}
+                                onIonChange={e => setEmail(e.detail.value!)}
                                 type="text"
                                 required
                             />

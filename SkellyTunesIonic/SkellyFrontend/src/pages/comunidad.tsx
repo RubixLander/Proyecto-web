@@ -31,6 +31,7 @@ const Comunidad: React.FC = () => {
                 title="Creen que salga el OST de SilkSong antes que el juego? xd"
                 subtitle="22 de Octubre"
                 content="Lo del titulo"
+                route="/discusion"
               />
               <DiscussionCard 
                 inCommunity={true}   
@@ -39,6 +40,7 @@ const Comunidad: React.FC = () => {
                 title="¿Alguien sabe las samples que uso [minimo] en su ultimo EP?"
                 subtitle="7 de septiembre"
                 content="Especificamente los de LOST IN SPACE PRIMATE "
+                route="/discusion"
               />
             </div>
           </IonContent>

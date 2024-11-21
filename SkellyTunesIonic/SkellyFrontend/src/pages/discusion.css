@@ -1,0 +1,46 @@
+/* src/pages/Discussions.css */
+
+.discussion-list {
+    margin: 10px;
+  }
+  
+  .discussion-detail {
+    padding: 20px;
+  }
+  
+  .add-comment {
+    margin-top: 20px;
+  }
+  
+  .add-comment ion-input {
+    margin-bottom: 10px;
+  }
+
+/* Estilos para la cabecera de la discusión */
+/* Contenedor principal de la cabecera de la discusión */
+.discusion-cabecera {
+    display: flex;                /* Usamos flex para alinear los elementos en fila */
+    flex-direction: row;          /* Alineamos los elementos en una fila (por defecto) */
+    align-items: center;          /* Alinea verticalmente los elementos al centro */
+    padding: 20px;
+    background-image: url("https://balloonhq.com/wp-content/uploads/2024/01/Balloon_HQ_Resize_1920x1080_where_to_get_balloons_filled_with_helium.png");
+    background-size: cover;       /* Asegura que la imagen de fondo cubra el área */
+    background-position: center;  /* Centra la imagen de fondo */
+  }
+  
+  .discusion-cabecera-foto {
+    width: 65px;                 /* Ajusta el tamaño de la foto */
+    height: 65px;                /* Ajusta el tamaño de la foto */
+    background-color: #D9D9D9;    /* Fondo gris en caso de que no se cargue la imagen */
+    object-fit: cover;            /* Asegura que la imagen se recorte bien */
+    border-radius: 4px;           /* Hace que la imagen tenga bordes redondeados */
+    margin-right: 20px;           /* Espacio entre la foto y el título */
+  }
+  
+  .discusion-cabecera-info h1 {
+    margin: 0;                    /* Elimina el margen por defecto del <h1> */
+    font-size: 24px;              /* Tamaño de fuente del título */
+    color: white;                 /* Color blanco para el título */
+    text-align: left;             /* Alinea el título a la izquierda */
+  }
+  

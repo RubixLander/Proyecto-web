@@ -1,7 +1,7 @@
 require('dotenv').config(); //variables de entorno.
 const express = require('express');
 const cors = require('cors');
-const usuariosRoutes = require('./routes/usuarios');
+const authRoutes = require('./routes/autentificacion'); // Importar las rutas
 
 const app = express();
 const port = process.env.PORT;
@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas
-app.use('/api/usuarios', usuariosRoutes); // Usar las rutas de usuarios
+app.use('/api/autentificacion', authRoutes); // Usar las rutas de usuarios
 
 // Middleware de manejo de errores global
 app.use((err, req, res, next) => {

@@ -18,7 +18,7 @@ interface DiscussionCardProps {
   subtitle: string;
   content: string;
   inCommunity?: boolean; // Prop booleana
-
+  route: string
 }
 
 interface TrackCardProps {
@@ -320,20 +320,30 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({
   title,
   subtitle,
   content,
-  inCommunity
+  inCommunity,
+  route // Recibe la ruta de destino
 }) => {
+  const history = useHistory();  // Usamos useHistory para obtener el objeto history
+
+  // Función de redirección
+  const handleClick = () => {
+    if (route) {
+      history.push(route);  // Redirige a la ruta proporcionada en las props
+    }
+  };
+
   return (
-    <IonCard className="discussion-card" button={true}>
+    <IonCard className="discussion-card" button={true} onClick={handleClick}> {/* Usamos onClick para la redirección */}
       <IonCardHeader>
         {/* Encabezado con imagen y nombre de la comunidad */}
         <div className="disussion-card-header">
           {communityImage && (
             <div className={`disussion-card-image ${inCommunity ? 'in-community' : ''}`}>
-            <img 
-              src={communityImage} 
-              alt="Community Logo" 
-            />
-          </div>
+              <img 
+                src={communityImage} 
+                alt="Community Logo" 
+              />
+            </div>
           )}
           <span>{communityName}</span>
         </div>

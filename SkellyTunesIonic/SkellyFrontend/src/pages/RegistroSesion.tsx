@@ -13,23 +13,43 @@ import './Reginit.css';
 //Import de contexto
 import { useAuth } from '../contexts/autentificacion';
 
+//Puentes
+import axios from 'axios';
+
 const Registro: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [tag, setTag] = useState('');
     const history = useHistory();
     const { login } = useAuth();
+
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showToast, setShowToast] = useState(false);
 
     const validateEmail = (email: string) => {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@mail\.[a-zA-Z]{2,}$/; // Formato: cualquier cosa@mail.xxxx
         return emailPattern.test(email);
     };
 
-    const handleRegister = () => {
+    const validateTag = (tag: string) => {
+        // Expresión regular para validar el 'tag' en formato '@nombre'
+        const tagPattern = /^@[a-zA-Z0-9-_]{3,20}$/;
+        return tagPattern.test(tag);
+    };
+    
+
+    const handleRegister = async () => {
         // Validar Email
         if (!validateEmail(email)) {
             alert("Por favor, ingrese un correo electrónico válido con el formato @mail");
+            return;
+        }
+    
+        // Validar Tag (Formato: @nombre)
+        if (!validateTag(tag)) {
+            alert("El tag debe comenzar con '@' seguido de 3 a 20 caracteres alfanuméricos, guiones o guiones bajos.");
             return;
         }
     
@@ -45,36 +65,41 @@ const Registro: React.FC = () => {
             return;
         }
     
-        // Obtener datos existentes o crear un nuevo array
-        const existingUsers = localStorage.getItem('users');
-        const usersArray: User[] = existingUsers ? JSON.parse(existingUsers) : [];
+        try {
+            // Crear un objeto con los datos del usuario
+            const userData = { 
+                tag: tag, 
+                nombre: username, 
+                contraseña: password, 
+                correo: email, 
+                informacion: "No he escrito nada aun!", 
+                avatar: "https://media.istockphoto.com/id/1818754016/vector/skull-human-skeleton-silhouette-human-skeleton-head-side-view-human-body-structure-anatomy-x.jpg?s=612x612&w=0&k=20&c=KgdJFMcH-k67VSjpb6KK_rNA_NPni4Bq6PlligzATcc=", 
+                background: "https://everwallpaper.com/cdn/shop/products/skeleton-art-wall-mural.jpg?v=1650356286&width=533", 
+                headertext: "Bone-chilling!"
+            };
     
-        // Verificar si el usuario ya existe
-        const userExists = usersArray.some(user => user.username === username);
-        const emailExists = usersArray.some(user => user.email === email);
+            // Realizar la solicitud POST con Axios
+            const response = await axios.post('http://localhost:3000/api/autentificacion/registro', userData); // Realiza la petición directamente a la API
     
-        if (userExists) {
-            alert("Este nombre de usuario ya está registrado");
-            return;
+            if (response.status === 201) {
+                alert(response.data.message || "Usuario registrado exitosamente!");  // Mostrar mensaje de éxito
+                login();  // Cambiar el contexto de autenticación
+                history.push('/home');  // Redirigir al inicio
+            } else {
+                // Mostrar el mensaje de error del backend (por ejemplo, 'correo ya registrado')
+                alert(response.data.error || "Error al registrar el usuario, por favor intenta de nuevo");
+            }
+        } catch (error) {
+            // Manejo de errores: mostrar el mensaje de error desde el backend, si existe
+            if (error.response && error.response.data && error.response.data.error) {
+                alert(error.response.data.error); // Mostrar el error del backend
+            } else {
+                alert('Error al registrar el usuario, por favor intenta de nuevo'); // Mensaje genérico si no hay error específico
+            }
+            console.error("Error en el registro:", error); // Para depuración
         }
-    
-        if (emailExists) {
-            alert("Este correo electrónico ya está registrado");
-            return;
-        }
-    
-        // Almacenar datos en el array
-        const userData: User = { username, email, password };
-        usersArray.push(userData);
-    
-        // Guardar el nuevo array en localStorage
-        localStorage.setItem('users', JSON.stringify(usersArray));
-
-        login();
-        
-        // Redirigir a la página de inicio
-        history.push('/home');
     };
+    
     
     return (
         <IonPage>
@@ -91,6 +116,16 @@ const Registro: React.FC = () => {
                     placeholder='Example: SilksongClown44'
                     value={username}
                     onIonChange={e => setUsername(e.detail.value!)}
+                    type="text"
+                    required
+                    />
+                </IonItem>
+                <IonItem>
+                    <IonLabel position="stacked">Tag</IonLabel>
+                    <IonInput
+                    placeholder='@skelly'
+                    value={tag}
+                    onIonChange={e => setTag(e.detail.value!)}
                     type="text"
                     required
                     />

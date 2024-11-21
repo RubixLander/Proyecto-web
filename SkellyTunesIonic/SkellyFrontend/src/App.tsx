@@ -11,6 +11,8 @@ import Comunidades from './pages/comunidades';
 import Comunidad from './pages/comunidad';
 import {InterfazGeneral} from './components/Interfaces';
 import Reproductor from './pages/Reproductor';
+import Discusion from './pages/discusion';
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -37,11 +39,12 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet animated={false}>
         
-        <Route exact path="/registro"><Registro /></Route>
-        <Route exact path ="/inicioSesion"><Inicio/></Route>
+      <Route exact path="/registro"><Registro /></Route>
+      <Route exact path ="/inicioSesion"><Inicio/></Route>
 
 
-      <InterfazGeneral>  
+      <InterfazGeneral>
+        <Route exact path="/discusion"><Discusion /></Route>  
         <Route exact path="/reproductor"><Reproductor /></Route>
         <Route exact path="/comunidades"><Comunidades /></Route>
         <Route exact path="/comunidad"><Comunidad /></Route>
