@@ -187,4 +187,14 @@ CREATE TABLE IF NOT EXISTS cancion_me_gusta (
     FOREIGN KEY (cancion_id) REFERENCES canciones(id)
 );
 
+-- Nueva tabla para almacenar los albums destacados en las comunidades
+CREATE TABLE IF NOT EXISTS album_comunidad_destacado (
+    comunidad_id INTEGER NOT NULL,
+    album_id INTEGER NOT NULL,
+    destacado BOOLEAN DEFAULT 1,  -- Indicador de si el album está destacado
+    PRIMARY KEY (comunidad_id, album_id),
+    FOREIGN KEY (comunidad_id) REFERENCES comunidades(id),
+    FOREIGN KEY (album_id) REFERENCES albums(id)
+);
+
 END;

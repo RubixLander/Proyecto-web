@@ -66,4 +66,56 @@ router.get('/usuario/comunidades', (req, res) => {
     });
 });
 
+// Ruta para obtener los álbumes destacados de una comunidad
+router.get('/comunidades/:id/albums_destacados', (req, res) => {
+    const comunidadId = req.params.id;
+    
+    const query = `
+        SELECT a.id, a.titulo, a.coverart, a.año
+        FROM album_comunidad_destacado acd
+        JOIN albums a ON acd.album_id = a.id
+        WHERE acd.comunidad_id = ? AND acd.destacado = 1;
+    `;
+
+    db.all(query, [comunidadId], (err, rows) => {
+        if (err) {
+            console.error('Error al obtener los álbumes destacados de la comunidad:', err);
+            return res.status(500).json({ message: 'Error al obtener los álbumes destacados' });
+        }
+        res.status(200).json(rows);
+    });
+});
+
+// Ruta para crear una nueva comunidad
+router.post('/comunidades', (req, res) => {
+    const { nombre, headerText } = req.body;
+    const token = req.header('Authorization')?.replace('Bearer ', '');
+    
+    if (!token) {
+        return res.status(403).json({ error: 'Token no proporcionado' });
+    }
+
+    jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) {
+            return res.status(403).json({ error: 'Token no válido' });
+        }
+
+        const creador = decoded.tag;
+
+        const query = `
+            INSERT INTO comunidades (nombre, creador, headerText)
+            VALUES (?, ?, ?);
+        `;
+        
+        db.run(query, [nombre, creador, headerText], function(err) {
+            if (err) {
+                console.error('Error al crear la comunidad:', err);
+                return res.status(500).json({ message: 'Error al crear la comunidad' });
+            }
+
+            res.status(201).json({ message: 'Comunidad creada con éxito', comunidad_id: this.lastID });
+        });
+    });
+});
+
 module.exports = router;
