@@ -1,10 +1,11 @@
 //Import de Elementos IONIC/REACT
 import React, { useState, useEffect } from 'react';
 import { IonButtons, IonHeader, IonMenu, IonMenuButton, IonPage, IonToolbar, IonButton, IonIcon, IonSearchbar, IonToast } from '@ionic/react';
-import { close, home, library, person, people, settings, logOut, alert} from 'ionicons/icons';
+import { close, home, library, person, people, settings, logOut, alert, search} from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
 import { useLogo } from '../contexts/eventoespecial';
+import { useHistory } from 'react-router-dom';
 
 //Import de Componentes
 import { BotonIcono, BotonGeneral } from './Botones';
@@ -30,14 +31,27 @@ interface MenuLayoutProps {
 // Definir Interfaz
 export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
     const [userData, setUserData] = useState<{ avatar: string; nombre: string; tag: string } | null>(null);
-
+    const [searchQuery, setSearchQuery] = useState<string>('');  // Estado para almacenar la búsqueda
     const [error, setError] = useState<string | null>(null);
-
+    const history = useHistory();  // Hook de enrutamiento
     const { isShiny, toastShown, setToastShown } = useLogo(); // Obtiene isShiny y toastShown
     const logo = isShiny ? shinylogo : normallogo; // Determina el logo
     const { isAuthenticated } = useAuth();
     
     const [showToast, setShowToast] = useState(false);
+
+  // Función para manejar el cambio en el campo de búsqueda
+  const handleSearch = (event: any) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Función para manejar la redirección cuando se hace clic en "Buscar"
+  const performSearch = () => {
+    if (searchQuery.trim() !== '') {
+      history.push(`/busqueda/${searchQuery}`);  // Redirigir a la página de resultados
+    }
+  };
+
 
     useEffect(() => {
         if (isShiny && !toastShown) {
@@ -75,6 +89,8 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
     
         fetchUserData();
       }, []); // El array vacío asegura que se ejecute solo una vez cuando el componente se monte
+
+
 
     return (
         <>
@@ -139,9 +155,17 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
                             </div>
 
                             <div className="search-container">
-                                <IonSearchbar placeholder="¿Qué deseas buscar?" className="custom-searchbar" />
-                            </div>
-
+                <IonSearchbar
+                  value={searchQuery}
+                  onIonInput={handleSearch}  // Actualiza el valor cuando el usuario escribe
+                  debounce={0}
+                  placeholder="Busca algo!"
+                  className="custom-searchbar"
+                />
+                <IonButton onClick={performSearch} fill="clear">
+  <IonIcon icon={search} />
+</IonButton>
+              </div>
                             {isAuthenticated ? (
                                 //Sesion Iniciada
                                 <div className="right-side-container">

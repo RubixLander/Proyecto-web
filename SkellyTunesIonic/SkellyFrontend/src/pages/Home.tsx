@@ -21,6 +21,19 @@ interface Album {
   artista_nombre: string;
 }
 
+interface Artista {
+  tag: string;
+  nombre: string;
+  avatar: string;  // Nuevo campo para el avatar
+}
+
+interface Comunidad {
+  id: number;
+  nombre: string;
+  background: string;
+  avatar: String
+}
+
 // Lógica de aleatorización
 const shuffleArray = (array: Album[]): Album[] => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -36,6 +49,18 @@ const Home: React.FC = () => {
   const [limitedAlbums, setLimitedAlbums] = useState<Album[]>([]); // Álbumes aleatorizados y limitados
   const [loading, setLoading] = useState<boolean>(true); // Estado de carga
   const [error, setError] = useState<string | null>(null); // Estado de error
+
+  // Estado para los artistas, con avatar
+  const [artistas, setArtistas] = useState<Artista[]>([]);
+  const [limitedArtistas, setLimitedArtistas] = useState<Artista[]>([]);  // Estado para los artistas limitados
+  const [loadingArtistas, setLoadingArtistas] = useState<boolean>(true);
+  const [errorArtistas, setErrorArtistas] = useState<string | null>(null);
+
+    // Estado para almacenar las comunidades
+    const [comunidades, setComunidades] = useState<Comunidad[]>([]);
+    const [limitedComunidades, setLimitedComunidades] = useState<Comunidad[]>([]);
+    const [loadingComunidades, setLoadingComunidades] = useState(true);
+    const [errorComunidades, setErrorComunidades] = useState<string | null>(null);
 
   // Efecto para obtener los álbumes al cargar el componente
   useEffect(() => {
@@ -54,6 +79,42 @@ const Home: React.FC = () => {
     fetchAlbums();
   }, []);
 
+  // Efecto para obtener los artistas, ahora con avatar
+  useEffect(() => {
+    const fetchArtistas = async () => {
+      try {
+        const response = await api.get<Artista[]>('/artistas/artistas'); // Llamada a la nueva API de artistas
+        setArtistas(response.data);
+      } catch (err) {
+        console.error('Error al obtener los artistas', err);
+        setErrorArtistas('No se pudieron cargar los artistas');
+      } finally {
+        setLoadingArtistas(false);
+      }
+    };
+
+    fetchArtistas();
+  }, []);
+
+  // Efecto para obtener las comunidades
+  useEffect(() => {
+    const fetchComunidades = async () => {
+      try {
+        const response = await api.get<Comunidad[]>('/comunidad/comunidades'); // Llamada a la API de comunidades
+        setComunidades(response.data);
+      } catch (err) {
+        console.error('Error al obtener las comunidades', err);
+        setErrorComunidades('No se pudieron cargar las comunidades');
+      } finally {
+        setLoadingComunidades(false);
+      }
+    };
+
+    fetchComunidades();
+  }, []);
+
+
+
   // Lógica para aleatorizar y limitar los álbumes
   useEffect(() => {
     if (albums.length > 0) {
@@ -63,14 +124,32 @@ const Home: React.FC = () => {
     }
   }, [albums]); // Este efecto se ejecuta cada vez que cambia 'albums'
 
-  // Muestra un mensaje de carga si está en proceso
-  if (loading) {
-    return <IonContent><div>Cargando álbumes...</div></IonContent>;
+  // Lógica para aleatorizar y limitar los artistas
+  useEffect(() => {
+    if (artistas.length > 0) {
+      const shuffled = shuffleArray(artistas);
+      const limited = shuffled.slice(0, 3); // Limitar a 3 artistas
+      setLimitedArtistas(limited);
+    }
+  }, [artistas]);
+
+  // Lógica para aleatorizar y limitar las comunidades
+  useEffect(() => {
+    if (comunidades.length > 0) {
+      const shuffled = shuffleArray(comunidades); // Aleatorizar las comunidades
+      const limited = shuffled.slice(0, 3); // Limitar a 3 comunidades
+      setLimitedComunidades(limited); // Actualizar el estado con las comunidades limitadas
+    }
+  }, [comunidades]);
+
+  // Muestra mensaje de carga
+  if (loading || loadingArtistas || loadingComunidades) {
+    return <IonContent><div>Cargando...</div></IonContent>;
   }
 
-  // Muestra un mensaje de error si ocurre un problema
-  if (error) {
-    return <IonContent><div>{error}</div></IonContent>;
+  // Muestra mensaje de error
+  if (error || errorArtistas || errorComunidades) {
+    return <IonContent><div>{error || errorArtistas || errorComunidades}</div></IonContent>;
   }
 
   return (
@@ -88,7 +167,7 @@ const Home: React.FC = () => {
           <div className="CardsContainer">
             {limitedAlbums.length > 0 ? (
               limitedAlbums.map((album, index) => (
-                <AlbumCard key={index} image={album.coverart} title={album.album_titulo} subtitle={album.artista_nombre} />
+                <AlbumCard key={index} image={album.coverart} title={album.album_titulo} subtitle={album.artista_nombre} route={`/reproductor/${album.id}`} />
               ))
             ) : (
               <h2>No hay álbumes disponibles.</h2>
@@ -127,33 +206,33 @@ const Home: React.FC = () => {
             <h4>Artistas Destacados</h4>
           </div>
           <div className="CardsContainer">
-            <UserCard image={"https://f4.bcbits.com/img/0033779152_10.jpg"} title={"[minimo]"} subtitle={"@minimo"} route='/perfil' />
-            <UserCard image={"https://f4.bcbits.com/img/0011554563_10.jpg"} title={"b e g o t t e n 自杀"} subtitle={"@begotten"} />
-            <UserCard image={"https://f4.bcbits.com/img/0025284024_10.jpg"} title={"아버지"} subtitle={"@father2006"} />
+          {limitedArtistas.map((artista) => (
+              <UserCard
+                key={artista.tag}
+                image={artista.avatar}
+                title={artista.nombre}
+                subtitle={`${artista.tag}`}
+                route={`/perfil/${artista.tag}`}
+              />
+          ))}
+
           </div>
 
           {/*Seccion Comunidades*/}
           <div className='TabContentContainer'>
             <h4>Comunidades Populares</h4>
           </div>
-          <div className='community-container'>
-            <CommunityCard 
-              topImage={"https://media.istockphoto.com/id/533837393/es/foto/payaso.jpg?s=612x612&w=0&k=20&c=x90RAkaZXoE5lqccTYwFLtyVtepTf8xVXY6AdXDPFZs="} 
-              image="https://balloonhq.com/wp-content/uploads/2024/01/Balloon_HQ_Resize_1920x1080_where_to_get_balloons_filled_with_helium.png"
-              title={"Los payasos de micro"}
-              route='/comunidad'
+          <div className="community-container">
+          {limitedComunidades.map((comunidad) => (
+            <CommunityCard
+              key={comunidad.id}
+              topImage={comunidad.avatar} // Imagen de fondo
+              image={comunidad.background} // Imagen de avatar
+              title={comunidad.nombre} // Nombre de la comunidad
+              route={`/comunidad/${comunidad.id}`} // Ruta dinámica basada en el ID
             />
-            <CommunityCard 
-              topImage={"https://i.scdn.co/image/ab6775700000ee851c90ca347394ad0ce0b68046"} 
-              image={"https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/369315461_880463900260778_5464328731750021069_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=Qb-5wmOl4ccQ7kNvgFc21wu&_nc_zt=23&_nc_ht=scontent-scl2-1.xx&_nc_gid=A2S41O7gJoSXLIbEiblwoVG&oh=00_AYDYrWBk0JBb3KcDwvtGHnstnSCxzAKxusdpV0-ldxJ0MA&oe=671F1E86"} 
-              title={"MetalHead Community"}
-            />
-            <CommunityCard 
-              topImage={"https://m.media-amazon.com/images/I/51qId39VZrL.jpg"} 
-              image={"https://attwellfarmpark.co.uk/storage/media/56/conversions/JbZrzKSSO6VFis6Z6vIhI0V691o8m2asMg13KuJm-card@1x.jpg"} 
-              title={"Ducks"}
-            />
-          </div>
+          ))}
+        </div>
 
 
 

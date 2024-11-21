@@ -101,7 +101,13 @@
     flex: 1; /* Permite que el contenedor de búsqueda se expanda */
     max-width: 300px; /* Limita el ancho de la barra de búsqueda */
     margin-left: 20px;
+    display: flex; /* Usamos Flexbox para alinear los elementos en fila */
+    justify-content: flex-start; /* Alinea los elementos al inicio del contenedor */
+    gap: 10px; /* Espacio entre el IonSearchbar y el IonButton */
 }
+
+
+
 
 .custom-searchbar {
     width: 100%; /* Asegura que la barra de búsqueda use todo el ancho disponible */

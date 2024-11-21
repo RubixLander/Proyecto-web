@@ -1,0 +1,80 @@
+.CardsContainer {
+    display: flex; /* Usar Flexbox para alinear elementos */
+    flex-wrap: wrap; /* Permitir que las tarjetas se muevan a la siguiente línea si no hay espacio */
+    justify-content: flex-start; /* Alinear las tarjetas al inicio */
+    gap: 50px; /* Espacio entre tarjetas */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    max-width: 1100px; /* O el ancho deseado para limitar el contenedor */
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 1135px) {
+    .CardsContainer {
+        gap: 60px; /* Reducir espacio entre tarjetas */
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .CardsContainer {
+        gap: 30px; /* Reducir aún más el espacio entre tarjetas */
+        justify-content: center; /* Centrar tarjetas en pantallas pequeñas */
+    }
+}
+
+
+.playlist-card-container {
+    display: flex; /* Usar Flexbox para alinear elementos */
+    flex-wrap: wrap; /* Permitir que las tarjetas se muevan a la siguiente línea si no hay espacio */
+    justify-content: flex-start; /* Alinear las tarjetas al inicio */
+    gap:50px;
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    max-width: 1400px; /* O el ancho deseado para limitar el contenedor */
+    padding: 20px; /* Espaciado alrededor del contenedor */
+}
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .playlist-card-container {
+        gap: 20px; /* Reduce el espacio entre tarjetas */
+        padding: 10px; /* Reduce el espaciado alrededor del contenedor */
+    }
+
+    .playlist-card {
+        max-width: 100%; /* Permite que la tarjeta ocupe todo el ancho en dispositivos pequeños */
+    }
+
+    /* Opcional: Ajustar el tamaño de las tarjetas en pantallas muy pequeñas */
+    .playlist-card {
+        flex: 1 1 100%; /* Permite que las tarjetas ocupen todo el ancho en pantallas pequeñas */
+    }
+}
+
+.community-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se muevan a la siguiente línea */
+    justify-content: flex-start; /* Centra las tarjetas en la línea */
+    gap: 15px; /* Espacio entre las tarjetas */
+    max-width: 1200px; /* Ajusta el máximo ancho según tus necesidades */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho disponible */
+    padding: 0 20px; /* Añade padding a los lados para un margen */
+    margin: 0 auto; /* Centra el contenedor en la página */
+  }
+
+  .discussion-container {
+    max-width: 1200px; /* Adjust the width as needed */
+    margin: 0 auto;   /* Center the container */
+    padding: 10px;    /* Optional padding */
+
+
+  }
+
+  .track-card-container {
+    max-width: 1000px; /* Limita el tamaño del contenedor */
+    margin: 0 auto; /* Centra el contenedor en la página */
+    display: flex; /* Permite el uso de flexbox */
+    flex-direction: column; /* Alinea las tarjetas en una columna */
+    gap: 16px; /* Espacio entre tarjetas */
+    padding: 16px; /* Añadir padding alrededor del contenedor */
+    box-sizing: border-box; /* Incluye el padding en el cálculo del ancho total */
+}

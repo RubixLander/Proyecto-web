@@ -12,6 +12,7 @@ import Comunidad from './pages/comunidad';
 import {InterfazGeneral} from './components/Interfaces';
 import Reproductor from './pages/Reproductor';
 import Discusion from './pages/discusion';
+import Busqueda from './pages/busqueda';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -45,11 +46,12 @@ const App: React.FC = () => (
 
       <InterfazGeneral>
         <Route exact path="/discusion"><Discusion /></Route>  
-        <Route exact path="/reproductor"><Reproductor /></Route>
+        <Route path="/reproductor/:id" component={Reproductor} />
         <Route exact path="/comunidades"><Comunidades /></Route>
-        <Route exact path="/comunidad"><Comunidad /></Route>
+        <Route exact path="/comunidad/:communityId"component={Comunidad} />
         <Route exact path="/biblioteca"><Biblioteca /></Route>
         <Route path="/perfil/:tag" component={Perfil} />
+        <Route path="/busqueda/:searchQuery" component={Busqueda} />
         <Route exact path="/home"><Home /></Route>
 
         <Route exact path="/ajustePerfil"><AjustePerfil /></Route>

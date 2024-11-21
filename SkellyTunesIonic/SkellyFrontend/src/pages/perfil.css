@@ -94,5 +94,19 @@
     margin-right: 8px; /* Espaciado entre el icono y el label */
 }
 
+.text-box {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro translúcido */
+    padding: 5px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Alinear texto */
+  }
+  
+  .text-box h1,
+  .text-box h2,
+  .text-box p {
+    color: white !important; /* Asegura que el color sea blanco */
+    margin: 0; /* Elimina márgenes extras */
+  }
+  
 
 

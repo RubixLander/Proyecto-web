@@ -5,11 +5,12 @@ const db = require('../db');  // Conexión a la base de datos
 
 // Ruta para obtener todos los artistas
 router.get('/artistas', (req, res) => {
-    // Consulta SQL para obtener los artistas (usuarios con álbumes asociados)
+    // Consulta SQL para obtener los artistas (usuarios con álbumes asociados) y su avatar
     const query = `
-        SELECT DISTINCT u.tag, u.nombre
+        SELECT DISTINCT u.tag, u.nombre, p.avatar
         FROM usuarios u
-        JOIN albumartista a ON u.tag = a.usuario_tag;
+        JOIN albumartista a ON u.tag = a.usuario_tag
+        LEFT JOIN perfiles p ON u.tag = p.tag;
     `;
 
     // Ejecutamos la consulta en la base de datos

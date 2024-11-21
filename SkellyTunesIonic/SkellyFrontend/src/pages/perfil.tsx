@@ -10,8 +10,6 @@ import {BotonGeneral} from '../components/Botones';
 import TabsNavegacion from '../components/Tabs'
 import {AlbumCard, CommunityCard, PlaylistCard} from '../components/Cards';
 
-//Import de datos
-import albumsData from '../data/albums.json';
 
 //Import de CSS
 import './perfil.css';
@@ -21,6 +19,22 @@ import { useAuth } from '../contexts/autentificacion';
 
 //Puentes
 import api from '../api/api';
+
+interface Album {
+    album_id: number;
+    coverart: string;
+    album_titulo: string;
+    artista_nombre: string;
+    artista_tag: string;
+  }
+
+  interface Community {
+    id: number;
+    nombre: string;
+    background: string;
+    avatar: string;
+  }
+  
 
 
 const Perfil: React.FC = () => {
@@ -32,15 +46,23 @@ const Perfil: React.FC = () => {
     const [profileData, setProfileData] = useState<any>(null); // Datos del perfil
     const [loading, setLoading] = useState<boolean>(true); // Estado de carga
     const [error, setError] = useState<string | null>(null); // Estado de error
-  
     const [username, setUsername] = useState<string>(''); // Nombre de usuario
     const [headerText, setHeaderText] = useState<string>(''); // Texto del header
     const [informacion, setInformacion] = useState<string>(''); // Información adicional
     const [profileImage, setProfileImage] = useState<string | null>(null); // Imagen de perfil
     const [backgroundImage, setBackgroundImage] = useState<string | null>(null); // Imagen de fondo
 
-  // Efecto para obtener los datos del perfil
-  useEffect(() => {
+    const [albums, setAlbums] = useState<Album[]>([]); // Estado para los álbumes
+    const [loadingAlbums, setLoadingAlbums] = useState<boolean>(false); // Estado de carga para álbumes
+    const [albumsError, setAlbumsError] = useState<string | null>(null); // Estado de error específico para los álbumes
+
+    const [communities, setCommunities] = useState<Community[]>([]);
+    const [loadingCommunities, setLoadingCommunities] = useState<boolean>(false);
+    const [communitiesError, setCommunitiesError] = useState<string | null>(null);
+
+
+ // Efecto para obtener los datos del perfil
+useEffect(() => {
     const fetchUserProfile = async () => {
       if (!tag) {
         console.error('No se ha proporcionado un tag de usuario');
@@ -48,12 +70,14 @@ const Perfil: React.FC = () => {
         setLoading(false);
         return;
       }
-
+  
       const encodedUserTag = encodeURIComponent(tag); // Codificar el tag para la URL
+      setLoading(true); // Inicia el estado de carga
+      setError(null); // Resetea cualquier error previo
+  
       try {
         const response = await api.get(`/perfil/obtener/${encodedUserTag}`); // Petición GET a la API
         console.log('Datos del perfil:', response.data);
-        
         setProfileData(response.data); // Guardamos los datos en el estado
       } catch (err) {
         setError('Error al obtener el perfil'); // Manejamos el error
@@ -62,10 +86,21 @@ const Perfil: React.FC = () => {
         setLoading(false); // Finalizamos el estado de carga
       }
     };
-
+  
     fetchUserProfile();
+  
+    // Cleanup: Restablecer estados al cambiar de página o desmontar el componente
+    return () => {
+      setProfileData(null);
+      setUsername('');
+      setHeaderText('');
+      setInformacion('');
+      setProfileImage(null);
+      setBackgroundImage(null);
+      setError(null);
+    };
   }, [tag]); // El efecto se ejecuta cuando el 'tag' cambia
-
+  
   // Cuando los datos del perfil cambian, actualiza los estados locales
   useEffect(() => {
     if (profileData) {
@@ -77,12 +112,88 @@ const Perfil: React.FC = () => {
     }
   }, [profileData]); // Este efecto se ejecuta cuando profileData cambia
 
+  // Efecto para obtener los álbumes al cargar el componente
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      if (!tag) {
+        console.error('No se ha proporcionado un tag de usuario');
+        setAlbumsError('Tag de usuario no encontrado');
+        setLoadingAlbums(false);
+        return;
+      }
+
+      const encodedUserTag = encodeURIComponent(tag); // Codificar el tag para la URL
+
+      try {
+        setLoadingAlbums(true); // Iniciar la carga de los álbumes
+        setAlbumsError(null); // Limpiar cualquier error previo
+
+        // Hacer la petición GET a la API con el tag codificado
+        console.log(encodedUserTag);
+        const response = await api.get(`/album/albumsUsuario/${encodedUserTag}`);
+        console.log('Álbumes obtenidos:', response.data);
+        setAlbums(response.data.albums); // Guardar los álbumes en el estado
+      } catch (err) {
+        console.error('Error al obtener los álbumes', err);
+        setAlbumsError('No se pudieron cargar los álbumes. Por favor, inténtalo nuevamente.');
+      } finally {
+        setLoadingAlbums(false); // Desactivar el estado de carga
+      }
+    };
+
+    fetchAlbums();
+
+    // Cleanup: Restablecer estados al cambiar de página o desmontar el componente
+    return () => {
+        setAlbums([]); // Limpiar los álbumes cuando el componente se desmonte
+        setAlbumsError(null); // Limpiar el error
+      };
+  }, [tag]); // El efecto se ejecuta cada vez que cambia el 'tag'
+
+  useEffect(() => {
+    const fetchCommunities = async () => {
+      if (!tag) {
+        console.error('No se ha proporcionado un tag de usuario');
+        setCommunitiesError('Tag de usuario no encontrado');
+        setLoadingCommunities(false);
+        return;
+      }
+
+      const encodedUserTag = encodeURIComponent(tag); // Codificar el tag para la URL
+
+      try {
+        setLoadingCommunities(true); // Iniciar la carga de las comunidades
+        setCommunitiesError(null); // Limpiar cualquier error previo
+
+        // Hacer la petición GET a la API con el tag codificado
+        console.log(encodedUserTag);
+        const response = await api.get(`/comunidad/usuario/${encodedUserTag}`);
+        console.log('Comunidades obtenidas:', response.data);
+        setCommunities(response.data); // Guardar las comunidades en el estado
+      } catch (err) {
+        console.error('Error al obtener las comunidades', err);
+        setCommunitiesError('No se pudieron cargar las comunidades. Por favor, inténtalo nuevamente.');
+      } finally {
+        setLoadingCommunities(false); // Desactivar el estado de carga
+      }
+    };
+
+    fetchCommunities();
+
+    // Cleanup: Restablecer estados al cambiar de página o desmontar el componente
+    return () => {
+        setCommunities([]); // Limpiar las comunidades cuando el componente se desmonte
+        setCommunitiesError(null); // Limpiar el error
+      };
+
+  }, [tag]); // El efecto se ejecuta cada vez que cambia el 'tag'
+
   // Renderiza los estados de carga y error
-  if (loading) {
+  if (loading || loadingAlbums || loadingCommunities) {
     return <IonContent><div>Cargando...</div></IonContent>; // Muestra un mensaje de carga
   }
 
-  if (error) {
+  if (error ) {
     return <IonContent><div>{error}</div></IonContent>; // Muestra un mensaje de error
   }
 
@@ -97,14 +208,33 @@ const Perfil: React.FC = () => {
             content: (
                 <IonContent className="scrollable">
                     <div className="CardsContainer">
-                        {albumsData.filter(album => album.tag === "@minimo").length > 0 ? (
-                            albumsData.filter(album => album.tag === "@minimo").map((album, index) => (
-                                <AlbumCard key={index} image={album.image} title={album.title} />
+                    {/* Si los álbumes están cargando, mostrar el mensaje de carga */}
+                    {loadingAlbums ? (
+                        <div className="loading-message">Cargando álbumes...</div>
+                    ) : (
+                        // Si hay un error al cargar los álbumes, mostrar el mensaje de error
+                        albumsError ? (
+                        <div className="error-message">No hay álbumes disponibles</div>
+                        ) : (
+                        // Si no hay error, mostrar los álbumes
+                        albums.length > 0 ? (
+                            albums.map((album, index) => (
+                            <AlbumCard
+                                key={index}
+                                image={album.coverart} // Usamos coverart para la imagen
+                                title={album.album_titulo} // Usamos album_titulo para el título
+                                route={`/reproductor/${album.album_id}`} // Usamos album_id para la ruta
+                            />
                             ))
                         ) : (
+                            // Si no hay álbumes disponibles
                             <h2>No hay álbumes disponibles.</h2>
-                        )}
+                        )
+                        )
+                    )}
                     </div>
+
+
                 </IonContent>
             ),
         },
@@ -132,19 +262,38 @@ const Perfil: React.FC = () => {
             title: 'Comunidades',
             icon: people,
             content: (
-                <div className='community-container'>
-                    <CommunityCard 
-                        topImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp08RZAoIfJnOtiDVX0C8Bdm3xw6op5aaRlg&s" 
-                        image="https://i.redd.it/gb1ccyushjf81.png"
-                        title="DeepRockMusic"
-                    />
-                    <CommunityCard 
-                        topImage="https://media.istockphoto.com/id/533837393/es/foto/payaso.jpg?s=612x612&w=0&k=20&c=x90RAkaZXoE5lqccTYwFLtyVtepTf8xVXY6AdXDPFZs="
-                        image="https://balloonhq.com/wp-content/uploads/2024/01/Balloon_HQ_Resize_1920x1080_where_to_get_balloons_filled_with_helium.png"
-                        title="Los payasos de micro"
-                        route='/comunidad'
-                    />
-                </div>
+
+<IonContent className="scrollable">
+  <div className="community-container">
+    {/* Si las comunidades están cargando, mostrar el mensaje de carga */}
+    {loadingCommunities ? (
+      <div className="loading-message">Cargando comunidades...</div>
+    ) : (
+      // Si hay un error al cargar las comunidades, mostrar el mensaje de error
+      communitiesError ? (
+        <div className="error-message">No hay comunidades disponibles</div>
+      ) : (
+        // Si no hay error, mostrar las comunidades
+        communities.length > 0 ? (
+          communities.map((community, index) => (
+            <CommunityCard
+              key={index}
+              topImage={community.avatar} // Usamos background para la imagen superior
+              image={community.background} // Usamos avatar para la imagen
+              title={community.nombre} // Usamos nombre para el título
+              route={`/comunidad/${community.id}`} // Ruta dinámica basada en el ID
+            />
+          ))
+        ) : (
+          // Si no hay comunidades disponibles
+          <h2>No hay comunidades disponibles.</h2>
+        )
+      )
+    )}
+  </div>
+</IonContent>
+                
+
             ),
         },
         {
@@ -198,20 +347,26 @@ const Perfil: React.FC = () => {
                 <IonContent>
                     {/* CABECERA DE PERFIL */}
                     <IonHeader>
-                        <div className="perfil"  style={{backgroundImage: `url(${backgroundImage})`}}>
-                            <img className="foto-perfil" src={profileImage} />
-                            <div className="info">
-                                <h1>{username}</h1>
-                                <h2>{tag}</h2>
-                                <p>{headerText}</p>
-                            </div>
-                            {isAuthenticated && userTag !== tag && (
-                                <div className="seguir-btn">
-                                <BotonGeneral text="Seguir" color="dark" size="small" />
-                                </div>
-                            )}
-                        </div>
-                    </IonHeader>
+  <div className="perfil" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <img className="foto-perfil" src={profileImage} />
+    <div className="info">
+      <div className="text-box">
+        <h1>{username}</h1>
+      </div>
+      <div className="text-box">
+        <h2>{tag}</h2>
+      </div>
+      <div className="text-box">
+        <p>{headerText}</p>
+      </div>
+    </div>
+    {isAuthenticated && userTag !== tag && (
+      <div className="seguir-btn">
+        <BotonGeneral text="Seguir" color="dark" size="small" />
+      </div>
+    )}
+  </div>
+</IonHeader>
                     {/* CUERPO DE PERFIL */}
                     <IonContent>
                         <TabsNavegacion tabs={tabs} />

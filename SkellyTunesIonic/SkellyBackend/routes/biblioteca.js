@@ -8,7 +8,7 @@ const decodeTag = (encodedTag) => {
     return Buffer.from(encodedTag, 'base64').toString('utf-8');
 };
 
-router.get('/bibliotecaUsuario/:tag', async (req, res) => {
+router.get('/albumsUsuario/:tag', async (req, res) => {
     const { tag: encodedTag } = req.params;
     const tag = decodeTag(encodedTag);  // Decodificamos el tag recibido
 

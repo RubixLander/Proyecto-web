@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS playlists
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     titulo TEXT,
     detalle TEXT,
+    art TEXT,
     creador TEXT,
     createdat TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedat TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -97,6 +98,9 @@ CREATE TABLE IF NOT EXISTS comunidades
     nombre TEXT,
     creador TEXT,
     headerText TEXT,
+    informacion TEXT,
+    background TEXT,
+    avatar TEXT,
     FOREIGN KEY (creador) REFERENCES usuarios (tag)
 );
 

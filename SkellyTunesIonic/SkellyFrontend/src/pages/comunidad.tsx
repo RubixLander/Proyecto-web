@@ -1,7 +1,8 @@
 //Import de Elementos IONIC/REACT
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IonContent, IonHeader, IonPage,  IonLabel,  IonIcon } from '@ionic/react';
 import { chatbubbles,  people, star , calendar, information} from 'ionicons/icons';
+import { useParams } from 'react-router-dom';
 
 //Import de Componentes
 import {InterfazGeneral} from '../components/Interfaces';
@@ -12,8 +13,88 @@ import {AlbumCard, UserCard, DiscussionCard} from '../components/Cards';
 //Import de CSS
 import './comunidad.css';
 
+//Puentes
+import api from '../api/api';
+
 
 const Comunidad: React.FC = () => {
+
+  const [communityData, setCommunityData] = useState<any>(null); // Datos de la comunidad
+  const [communityName, setCommunityName] = useState<string>(''); // Nombre de la comunidad
+  const [headerText, setHeaderText] = useState<string>(''); // Texto del header
+  const [communityInfo, setCommunityInfo] = useState<string>(''); // Información adicional
+  const [avatarImage, setAvatarImage] = useState<string | null>(null); // Imagen del avatar
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null); // Imagen de fondo
+  const [loading, setLoading] = useState<boolean>(true); // Estado de carga
+  const [error, setError] = useState<string | null>(null); // Estado de error
+  
+  const { communityId } = useParams<{ communityId: string }>(); // Obtén el ID de la comunidad desde la URL
+  
+
+// Efecto para obtener los datos de una comunidad
+useEffect(() => {
+  console.log('ID de la comunidad desde la URL:', communityId);
+  const fetchCommunityData = async () => {
+    if (!communityId) {
+      console.error('No se ha proporcionado un ID de comunidad');
+      setError('ID de comunidad no encontrado');
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true); // Inicia el estado de carga
+    setError(null); // Resetea cualquier error previo
+
+    try {
+      const response = await api.get(`/comunidad/obtener/${communityId}`); // Petición GET a la API
+      console.log('Datos de la comunidad:', response.data);
+      setCommunityData(response.data); // Guardamos los datos en el estado
+    } catch (err) {
+      setError('Error al obtener la comunidad'); // Manejamos el error
+      console.error(err);
+    } finally {
+      setLoading(false); // Finalizamos el estado de carga
+    }
+  };
+
+  fetchCommunityData();
+
+  // Cleanup: Restablecer estados al cambiar de página o desmontar el componente
+  return () => {
+    setCommunityData(null);
+    setCommunityName('');
+    setHeaderText('');
+    setCommunityInfo('');
+    setAvatarImage(null);
+    setBackgroundImage(null);
+    setError(null);
+  };
+}, [communityId]); // El efecto se ejecuta cuando cambia 'communityId'
+
+// Cuando los datos de la comunidad cambian, actualiza los estados locales
+useEffect(() => {
+  if (communityData) {
+    setCommunityName(communityData.nombre || ''); // Actualiza el nombre de la comunidad
+    setHeaderText(communityData.headerText || ''); // Actualiza el texto del header
+    setCommunityInfo(communityData.informacion || ''); // Actualiza la información adicional
+    setAvatarImage(communityData.avatar || null); // Imagen del avatar
+    setBackgroundImage(communityData.background || null); // Imagen de fondo
+  }
+}, [communityData]); // Este efecto se ejecuta cuando communityData cambia
+
+// Renderiza los estados de carga y error
+if (loading) {
+  return <IonContent><div>Cargando...</div></IonContent>; // Muestra un mensaje de carga
+}
+
+if (error) {
+  return <IonContent><div>{error}</div></IonContent>; // Muestra un mensaje de error
+}
+  
+
+
+
+
     /* CONTENIDO DE PAGINAS DE PERFIL */
     const tabs = [
       {
@@ -96,14 +177,7 @@ const Comunidad: React.FC = () => {
             <div className='about-container'>
               <div className="about-info">
                 <h2>Información</h2>
-                <p>
-                  Bienvenidos al el día del payaso. Este día los payasitos se reúnen para hacer unos chistositos bien grasiositos. 
-                  "Oigale, cuente un chiste!" "....ehhhh...." El día del payaso 1 de abril de cualquier año. Todos los payasitos 
-                  se reúnen para hacer felices a los niñitos y a los grandecitos también. 
-                  "Oye, está el señor payaso, el señor payach-!" .... El día del payaso. Hay muchos payasitos, está el payasito 
-                  chistosito, la payasita sin chichita, el payacho cacho HAHAA. 
-                  Así que no esperes más, celebra a tu payasito favorito este día, y solo es 1, porque mañana es 2 HAHAAAAA.
-                </p>
+                <p>{communityInfo}</p>
   
                 <h2>Detalles</h2>
                 <div className="detail-item">
@@ -133,11 +207,14 @@ const Comunidad: React.FC = () => {
           <IonContent>
             {/* CABECERA DE PERFIL */}
             <IonHeader>
-              <div className="comunidad-cabecera">
-                <img className="comunidad-cabecera-foto" src="https://media.istockphoto.com/id/533837393/es/foto/payaso.jpg?s=612x612&w=0&k=20&c=x90RAkaZXoE5lqccTYwFLtyVtepTf8xVXY6AdXDPFZs=" />
+              <div className="comunidad-cabecera" style={{backgroundImage: `url(${backgroundImage})`}}>
+                <img className="comunidad-cabecera-foto" src={avatarImage} />
                 <div className="comunidad-cabecera-info">
-                  <h1>Los payasos de micro</h1>
-                  <p>Porque la vida es una comedia</p>
+                <div className="comu-info">
+  <h1>{communityName}</h1>
+  <p>{headerText}</p>
+</div>
+
                 </div>
                 <div className="comunidad-cabecera-btn">
                   <BotonGeneral text='Unirse' color='dark' size='small' />
