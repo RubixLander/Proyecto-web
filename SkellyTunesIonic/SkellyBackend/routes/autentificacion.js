@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const db = require('../db'); // Importar la conexión a la base de datos
 
+// Usar la SECRET_KEY desde el archivo .env
+const SECRET_KEY = process.env.SECRET_KEY;
+
 // Ruta para login
 router.post('/login', (req, res) => {
   const { correo, contraseña } = req.body;
@@ -38,7 +41,7 @@ router.post('/login', (req, res) => {
       }
 
       // Si las credenciales son correctas, devolver una respuesta positiva con un token y el tag del usuario
-      const token = jwt.sign({ correo: row.correo }, 'secretkey', { expiresIn: '1h' }); // Cambiado 'tag' por 'correo'
+      const token = jwt.sign({ correo: row.correo, tag: row.tag }, process.env.SECRET_KEY, { expiresIn: '1h' });
       return res.status(200).json({ 
         message: 'Login exitoso.', 
         token, 
@@ -84,7 +87,7 @@ router.post('/registro', (req, res) => {
             return res.status(500).json({ error: 'Error al insertar el perfil.' });
           }
 
-          const token = jwt.sign({ correo }, 'secretkey', { expiresIn: '1h' });
+          const token = jwt.sign({ correo: row.correo, tag: row.tag }, process.env.SECRET_KEY, { expiresIn: '1h' });
           return res.status(201).json({ message: 'Usuario registrado exitosamente.', token });
         });
       });

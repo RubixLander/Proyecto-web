@@ -5,7 +5,7 @@ const authRoutes = require('./routes/autentificacion'); // Importar las rutas
 const perfil = require('./routes/perfil');
 const buscar = require('./routes/buscar');
 const biblioteca = require('./routes/biblioteca');
-const userRoutes = require('./routes/usuarios'); // Importar las rutas
+const userRoutes = require('./routes/usuario'); // Importar las rutas
 
 
 const app = express();
@@ -20,7 +20,7 @@ app.use('/api/autentificacion', authRoutes); // Usar las rutas de usuarios
 app.use('/api/perfil', perfil);
 app.use('api/buscar', buscar);
 app.use('api/biblioteca', biblioteca);
-app.use('/api/usuarios', userRoutes); 
+app.use('/api/usuario', userRoutes); 
 //Usar esta estructura de arriba xd
 
 // Middleware de manejo de errores global

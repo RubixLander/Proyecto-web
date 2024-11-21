@@ -30,7 +30,7 @@ interface MenuLayoutProps {
 // Definir Interfaz
 export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
     const [userData, setUserData] = useState<{ avatar: string; nombre: string; tag: string } | null>(null);
-    const userTag = localStorage.getItem('userTag');
+
     const [error, setError] = useState<string | null>(null);
 
     const { isShiny, toastShown, setToastShown } = useLogo(); // Obtiene isShiny y toastShown
@@ -49,7 +49,7 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
     useEffect(() => {
         // Obtener el userTag del localStorage
         const userTag = localStorage.getItem('userTag');
-        
+        console.log(userTag);
         if (!userTag) {
           console.error('El usuario no está autenticado');
           setError('No estás autenticado');
@@ -62,7 +62,7 @@ export const InterfazGeneral: React.FC<MenuLayoutProps> = ({ children }) => {
         // Método para obtener los datos del usuario
         const fetchUserData = async () => {
           try {
-            const response = await api.get('/usuarios/datosbarra', { params: { userTag: encodedUserTag } });
+            const response = await api.get('/usuario/datosbarra', { params: { userTag: encodedUserTag } });
             setUserData(response.data); // Guardar los datos en el estado
           } catch (err: any) {
             if (err.response) {
