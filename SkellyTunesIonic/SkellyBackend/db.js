@@ -3,7 +3,9 @@ const path = require('path');
 const fs = require('fs');
 
 // Crear y conectar a la base de datos SQLite
-const dbPath = path.join(__dirname, 'db/database.bd'); // Ajusta esta ruta según tu estructura de carpetas
+const dbPath = process.env.DB_STORAGE; // Ajusta esta ruta según tu estructura de carpetas
+const schemaPath = process.env.SCHEMA_STORAGE;
+
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Error al conectar a la base de datos', err);
@@ -23,7 +25,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 // Inicializar la base de datos
 const initializeDatabase = () => {
-  const schemaPath = path.join(__dirname, 'db/schema.sql'); // Cambia 'data/schema.sql' a 'db/schema.sql'
+  const schemaPath = process.env.SCHEMA_STORAGE; // Cambia 'data/schema.sql' a 'db/schema.sql'
   fs.readFile(schemaPath, 'utf8', (err, data) => {
     if (err) {
       console.error('Error leyendo el archivo SQL', err);

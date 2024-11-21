@@ -1,9 +1,10 @@
+require('dotenv').config(); //variables de entorno.
 const express = require('express');
 const cors = require('cors');
-const usuariosRoutes = require('./routes/usuarios '); // Importar las rutas
+const usuariosRoutes = require('./routes/usuarios');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 // Middleware
 app.use(cors());
