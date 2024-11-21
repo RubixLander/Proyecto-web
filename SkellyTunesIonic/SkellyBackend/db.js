@@ -9,6 +9,15 @@ const db = new sqlite3.Database(dbPath, (err) => {
     console.error('Error al conectar a la base de datos', err);
   } else {
     console.log('Conexión exitosa a la base de datos SQLite');
+
+    // Activar las claves foráneas para esta sesión de base de datos
+    db.run("PRAGMA foreign_keys = ON;", (err) => {
+      if (err) {
+        console.error("Error al activar las claves foráneas:", err);
+      } else {
+        console.log("Claves foráneas activadas");
+      }
+    });
   }
 });
 
