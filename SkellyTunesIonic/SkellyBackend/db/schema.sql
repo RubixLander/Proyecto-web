@@ -169,4 +169,22 @@ CREATE TABLE IF NOT EXISTS seguidosUsuarios (
     FOREIGN KEY (seguido_tag) REFERENCES usuarios(tag)
 );
 
+-- Nueva tabla para almacenar los álbumes guardados por los usuarios (Me gusta)
+CREATE TABLE IF NOT EXISTS album_me_gusta (
+    usuario_tag TEXT NOT NULL,
+    album_id INTEGER NOT NULL,
+    PRIMARY KEY (usuario_tag, album_id),
+    FOREIGN KEY (usuario_tag) REFERENCES usuarios(tag),
+    FOREIGN KEY (album_id) REFERENCES albums(id)
+);
+
+-- Nueva tabla para almacenar las canciones guardadas por los usuarios (Me gusta)
+CREATE TABLE IF NOT EXISTS cancion_me_gusta (
+    usuario_tag TEXT NOT NULL,
+    cancion_id INTEGER NOT NULL,
+    PRIMARY KEY (usuario_tag, cancion_id),
+    FOREIGN KEY (usuario_tag) REFERENCES usuarios(tag),
+    FOREIGN KEY (cancion_id) REFERENCES canciones(id)
+);
+
 END;

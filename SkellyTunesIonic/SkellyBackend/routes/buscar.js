@@ -1,9 +1,12 @@
 const express = require('express');
-const db = require('../db');  // Tu conexión a la base de datos
+const sqlite3 = require('sqlite3');  // Librería para conectar a SQLite
 const router = express.Router();
 
+// Establecer la conexión a la base de datos SQLite
+const db = new sqlite3.Database('./db/musicLibrary.db');  // Ajusta la ruta a tu base de datos
+
 // Ruta para buscar álbumes
-router.get('/buscar/albumes', async (req, res) => {
+router.get('/buscar/albumes', (req, res) => {
     const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
 
     try {
@@ -15,13 +18,18 @@ router.get('/buscar/albumes', async (req, res) => {
             JOIN usuarios u ON aa.usuario_tag = u.tag
             WHERE a.titulo LIKE ? OR u.nombre LIKE ?;
         `;
-        const [albums] = await db.query(query, [`%${busqueda}%`, `%${busqueda}%`]);
+        db.all(query, [`%${busqueda}%`, `%${busqueda}%`], (err, albums) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Error al buscar álbumes' });
+            }
 
-        if (albums.length > 0) {
-            return res.json(albums);
-        } else {
-            return res.status(404).json({ message: 'No se encontraron álbumes o artistas' });
-        }
+            if (albums.length > 0) {
+                return res.json(albums);
+            } else {
+                return res.status(404).json({ message: 'No se encontraron álbumes o artistas' });
+            }
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error al buscar álbumes' });
@@ -29,7 +37,7 @@ router.get('/buscar/albumes', async (req, res) => {
 });
 
 // Ruta para buscar artistas
-router.get('/buscar/artistas', async (req, res) => {
+router.get('/buscar/artistas', (req, res) => {
     const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
 
     try {
@@ -40,13 +48,18 @@ router.get('/buscar/artistas', async (req, res) => {
             JOIN perfiles p ON u.tag = p.tag
             WHERE u.nombre LIKE ? OR u.tag LIKE ?;
         `;
-        const [artistas] = await db.query(query, [`%${busqueda}%`, `%${busqueda}%`]);
+        db.all(query, [`%${busqueda}%`, `%${busqueda}%`], (err, artistas) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Error al buscar artistas' });
+            }
 
-        if (artistas.length > 0) {
-            return res.json(artistas);
-        } else {
-            return res.status(404).json({ message: 'No se encontraron artistas' });
-        }
+            if (artistas.length > 0) {
+                return res.json(artistas);
+            } else {
+                return res.status(404).json({ message: 'No se encontraron artistas' });
+            }
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error al buscar artistas' });
@@ -54,7 +67,7 @@ router.get('/buscar/artistas', async (req, res) => {
 });
 
 // Ruta para buscar canciones
-router.get('/buscar/canciones', async (req, res) => {
+router.get('/buscar/canciones', (req, res) => {
     const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
 
     try {
@@ -67,13 +80,18 @@ router.get('/buscar/canciones', async (req, res) => {
             JOIN usuarios u ON aa.usuario_tag = u.tag
             WHERE c.titulo LIKE ? OR a.titulo LIKE ? OR u.nombre LIKE ?;
         `;
-        const [canciones] = await db.query(query, [`%${busqueda}%`, `%${busqueda}%`, `%${busqueda}%`]);
+        db.all(query, [`%${busqueda}%`, `%${busqueda}%`, `%${busqueda}%`], (err, canciones) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Error al buscar canciones' });
+            }
 
-        if (canciones.length > 0) {
-            return res.json(canciones);
-        } else {
-            return res.status(404).json({ message: 'No se encontraron canciones' });
-        }
+            if (canciones.length > 0) {
+                return res.json(canciones);
+            } else {
+                return res.status(404).json({ message: 'No se encontraron canciones' });
+            }
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error al buscar canciones' });
