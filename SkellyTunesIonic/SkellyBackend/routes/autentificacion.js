@@ -8,8 +8,8 @@ const db = require('../db'); // Importar la conexión a la base de datos
 router.post('/login', (req, res) => {
   const { correo, contraseña } = req.body;
 
-    // Verificar que los datos son recibidos correctamente
-    console.log('Datos recibidos:', req.body);
+  // Verificar que los datos son recibidos correctamente
+  console.log('Datos recibidos:', req.body);
 
   // Validar que los datos fueron enviados
   if (!correo || !contraseña) {
@@ -37,12 +37,17 @@ router.post('/login', (req, res) => {
         return res.status(401).json({ error: 'Contraseña incorrecta.' });
       }
 
-      // Si las credenciales son correctas, devolver una respuesta positiva con un token
+      // Si las credenciales son correctas, devolver una respuesta positiva con un token y el tag del usuario
       const token = jwt.sign({ correo: row.correo }, 'secretkey', { expiresIn: '1h' }); // Cambiado 'tag' por 'correo'
-      return res.status(200).json({ message: 'Login exitoso.', token });
+      return res.status(200).json({ 
+        message: 'Login exitoso.', 
+        token, 
+        tag: row.tag // Aquí agregamos el tag del usuario encontrado
+      });
     });
   });
 });
+
 
 // Ruta para registro de usuario
 router.post('/registro', (req, res) => {
