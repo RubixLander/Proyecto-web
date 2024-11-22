@@ -1,6 +1,7 @@
 require('dotenv').config(); //variables de entorno.
 const express = require('express');
 const cors = require('cors');
+
 const authRoutes = require('./routes/autentificacion'); // Importar las rutas
 const perfil = require('./routes/perfil');
 const buscar = require('./routes/buscar');
@@ -12,9 +13,12 @@ const comunidades = require('./routes/comunidad');
 const subirAlbum = require('./routes/subirAlbum');
 const subirCanciones = require('./routes/subirCanciones');
 const playlist = require('./routes/playlist');
+const comentarios = require('./routes/comentarios');
+const playlistCanciones = require('./routes/playlistCanciones');
 
 const app = express();
 const port = process.env.PORT;
+
 
 // Middleware
 app.use(cors());
@@ -32,6 +36,8 @@ app.use('/api/comunidad', comunidades);
 app.use('/api/subirAlbum', subirAlbum);
 app.use('/api/subirCanciones', subirCanciones);
 app.use('/api/playlist', playlist);
+app.use('/api/comentarios', comentarios);
+app.use('./api/playlistCanciones', playlistCanciones);
 //Usar esta estructura de arriba xd
 
 // Middleware de manejo de errores global
