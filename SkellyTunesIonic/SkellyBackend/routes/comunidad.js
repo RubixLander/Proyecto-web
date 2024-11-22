@@ -54,9 +54,7 @@ router.get('/usuario/:tag', (req, res) => {
     });
 });
 
-
-
-// Obtener el perfil de una comunidad
+// Ruta para obtener el perfil de una comunidad
 router.get('/obtener/:id', async (req, res) => {
     const { id } = req.params; // Obtiene el ID de la comunidad desde los parámetros de la URL
   
@@ -94,8 +92,33 @@ router.get('/obtener/:id', async (req, res) => {
       console.error('Error interno del servidor:', error);
       return res.status(500).json({ message: 'Error al obtener el perfil de la comunidad' });
     }
-  });
-  
+});
 
+// Ruta para obtener las discusiones de una comunidad, incluyendo el creador
+router.get('/comunidad/:id/discusiones', (req, res) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ error: 'ID de comunidad no proporcionado' });
+    }
+
+    // Consulta SQL para obtener las discusiones de una comunidad, incluyendo el tag del creador
+    const query = `
+        SELECT d.id, d.titulo, d.detalle, d.fecha, d.creador AS creador_tag, u.nombre AS creador_nombre, u.avatar AS creador_avatar
+        FROM discusiones d
+        JOIN usuarios u ON d.creador = u.tag
+        WHERE d.comunidad = ?;
+    `;
+
+    db.all(query, [id], (err, rows) => {
+        if (err) {
+            console.error('Error al obtener las discusiones de la comunidad:', err);
+            return res.status(500).json({ message: 'Error al obtener las discusiones de la comunidad' });
+        }
+
+        // Devolvemos las discusiones con los detalles del creador
+        res.status(200).json(rows);
+    });
+});
 
 module.exports = router;

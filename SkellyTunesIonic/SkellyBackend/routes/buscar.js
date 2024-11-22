@@ -5,10 +5,8 @@ const router = express.Router();
 // Ruta para buscar álbumes
 router.get('/albumes', (req, res) => {
     const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
-    // Imprimir la búsqueda que ha llegado
     console.log('Búsqueda recibida:', busqueda);
     try {
-        // Consulta SQL para buscar álbumes por título o artista
         const query = `
             SELECT a.id, a.coverart, a.titulo AS album_titulo, u.nombre AS artista_nombre
             FROM albums a
@@ -23,7 +21,7 @@ router.get('/albumes', (req, res) => {
             }
 
             if (albums.length > 0) {
-                return res.json(albums); // Incluir el id en la respuesta
+                return res.json(albums);
             } else {
                 return res.status(404).json({ message: 'No se encontraron álbumes o artistas' });
             }
@@ -34,13 +32,10 @@ router.get('/albumes', (req, res) => {
     }
 });
 
-
 // Ruta para buscar artistas
 router.get('/artistas', (req, res) => {
-    const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
-
+    const { busqueda } = req.query;
     try {
-        // Consulta SQL para buscar artistas por nombre o tag
         const query = `
             SELECT p.avatar, u.nombre, u.tag
             FROM usuarios u
@@ -67,10 +62,8 @@ router.get('/artistas', (req, res) => {
 
 // Ruta para buscar canciones
 router.get('/buscar/canciones', (req, res) => {
-    const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
-
+    const { busqueda } = req.query;
     try {
-        // Consulta SQL para buscar canciones por título, álbum o artista
         const query = `
             SELECT c.coverart, c.track, c.titulo AS cancion_titulo, c.duracion, u.nombre AS artista_nombre, a.titulo AS album_titulo
             FROM canciones c
@@ -94,6 +87,37 @@ router.get('/buscar/canciones', (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error al buscar canciones' });
+    }
+});
+
+// Ruta para buscar playlists
+router.get('/buscar/playlists', (req, res) => {
+    const { busqueda } = req.query;  // El término de búsqueda se pasa como parámetro query
+
+    try {
+        // Consulta SQL para buscar playlists por título o creador
+        const query = `
+            SELECT p.id, p.titulo AS playlist_titulo, p.detalle, p.art, u.nombre AS creador_nombre
+            FROM playlists p
+            JOIN usuarios u ON p.creador = u.tag
+            WHERE p.titulo LIKE ? OR u.nombre LIKE ?;
+        `;
+
+        db.all(query, [`%${busqueda}%`, `%${busqueda}%`], (err, playlists) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Error al buscar playlists' });
+            }
+
+            if (playlists.length > 0) {
+                return res.json(playlists);  // Devuelve los playlists encontrados
+            } else {
+                return res.status(404).json({ message: 'No se encontraron playlists' });
+            }
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Error al buscar playlists' });
     }
 });
 
