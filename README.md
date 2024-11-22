@@ -1,5 +1,3 @@
-Esta branch esta creada para almacenar y desarrollar el proyecto en su version Ionic React.
-
 ## Instrucciones
 - Descargue el codigo en un .zip y extraigalo
 - luego arranque el servidor backend con el comando "node server.js" en la carpeta raiz (/skellybackend) 
