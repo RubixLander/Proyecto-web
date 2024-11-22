@@ -5,10 +5,13 @@ const router = express.Router();
 // Ruta para buscar álbumes
 router.get('/albumes', (req, res) => {
     const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
+    // Imprimir la búsqueda que ha llegado
     console.log('Búsqueda recibida:', busqueda);
     try {
+        // Consulta SQL para buscar álbumes por título o artista
         const query = `
-            SELECT a.id, a.coverart, a.titulo AS album_titulo, u.nombre AS artista_nombre
+            SELECT a.id, a.coverart, a.titulo AS album_titulo, u.nombre AS artista_nombre,
+                   (SELECT id FROM canciones WHERE album = a.id AND track = 1) AS primera_cancion_id
             FROM albums a
             JOIN albumartista aa ON a.id = aa.album_id
             JOIN usuarios u ON aa.usuario_tag = u.tag
@@ -21,7 +24,7 @@ router.get('/albumes', (req, res) => {
             }
 
             if (albums.length > 0) {
-                return res.json(albums);
+                return res.json(albums); // Incluir el id en la respuesta
             } else {
                 return res.status(404).json({ message: 'No se encontraron álbumes o artistas' });
             }
@@ -32,10 +35,14 @@ router.get('/albumes', (req, res) => {
     }
 });
 
+
+
 // Ruta para buscar artistas
 router.get('/artistas', (req, res) => {
-    const { busqueda } = req.query;
+    const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
+
     try {
+        // Consulta SQL para buscar artistas por nombre o tag
         const query = `
             SELECT p.avatar, u.nombre, u.tag
             FROM usuarios u
@@ -62,8 +69,10 @@ router.get('/artistas', (req, res) => {
 
 // Ruta para buscar canciones
 router.get('/buscar/canciones', (req, res) => {
-    const { busqueda } = req.query;
+    const { busqueda } = req.query; // El término de búsqueda se pasa como parámetro query
+
     try {
+        // Consulta SQL para buscar canciones por título, álbum o artista
         const query = `
             SELECT c.coverart, c.track, c.titulo AS cancion_titulo, c.duracion, u.nombre AS artista_nombre, a.titulo AS album_titulo
             FROM canciones c

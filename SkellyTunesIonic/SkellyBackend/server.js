@@ -1,7 +1,7 @@
 require('dotenv').config(); //variables de entorno.
 const express = require('express');
 const cors = require('cors');
-
+const path = require('path');
 const authRoutes = require('./routes/autentificacion'); // Importar las rutas
 const perfil = require('./routes/perfil');
 const buscar = require('./routes/buscar');
@@ -15,15 +15,18 @@ const subirCanciones = require('./routes/subirCanciones');
 const playlist = require('./routes/playlist');
 const comentarios = require('./routes/comentarios');
 const playlistCanciones = require('./routes/playlistCanciones');
-const reproducirCancion = require('./routes/reproducirCancion');
+const canciones = require('./routes/cancion')
+
 
 const app = express();
 const port = process.env.PORT;
 
-
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Servir archivos estáticos desde la carpeta 'uploads/canciones'
+app.use('/uploads/canciones', express.static(path.join(__dirname, 'uploads', 'canciones')));
 
 // Rutas
 app.use('/api/autentificacion', authRoutes); // Usar las rutas de usuarios
@@ -38,8 +41,8 @@ app.use('/api/subirAlbum', subirAlbum);
 app.use('/api/subirCanciones', subirCanciones);
 app.use('/api/playlist', playlist);
 app.use('/api/comentarios', comentarios);
-app.use('./api/playlistCanciones', playlistCanciones);
-app.use('./api/reproducirCancion', reproducirCancion);
+app.use('/api/playlistCanciones', playlistCanciones);
+app.use('/api/cancion', canciones);
 //Usar esta estructura de arriba xd
 
 // Middleware de manejo de errores global

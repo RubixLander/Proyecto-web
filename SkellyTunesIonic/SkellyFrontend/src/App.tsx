@@ -46,7 +46,7 @@ const App: React.FC = () => (
 
       <InterfazGeneral>
         <Route exact path="/discusion"><Discusion /></Route>  
-        <Route path="/reproductor/:id" component={Reproductor} />
+        <Route path="/reproductor/:albumId/:songId" component={Reproductor} />
         <Route exact path="/comunidades"><Comunidades /></Route>
         <Route exact path="/comunidad/:communityId"component={Comunidad} />
         <Route exact path="/biblioteca"><Biblioteca /></Route>

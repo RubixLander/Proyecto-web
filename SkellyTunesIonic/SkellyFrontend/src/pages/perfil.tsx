@@ -26,6 +26,7 @@ interface Album {
     album_titulo: string;
     artista_nombre: string;
     artista_tag: string;
+    primera_cancion_id: number;
   }
 
   interface Community {
@@ -206,6 +207,9 @@ useEffect(() => {
             title: 'Música',
             icon: playCircle,
             content: (
+
+
+                
                 <IonContent className="scrollable">
                     <div className="CardsContainer">
                     {/* Si los álbumes están cargando, mostrar el mensaje de carga */}
@@ -223,7 +227,7 @@ useEffect(() => {
                                 key={index}
                                 image={album.coverart} // Usamos coverart para la imagen
                                 title={album.album_titulo} // Usamos album_titulo para el título
-                                route={`/reproductor/${album.album_id}`} // Usamos album_id para la ruta
+                                route={`/reproductor/${album.album_id}/${album.primera_cancion_id}`} // Usamos album_id para la ruta
                             />
                             ))
                         ) : (

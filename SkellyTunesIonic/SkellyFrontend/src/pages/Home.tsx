@@ -19,6 +19,7 @@ interface Album {
   album_titulo: string;
   año: number;
   artista_nombre: string;
+  primera_cancion_id: number;
 }
 
 interface Artista {
@@ -167,7 +168,7 @@ const Home: React.FC = () => {
           <div className="CardsContainer">
             {limitedAlbums.length > 0 ? (
               limitedAlbums.map((album, index) => (
-                <AlbumCard key={index} image={album.coverart} title={album.album_titulo} subtitle={album.artista_nombre} route={`/reproductor/${album.id}`} />
+                <AlbumCard key={index} image={album.coverart} title={album.album_titulo} subtitle={album.artista_nombre} route={`/reproductor/${album.id}/${album.primera_cancion_id}`} />
               ))
             ) : (
               <h2>No hay álbumes disponibles.</h2>

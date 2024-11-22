@@ -4,8 +4,10 @@ import { musicalNotes } from 'ionicons/icons';
 import "./Lists.css";
 
 interface Song {
-  title: string;
-  duration: string; // Formato "mm:ss"
+  cancion_id: string;
+  track: number;
+  cancion_titulo: string;
+  duracion: string;
 }
 
 interface SongListProps {
@@ -26,10 +28,10 @@ export const SongList: React.FC<SongListProps> = ({ songs, onSongClick, album })
           {songs.map((song, index) => (
             <IonItem key={index} button onClick={() => onSongClick(song)}>
               <IonLabel style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <span style={{ marginRight: '10px' }}>{index + 1}.</span>
+                <span style={{ marginRight: '10px' }}>{song.track}.</span>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <h3 style={{ margin: 0 }}>{song.title}</h3>
-                  <p style={{ margin: 0 }}>{song.duration}</p>
+                  <h3 style={{ margin: 0 }}>{song.cancion_titulo}</h3>
+                  <p style={{ margin: 0 }}>{song.duracion}</p>
                 </div>
               </IonLabel>
             </IonItem>

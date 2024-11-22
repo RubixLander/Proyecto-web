@@ -54,7 +54,9 @@ router.get('/usuario/:tag', (req, res) => {
     });
 });
 
-// Ruta para obtener el perfil de una comunidad
+
+
+// Obtener el perfil de una comunidad
 router.get('/obtener/:id', async (req, res) => {
     const { id } = req.params; // Obtiene el ID de la comunidad desde los parámetros de la URL
   
@@ -92,9 +94,9 @@ router.get('/obtener/:id', async (req, res) => {
       console.error('Error interno del servidor:', error);
       return res.status(500).json({ message: 'Error al obtener el perfil de la comunidad' });
     }
-});
-
-// Ruta para obtener las discusiones de una comunidad, incluyendo el creador
+  });
+  
+  // Ruta para obtener las discusiones de una comunidad, incluyendo el creador
 router.get('/comunidad/:id/discusiones', (req, res) => {
     const { id } = req.params;
 
@@ -115,10 +117,13 @@ router.get('/comunidad/:id/discusiones', (req, res) => {
             console.error('Error al obtener las discusiones de la comunidad:', err);
             return res.status(500).json({ message: 'Error al obtener las discusiones de la comunidad' });
         }
+  });
+  
 
         // Devolvemos las discusiones con los detalles del creador
         res.status(200).json(rows);
     });
 });
+
 
 module.exports = router;

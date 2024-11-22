@@ -5,6 +5,7 @@ const path = require('path');
 const db = require('../db'); // Conexión a la base de datos
 const router = express.Router();
 
+
 // Configuración de multer para subir archivos
 const storage = multer.diskStorage({
     // Destino de los archivos

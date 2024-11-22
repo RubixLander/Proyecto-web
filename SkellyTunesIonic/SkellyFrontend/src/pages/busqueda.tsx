@@ -19,6 +19,7 @@ interface Album {
   album_titulo: string;
   año: number;
   artista_nombre: string;
+  primera_cancion_id: number;
 }
 
 interface Artista {
@@ -141,7 +142,7 @@ useEffect(() => {
         image={album.coverart} // Imagen del álbum
         title={album.album_titulo} // Título del álbum
         subtitle={album.artista_nombre} // Nombre del artista
-        route={`/reproductor/${album.id}`} // Ruta para ir al reproductor
+        route={`/reproductor/${album.id}/${album.primera_cancion_id}`} // Ruta para ir al reproductor
       />
     ))
   ) : (

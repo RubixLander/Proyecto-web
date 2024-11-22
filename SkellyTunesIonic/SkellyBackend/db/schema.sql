@@ -1,7 +1,4 @@
 BEGIN;
-
--- Primero las tablas que son referenciadas
--- Tabla usuarios
 CREATE TABLE IF NOT EXISTS usuarios
 (
     tag TEXT NOT NULL PRIMARY KEY,
@@ -10,25 +7,20 @@ CREATE TABLE IF NOT EXISTS usuarios
     correo TEXT
 );
 
--- Tabla generos
 CREATE TABLE IF NOT EXISTS generos
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT
 );
 
--- Tabla albums
 CREATE TABLE IF NOT EXISTS albums
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    coverart TEXT, -- Ya tienes esta columna, que puede contener la ruta de la portada
+    coverart TEXT,
     titulo TEXT,
-    "año" INTEGER,
-    archivo_path TEXT  -- Ruta de la carpeta donde se guardan los archivos de música (opcional)
+    "año" INTEGER
 );
 
--- Ahora las tablas que contienen claves foráneas
--- Tabla albumartista
 CREATE TABLE IF NOT EXISTS albumartista
 (
     usuario_tag TEXT NOT NULL,
@@ -38,7 +30,6 @@ CREATE TABLE IF NOT EXISTS albumartista
     FOREIGN KEY (album_id) REFERENCES albums (id)
 );
 
--- Tabla albumgenero
 CREATE TABLE IF NOT EXISTS albumgenero
 (
     album_id INTEGER NOT NULL,
@@ -48,7 +39,6 @@ CREATE TABLE IF NOT EXISTS albumgenero
     FOREIGN KEY (genero_id) REFERENCES generos (id)
 );
 
--- Tabla canciones
 CREATE TABLE IF NOT EXISTS canciones
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -56,11 +46,10 @@ CREATE TABLE IF NOT EXISTS canciones
     titulo TEXT,
     duracion TEXT,  -- Usamos TEXT para representar el tipo TIME
     album INTEGER,
-    archivo_path TEXT,  -- Aquí guardamos la ruta del archivo de la canción
+    archivo_path TEXT,
     FOREIGN KEY (album) REFERENCES albums (id)
 );
 
--- Tabla canciongenero
 CREATE TABLE IF NOT EXISTS canciongenero
 (
     cancion_id INTEGER NOT NULL,
@@ -70,7 +59,6 @@ CREATE TABLE IF NOT EXISTS canciongenero
     FOREIGN KEY (genero_id) REFERENCES generos (id)
 );
 
--- Tabla playlists
 CREATE TABLE IF NOT EXISTS playlists
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -83,7 +71,6 @@ CREATE TABLE IF NOT EXISTS playlists
     FOREIGN KEY (creador) REFERENCES usuarios (tag)
 );
 
--- Tabla playlistcanciones
 CREATE TABLE IF NOT EXISTS playlistcanciones
 (
     playlist_id INTEGER NOT NULL,
@@ -93,7 +80,6 @@ CREATE TABLE IF NOT EXISTS playlistcanciones
     FOREIGN KEY (cancion_id) REFERENCES canciones (id)
 );
 
--- Tabla comunidades
 CREATE TABLE IF NOT EXISTS comunidades
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -106,7 +92,6 @@ CREATE TABLE IF NOT EXISTS comunidades
     FOREIGN KEY (creador) REFERENCES usuarios (tag)
 );
 
--- Tabla miembroscomunidad
 CREATE TABLE IF NOT EXISTS miembroscomunidad
 (
     usuario_tag TEXT NOT NULL,
@@ -116,7 +101,6 @@ CREATE TABLE IF NOT EXISTS miembroscomunidad
     FOREIGN KEY (comunidad_id) REFERENCES comunidades (id)
 );
 
--- Tabla discusiones
 CREATE TABLE IF NOT EXISTS discusiones
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -129,7 +113,6 @@ CREATE TABLE IF NOT EXISTS discusiones
     FOREIGN KEY (creador) REFERENCES usuarios (tag)
 );
 
--- Tabla respuestas
 CREATE TABLE IF NOT EXISTS respuestas
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -142,7 +125,6 @@ CREATE TABLE IF NOT EXISTS respuestas
     FOREIGN KEY (discussionId) REFERENCES discusiones (id)
 );
 
--- Tabla comentarios
 CREATE TABLE IF NOT EXISTS comentarios
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -155,7 +137,6 @@ CREATE TABLE IF NOT EXISTS comentarios
     FOREIGN KEY (cancion) REFERENCES canciones (id)
 );
 
--- Tabla perfiles
 CREATE TABLE IF NOT EXISTS perfiles (
     id INTEGER PRIMARY KEY,
     tag TEXT,
@@ -166,7 +147,6 @@ CREATE TABLE IF NOT EXISTS perfiles (
     FOREIGN KEY (tag) REFERENCES usuarios(tag)
 );
 
--- Tabla seguidosUsuarios
 CREATE TABLE IF NOT EXISTS seguidosUsuarios (
     seguidor_tag TEXT,
     seguido_tag TEXT,
@@ -175,7 +155,6 @@ CREATE TABLE IF NOT EXISTS seguidosUsuarios (
     FOREIGN KEY (seguido_tag) REFERENCES usuarios(tag)
 );
 
--- Nueva tabla para almacenar los álbumes guardados por los usuarios (Me gusta)
 CREATE TABLE IF NOT EXISTS album_me_gusta (
     usuario_tag TEXT NOT NULL,
     album_id INTEGER NOT NULL,
@@ -184,7 +163,6 @@ CREATE TABLE IF NOT EXISTS album_me_gusta (
     FOREIGN KEY (album_id) REFERENCES albums(id)
 );
 
--- Nueva tabla para almacenar las canciones guardadas por los usuarios (Me gusta)
 CREATE TABLE IF NOT EXISTS cancion_me_gusta (
     usuario_tag TEXT NOT NULL,
     cancion_id INTEGER NOT NULL,
@@ -193,7 +171,6 @@ CREATE TABLE IF NOT EXISTS cancion_me_gusta (
     FOREIGN KEY (cancion_id) REFERENCES canciones(id)
 );
 
--- Nueva tabla para almacenar los albums destacados en las comunidades
 CREATE TABLE IF NOT EXISTS album_comunidad_destacado (
     comunidad_id INTEGER NOT NULL,
     album_id INTEGER NOT NULL,
@@ -203,4 +180,4 @@ CREATE TABLE IF NOT EXISTS album_comunidad_destacado (
     FOREIGN KEY (album_id) REFERENCES albums(id)
 );
 
-END;
+COMMIT;
