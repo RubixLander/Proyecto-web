@@ -96,7 +96,7 @@ router.get('/obtener/:id', async (req, res) => {
     }
   });
   
-  // Ruta para obtener las discusiones de una comunidad, incluyendo el creador
+// Ruta para obtener las discusiones de una comunidad, incluyendo el creador
 router.get('/comunidad/:id/discusiones', (req, res) => {
     const { id } = req.params;
 
@@ -117,13 +117,12 @@ router.get('/comunidad/:id/discusiones', (req, res) => {
             console.error('Error al obtener las discusiones de la comunidad:', err);
             return res.status(500).json({ message: 'Error al obtener las discusiones de la comunidad' });
         }
-  });
-  
 
         // Devolvemos las discusiones con los detalles del creador
         res.status(200).json(rows);
     });
 });
+
 
 
 module.exports = router;
