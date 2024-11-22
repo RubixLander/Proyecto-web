@@ -21,9 +21,10 @@ CREATE TABLE IF NOT EXISTS generos
 CREATE TABLE IF NOT EXISTS albums
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    coverart TEXT,
+    coverart TEXT, -- Ya tienes esta columna, que puede contener la ruta de la portada
     titulo TEXT,
-    "año" INTEGER
+    "año" INTEGER,
+    archivo_path TEXT  -- Ruta de la carpeta donde se guardan los archivos de música (opcional)
 );
 
 -- Ahora las tablas que contienen claves foráneas
@@ -55,6 +56,7 @@ CREATE TABLE IF NOT EXISTS canciones
     titulo TEXT,
     duracion TEXT,  -- Usamos TEXT para representar el tipo TIME
     album INTEGER,
+    archivo_path TEXT,  -- Aquí guardamos la ruta del archivo de la canción
     FOREIGN KEY (album) REFERENCES albums (id)
 );
 

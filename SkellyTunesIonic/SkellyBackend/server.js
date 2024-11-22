@@ -15,6 +15,7 @@ const subirCanciones = require('./routes/subirCanciones');
 const playlist = require('./routes/playlist');
 const comentarios = require('./routes/comentarios');
 const playlistCanciones = require('./routes/playlistCanciones');
+const reproducirCancion = require('./routes/reproducirCancion');
 
 const app = express();
 const port = process.env.PORT;
@@ -38,6 +39,7 @@ app.use('/api/subirCanciones', subirCanciones);
 app.use('/api/playlist', playlist);
 app.use('/api/comentarios', comentarios);
 app.use('./api/playlistCanciones', playlistCanciones);
+app.use('./api/reproducirCancion', reproducirCancion);
 //Usar esta estructura de arriba xd
 
 // Middleware de manejo de errores global
